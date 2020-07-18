@@ -1,0 +1,39 @@
+MODIFICACIONES A LA BD
+
+
+CREATE
+    /*[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+    [DEFINER = { user | CURRENT_USER }]
+    [SQL SECURITY { DEFINER | INVOKER }]*/
+    VIEW `compraventa`.`listaprecio1` 
+    AS
+(SELECT
+  `listaprecios`.`Codigo`       AS `Codigo`,
+  `productos`.`Descripcion`     AS `producto`,
+  `listaprecios`.`Descripcion`  AS `Descripcion`,
+  `listaprecios`.`Precio`       AS `Precio`,
+  `listaprecios`.`Porcentaje`   AS `Porcentaje`,
+  `listaprecios`.`PrecioCompra` AS `PrecioCompra`,
+  `listaprecios`.`Cuotas`       AS `cuotas`,
+  `productos`.`CodigoProducto`  AS `CodigoProducto`,
+  `productos`.`CodigoBarra`     AS `CodigoBarra`,
+  `stock`.`StockActual`         AS `StockActual`,
+  `stock`.`codigoDeposito`      AS `codigoDeposito`,
+  `listaprecios`.`Estado`          AS `Estado`,
+  `marcas`.`CodigoMarca`        AS `CodigoMarca`,
+  `marcas`.`Descripcion`        AS `Marca`,
+  `depositos`.`Nombre` AS  `Nombre`
+FROM `productos`
+     JOIN `marcas`
+       ON `productos`.`CodigoMarca` = `marcas`.`CodigoMarca`
+    JOIN `stock`
+      ON `stock`.`CodigoProducto` = `productos`.`CodigoProducto`
+   JOIN `listaprecios`
+     ON `listaprecios`.`codigoDeposito` = `stock`.`codigoDeposito`
+          AND `listaprecios`.`CodigoProducto` = `stock`.`CodigoProducto`
+    JOIN `depositos` 
+        ON `stock`.`codigoDeposito` = `depositos`.`codigoDeposito`);
+        
+        
+AGREGAR CAMPO ESTADO A LA LISTA DE PRECIO VARCHAR DEFAUL ACTIVO
+
