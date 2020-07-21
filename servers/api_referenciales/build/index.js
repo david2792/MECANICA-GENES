@@ -16,6 +16,7 @@ const ruta_impuesto_1 = __importDefault(require("./rutas/rutas-referenciales/rut
 const ruta_marca_1 = __importDefault(require("./rutas/rutas-referenciales/ruta_marca"));
 const ruta_producto_1 = __importDefault(require("./rutas/rutas-producto/ruta_producto"));
 const ruta_lista_1 = __importDefault(require("./rutas/rutas-producto/ruta_lista"));
+const ruta_cliente_1 = __importDefault(require("./rutas/rutas-clientes/ruta_cliente"));
 // fin referenciales productos
 class Server {
     constructor() {
@@ -42,6 +43,7 @@ class Server {
         this.app.use('/api/categorias', ruta_categoria_1.default);
         this.app.use('/api/productos', ruta_producto_1.default);
         this.app.use('/api/listasprecios', ruta_lista_1.default);
+        this.app.use('/api/clientes', ruta_cliente_1.default);
         // fin de referenciales
     }
     iniciar() {

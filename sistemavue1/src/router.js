@@ -8,6 +8,7 @@ import Medida from './components/referenciales-productos/Medida.vue'
 import Impuesto from './components/referenciales-productos/Impuesto.vue'
 import Producto from './components/producto/Producto.vue'
 import Listaprecio from './components/producto/Listaprecio.vue'
+import Cliente from '/components/cliente/Cliente.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +52,13 @@ export default new Router({
           component: Listaprecio
         },
     // fin de productos
+    // cliente
+    {
+      path:'/clientes',
+      name:'cliente',
+      component: Cliente
+    },
+    // 
     {
       path: '/about',
       name: 'about',

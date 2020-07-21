@@ -12,6 +12,7 @@ import impuestosRutas from './rutas/rutas-referenciales/ruta_impuesto';
 import marcasRutas from './rutas/rutas-referenciales/ruta_marca';
 import productosRutas from './rutas/rutas-producto/ruta_producto';
 import listaRutas from './rutas/rutas-producto/ruta_lista';
+import clienteRutas from './rutas/rutas-clientes/ruta_cliente'
 
 // fin referenciales productos
 
@@ -45,6 +46,7 @@ class Server
         this.app.use('/api/categorias',categoriaRutas);
         this.app.use('/api/productos',productosRutas);
         this.app.use('/api/listasprecios',listaRutas);
+        this.app.use('/api/clientes',clienteRutas);
         // fin de referenciales
     }
     iniciar():void
