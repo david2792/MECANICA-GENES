@@ -1,55 +1,56 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 import pool from '../../conexionBD';
 
 
-class ClienteControlador
-{
- public async listar (req:Request,res:Response){
+class ClienteControlador {
+  public async listar(req: Request, res: Response) {
     const usuario = await pool.query('SELECT * FROM vclientes');
     res.json(usuario);
-  } 
+  }
 
-  public async crear(req:Request, res:Response):Promise<void>
-  {
-   const ciudad= req.body.ciudad;
-   const id= await pool.query('SELECT codigo FROM ciudades WHERE nombre =?',ciudad);
-   JSON.stringify(id);
-   const codigociudades= id[0].codigo;
-   console.log(codigociudades);
-   const Cedula = req.body.Cedula;
-   const Ruc = req.body.Ruc;
-   const RazonSocial = req.body.RazonSocial;
-   //const fechanacimiento = req.body.fechanacimiento;
-   const Direccion =  req.body.Direccion;
-   const Telefono =  req.body.Telefono;
-   const Email= req.body.Email;
-   const values={Cedula,Ruc,RazonSocial,Direccion,Telefono,codigociudades};
-   await pool.query('INSERT INTO clientes  SET ?',values);
-    res.json({message:"el cliente  fue guardado"});
+  public async crear(req: Request, res: Response): Promise<void> {
+    const Codigo = await pool.query('SELECT MAX(CodigoCliente)+1 AS Codigo FROM clientes')
+    JSON.stringify(Codigo);
+    const CodigoCliente = Codigo[0].Codigo;
+    const Ciudad = req.body.Ciudad;
+    const id = await pool.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
+    JSON.stringify(id);
+    const CodigoCiudad = id[0].CodigoCiudad;
+    console.log(CodigoCiudad);
+    const Cedula = req.body.Cedula;
+    const Ruc = req.body.Ruc;
+    const RazonSocial = req.body.RazonSocial;
+    const Direccion = req.body.Direccion;
+    const Telefono = req.body.Telefono;
+    const Email = req.body.Email;
+    const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono,Email, CodigoCiudad };
+    console.log(values);
+    await pool.query('INSERT INTO clientes  SET ?', values);
+    res.json({ message: "el cliente  fue guardado" });
   }
- 
-  public async actualizar(req:Request, res:Response):Promise<void>
-  {
-    const { id }= req.params;
-    const ciudad= req.body.ciudad;
-   const idciudad= await pool.query('SELECT codigo FROM ciudades WHERE nombre =?',ciudad);
-   JSON.stringify(idciudad);
-   const codigociudad= idciudad[0].codigo;
-   const cedula = req.body.cedula;
-   const ruc = req.body.ruc;
-   const razonsocial = req.body.razonsocial;
-   const fechanacimiento = req.body.fechanacimiento;
-   const direccion =  req.body.direccion;
-   const telefono =  req.body.telefono;
-   const values={cedula,ruc,razonsocial,fechanacimiento,direccion,telefono,codigociudad};
-    const marcas =  await pool.query('UPDATE clientes SET ? WHERE codigo = ?',[values,id]);
-    res.json({message:'el cliente fue actualizado'});
+
+  public async actualizar(req: Request, res: Response): Promise<void> {
+    const CodigoCliente = req.body.CodigoCliente;
+    const Ciudad = req.body.Ciudad;
+    const idciudad = await pool.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
+    JSON.stringify(idciudad);
+    const CodigoCiudad = idciudad[0].CodigoCiudad;
+    const Cedula = req.body.Cedula;
+    const Ruc = req.body.Ruc;
+    const RazonSocial = req.body.RazonSocial;
+    const Direccion = req.body.Direccion;
+    const Telefono = req.body.Telefono;
+    const Email = req.body.Email;
+    const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono, Email, CodigoCiudad };
+    console.log(values)
+    const marcas = await pool.query('UPDATE clientes SET ? WHERE CodigoCliente = ?', [values, CodigoCliente]);
+    res.json({ message: 'el cliente fue actualizado' });
   }
-   public async listarCiudad (req:Request,res:Response){
-   
+  public async listarCiudad(req: Request, res: Response) {
+
     const ciudad = await pool.query('SELECT nombre FROM ciudades');
-    res.json(ciudad); 
+    res.json(ciudad);
   }
-  
+
 }
-export const controladorCliente =  new ClienteControlador();
+export const controladorCliente = new ClienteControlador();

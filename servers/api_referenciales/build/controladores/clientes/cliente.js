@@ -23,38 +23,42 @@ class ClienteControlador {
     }
     crear(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ciudad = req.body.ciudad;
-            const id = yield conexionBD_1.default.query('SELECT codigo FROM ciudades WHERE nombre =?', ciudad);
+            const Codigo = yield conexionBD_1.default.query('SELECT MAX(CodigoCliente)+1 AS Codigo FROM clientes');
+            JSON.stringify(Codigo);
+            const CodigoCliente = Codigo[0].Codigo;
+            const Ciudad = req.body.Ciudad;
+            const id = yield conexionBD_1.default.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
             JSON.stringify(id);
-            const codigociudades = id[0].codigo;
-            console.log(codigociudades);
+            const CodigoCiudad = id[0].CodigoCiudad;
+            console.log(CodigoCiudad);
             const Cedula = req.body.Cedula;
             const Ruc = req.body.Ruc;
             const RazonSocial = req.body.RazonSocial;
-            //const fechanacimiento = req.body.fechanacimiento;
             const Direccion = req.body.Direccion;
             const Telefono = req.body.Telefono;
             const Email = req.body.Email;
-            const values = { Cedula, Ruc, RazonSocial, Direccion, Telefono, codigociudades };
+            const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono, Email, CodigoCiudad };
+            console.log(values);
             yield conexionBD_1.default.query('INSERT INTO clientes  SET ?', values);
             res.json({ message: "el cliente  fue guardado" });
         });
     }
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const ciudad = req.body.ciudad;
-            const idciudad = yield conexionBD_1.default.query('SELECT codigo FROM ciudades WHERE nombre =?', ciudad);
+            const CodigoCliente = req.body.CodigoCliente;
+            const Ciudad = req.body.Ciudad;
+            const idciudad = yield conexionBD_1.default.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
             JSON.stringify(idciudad);
-            const codigociudad = idciudad[0].codigo;
-            const cedula = req.body.cedula;
-            const ruc = req.body.ruc;
-            const razonsocial = req.body.razonsocial;
-            const fechanacimiento = req.body.fechanacimiento;
-            const direccion = req.body.direccion;
-            const telefono = req.body.telefono;
-            const values = { cedula, ruc, razonsocial, fechanacimiento, direccion, telefono, codigociudad };
-            const marcas = yield conexionBD_1.default.query('UPDATE clientes SET ? WHERE codigo = ?', [values, id]);
+            const CodigoCiudad = idciudad[0].CodigoCiudad;
+            const Cedula = req.body.Cedula;
+            const Ruc = req.body.Ruc;
+            const RazonSocial = req.body.RazonSocial;
+            const Direccion = req.body.Direccion;
+            const Telefono = req.body.Telefono;
+            const Email = req.body.Email;
+            const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono, Email, CodigoCiudad };
+            console.log(values);
+            const marcas = yield conexionBD_1.default.query('UPDATE clientes SET ? WHERE CodigoCliente = ?', [values, CodigoCliente]);
             res.json({ message: 'el cliente fue actualizado' });
         });
     }

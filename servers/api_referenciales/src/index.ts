@@ -1,6 +1,7 @@
-import express,{Application} from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+
 // inidex rutas
 import indexRutas from './rutas/indexRutas'
 // referenciales productos
@@ -12,49 +13,56 @@ import impuestosRutas from './rutas/rutas-referenciales/ruta_impuesto';
 import marcasRutas from './rutas/rutas-referenciales/ruta_marca';
 import productosRutas from './rutas/rutas-producto/ruta_producto';
 import listaRutas from './rutas/rutas-producto/ruta_lista';
-import clienteRutas from './rutas/rutas-clientes/ruta_cliente'
+import clienteRutas from './rutas/rutas-clientes/ruta_cliente';
+import ciudadRutas from './rutas/rutas-localidades/ruta_ciudad';
+import departamentoRutas from './rutas/rutas-localidades/ruta_departamento';
+import paisesRutas from './rutas/rutas-localidades/ruta_pais';
+import usuarioRutas from './rutas/rutas-acceso/ruta_usuario';
 
 // fin referenciales productos
+class Server {
 
-class Server
-{
-   public app: Application;
-    constructor()
-    {
-       this.app = express();
-       this.config();
-       this.rutas();
+    public app: Application;
+    constructor() {
+        this.app = express();
+        this.config();
+        this.rutas();
     }
-    config():void
-    {
-        this.app.set('port',process.env.PORT||3000);
+    config(): void {
+        this.app.set('port', process.env.PORT || 3000);
         this.app.use(morgan('dev'));
         this.app.use(cors());
         this.app.use(express.json());
-        this.app.use(express.urlencoded({extended: false}));
+        this.app.use(express.urlencoded({ extended: false }));
+       
     }
-    rutas():void
-    {
+    rutas(): void {
         //instanciamos el index de rutas
         this.app.use(indexRutas);
         // instanciamos las rutas de referenciales
-        this.app.use('/api/depositos',presentacionesRutas);
-        this.app.use('/api/marcas',marcasRutas);
-        this.app.use('/api/unidades',medidasRutas);
-        this.app.use('/api/impuestos',impuestosRutas);
+        this.app.use('/api/depositos', presentacionesRutas);
+        this.app.use('/api/marcas' ,marcasRutas);
+        this.app.use('/api/unidades', medidasRutas);
+        this.app.use('/api/impuestos', impuestosRutas);
         //this.app.use('/api/familias',familiaRutas);
-        this.app.use('/api/categorias',categoriaRutas);
-        this.app.use('/api/productos',productosRutas);
-        this.app.use('/api/listasprecios',listaRutas);
-        this.app.use('/api/clientes',clienteRutas);
+        this.app.use('/api/categorias', categoriaRutas);
+        this.app.use('/api/productos', productosRutas);
+        this.app.use('/api/listasprecios', listaRutas);
+        this.app.use('/api/clientes', clienteRutas);
+        // referenciales localidades
+        this.app.use('/api/ciudades', ciudadRutas);
+        this.app.use('/api/departamentos', departamentoRutas);
+        this.app.use('/api/paises', paisesRutas);
         // fin de referenciales
+        // ruta de acceso
+        this.app.use('/api/usuario', usuarioRutas)
     }
-    iniciar():void
-    {
-        this.app.listen(this.app.get('port'),()=>{
+
+    iniciar(): void {
+        this.app.listen(this.app.get('port'), () => {
             console.log("se inicio el servidor")
         });
     }
 }
-const servidor =  new Server();
+const servidor = new Server();
 servidor.iniciar();

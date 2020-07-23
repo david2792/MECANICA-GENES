@@ -17,6 +17,10 @@ const ruta_marca_1 = __importDefault(require("./rutas/rutas-referenciales/ruta_m
 const ruta_producto_1 = __importDefault(require("./rutas/rutas-producto/ruta_producto"));
 const ruta_lista_1 = __importDefault(require("./rutas/rutas-producto/ruta_lista"));
 const ruta_cliente_1 = __importDefault(require("./rutas/rutas-clientes/ruta_cliente"));
+const ruta_ciudad_1 = __importDefault(require("./rutas/rutas-localidades/ruta_ciudad"));
+const ruta_departamento_1 = __importDefault(require("./rutas/rutas-localidades/ruta_departamento"));
+const ruta_pais_1 = __importDefault(require("./rutas/rutas-localidades/ruta_pais"));
+const ruta_usuario_1 = __importDefault(require("./rutas/rutas-acceso/ruta_usuario"));
 // fin referenciales productos
 class Server {
     constructor() {
@@ -44,7 +48,13 @@ class Server {
         this.app.use('/api/productos', ruta_producto_1.default);
         this.app.use('/api/listasprecios', ruta_lista_1.default);
         this.app.use('/api/clientes', ruta_cliente_1.default);
+        // referenciales localidades
+        this.app.use('/api/ciudades', ruta_ciudad_1.default);
+        this.app.use('/api/departamentos', ruta_departamento_1.default);
+        this.app.use('/api/paises', ruta_pais_1.default);
         // fin de referenciales
+        // ruta de acceso
+        this.app.use('/api/usuario', ruta_usuario_1.default);
     }
     iniciar() {
         this.app.listen(this.app.get('port'), () => {
