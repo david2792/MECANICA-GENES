@@ -141,9 +141,11 @@ export default {
   },
   methods: {
     listar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       axios
-        .get("departamentos/")
+        .get("departamentos/",configuracion)
         .then(function(response) {
           me.paises = response.data;
         })
@@ -154,8 +156,8 @@ export default {
       selectPais() {
       let me = this;
       let paisArray = [];
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       axios
         .get("paises/", configuracion)
         .then(function(response) {
@@ -196,6 +198,8 @@ export default {
       return this.valida;
     },
     guardar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       if (this.validar()) {
         return;
@@ -207,7 +211,7 @@ export default {
             CodigoDepartamento: this.CodigoDepartamento,
             Nombre: this.Nombre,
             Pais:this.Pais
-          })
+          },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();
@@ -219,7 +223,7 @@ export default {
           });
       } else {
         axios
-          .post("departamentos/", { Nombre: this.Nombre,Pais:this.Pais})
+          .post("departamentos/", { Nombre: this.Nombre,Pais:this.Pais},configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();

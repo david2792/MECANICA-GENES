@@ -17,7 +17,6 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const conexionBD_1 = __importDefault(require("../../conexionBD"));
 // import randtoken from 'rand-token';
 // var randtoken = require('rand-token') ;
-var refreshTokens = [];
 class UsuarioControlador {
     /**
      * acceso al sistema
@@ -28,6 +27,7 @@ class UsuarioControlador {
             try {
                 const usuario = yield conexionBD_1.default.query('SELECT * FROM vusuarios');
                 JSON.stringify(usuario);
+                const cod = usuario[0].CodigoUsuario;
                 const Usuario = usuario[0].Usuario;
                 const Clave = usuario[0].Clave;
                 const NivelUsuario = usuario[0].NivelUsuario;
@@ -38,6 +38,7 @@ class UsuarioControlador {
                 console.log(pass);
                 if (users == Usuario && Clave == pass) {
                     var tokenData = {
+                        codigo: cod,
                         users: users,
                         pass: pass,
                         NivelUsuario: NivelUsuario
@@ -46,19 +47,22 @@ class UsuarioControlador {
                     console.log("bienvenido");
                     // var token = jwt.sign(users:users, SECRET, { expiresIn: '1h' , algorithm: 'RS256' })
                     var token = jsonwebtoken_1.default.sign(tokenData, 'Secret Password', {
-                        expiresIn: 60 * 60 * 24 // expires in 24 hours
+                        expiresIn: "8h" // expires in 24 hours
                     });
                     // console.log(token)
-                    res.json(tokenData);
+                    res.header('auth-token', token).json({ token, tokenData });
+                }
+                else {
                 }
             }
             catch (error) {
+                res.json(error);
             }
         });
     }
     verificar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            var SECRET = "SECRETO_PARA_ENCRIPTACION";
+            var SECRET = "Secret Password";
             var token = req.headers['authorization'];
             if (!token) {
                 res.status(401).send({

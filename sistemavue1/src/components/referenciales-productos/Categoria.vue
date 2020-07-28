@@ -103,6 +103,7 @@ export default {
       CodigoCategoria: "",
       Descripcion: "",
       validaMensaje: [],
+      valida:'',
       adModal: 0,
       adAccion: 0,
       adNombre: "",
@@ -124,12 +125,13 @@ export default {
   },
   methods: {
     listar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       axios
-        .get("categorias/")
+        .get("categorias/",configuracion)
         .then(function(response) {
           me.categorias = response.data;
-          console.log(me.categorias.data);
         })
         .catch(function(error) {
           console.log(error);
@@ -153,6 +155,8 @@ export default {
       return this.valida;
     },
     guardar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       if (this.validar()) {
         return;
@@ -164,7 +168,7 @@ export default {
           .put("categorias/", {
             CodigoCategoria: this.CodigoCategoria,
             Descripcion: this.Descripcion
-          })
+          },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();
@@ -176,7 +180,7 @@ export default {
           });
       } else {
         axios
-          .post("categorias/", { Descripcion: this.Descripcion })
+          .post("categorias/", { Descripcion: this.Descripcion },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();

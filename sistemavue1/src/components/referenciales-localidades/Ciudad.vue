@@ -142,8 +142,10 @@ export default {
   methods: {
     listar() {
       let me = this;
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       axios
-        .get("ciudades/")
+        .get("ciudades/",configuracion)
         .then(function(response) {
           me.ciudades = response.data;
           console.log(ciudades)
@@ -155,7 +157,7 @@ export default {
       selectDepartamento() {
       let me = this;
       let depaArray = [];
-      let header = { Token: this.$store.state.token };
+      let header = { "auth-token": this.$store.state.token };
       let configuracion = { headers: header };
       axios
         .get("departamentos/", configuracion)
@@ -197,6 +199,8 @@ export default {
       return this.valida;
     },
     guardar() {
+      let header = { "auth-token": this.$store.state.token };
+      let configuracion = { headers: header };
       let me = this;
       if (this.validar()) {
         return;
@@ -208,7 +212,7 @@ export default {
             CodigoCiudad: this.CodigoCiudad,
             Nombre: this.Nombre,
             Departamento:this.Departamento
-          })
+          },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();
@@ -220,7 +224,7 @@ export default {
           });
       } else {
         axios
-          .post("ciudades/", { Nombre: this.Nombre,Departamento:this.Departamento})
+          .post("ciudades/", { Nombre: this.Nombre,Departamento:this.Departamento},configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();

@@ -30,6 +30,9 @@
                     :error="error"
                     @click:append="hidePassword = !hidePassword"/>
                 </v-form>
+                <v-flex class="red--text" v-if="errorM">
+                        {{errorM}}
+                    </v-flex>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -60,6 +63,7 @@ export default {
       users:'',
       usuario: '',
       password: '',
+      errorM:null,
       hidePassword: true,
       error: false,
       showResult: false,
@@ -78,23 +82,15 @@ export default {
             const da1='';
             axios.post('usuario/login',{usuario: this.usuario, password: this.password})
             .then(respuesta =>{
-              me.da=respuesta.data;
-            //  me.da.NivelUsuario
-              console.log ( me.da.users);
-              this.$router.push({name: 'bienvenida',params:{
-                  rol:me.da.NivelUsuario,
-                  users:me.da.users
-                }});
-            })
-            .then(response =>{
-                
-                // this.$router.push({name: 'bienvenida',params:{
-                //   rol:rol
-                // }})
-                ;
+             return respuesta.data;
+             // console.log (respuesta.data.tokenData);
+            }).then(data=>{
+  
+              this.$store.dispatch("guardarToken",data.token);
+              this.$router.push({name:'Bienvenida'})
             })
             .catch(error =>{
-                //console.log(eror);
+                console.log(eror);
                 this.errorM=null;
                 if (error.response.status==404){
                     this.errorM='No existe el usuario o las credenciales son   incorrectas.';

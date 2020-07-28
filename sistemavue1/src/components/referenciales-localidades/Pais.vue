@@ -126,9 +126,11 @@ export default {
   },
   methods: {
     listar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       axios
-        .get("paises/")
+        .get("paises/",configuracion)
         .then(function(response) {
           me.paises = response.data;
         })
@@ -154,6 +156,8 @@ export default {
       return this.valida;
     },
     guardar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       if (this.validar()) {
         return;
@@ -165,7 +169,7 @@ export default {
           .put("paises/", {
             CodigoPais: this.CodigoPais,
             Nombre: this.Nombre
-          })
+          },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();
@@ -177,7 +181,7 @@ export default {
           });
       } else {
         axios
-          .post("paises/", { Nombre: this.Nombre })
+          .post("paises/", { Nombre: this.Nombre },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+const validateToken_1 = require("./libs/validateToken");
 // inidex rutas
 const indexRutas_1 = __importDefault(require("./rutas/indexRutas"));
 // referenciales productos
@@ -39,19 +40,19 @@ class Server {
         //instanciamos el index de rutas
         this.app.use(indexRutas_1.default);
         // instanciamos las rutas de referenciales
-        this.app.use('/api/depositos', ruta_presentacion_1.default);
-        this.app.use('/api/marcas', ruta_marca_1.default);
-        this.app.use('/api/unidades', ruta_unidadMedida_1.default);
-        this.app.use('/api/impuestos', ruta_impuesto_1.default);
+        this.app.use('/api/depositos', validateToken_1.TokenValidation, ruta_presentacion_1.default);
+        this.app.use('/api/marcas', validateToken_1.TokenValidation, ruta_marca_1.default);
+        this.app.use('/api/unidades', validateToken_1.TokenValidation, ruta_unidadMedida_1.default);
+        this.app.use('/api/impuestos', validateToken_1.TokenValidation, ruta_impuesto_1.default);
         //this.app.use('/api/familias',familiaRutas);
-        this.app.use('/api/categorias', ruta_categoria_1.default);
-        this.app.use('/api/productos', ruta_producto_1.default);
-        this.app.use('/api/listasprecios', ruta_lista_1.default);
-        this.app.use('/api/clientes', ruta_cliente_1.default);
+        this.app.use('/api/categorias', validateToken_1.TokenValidation, ruta_categoria_1.default);
+        this.app.use('/api/productos', validateToken_1.TokenValidation, ruta_producto_1.default);
+        this.app.use('/api/listasprecios', validateToken_1.TokenValidation, ruta_lista_1.default);
+        this.app.use('/api/clientes', validateToken_1.TokenValidation, ruta_cliente_1.default);
         // referenciales localidades
-        this.app.use('/api/ciudades', ruta_ciudad_1.default);
-        this.app.use('/api/departamentos', ruta_departamento_1.default);
-        this.app.use('/api/paises', ruta_pais_1.default);
+        this.app.use('/api/ciudades', validateToken_1.TokenValidation, ruta_ciudad_1.default);
+        this.app.use('/api/departamentos', validateToken_1.TokenValidation, ruta_departamento_1.default);
+        this.app.use('/api/paises', validateToken_1.TokenValidation, ruta_pais_1.default);
         // fin de referenciales
         // ruta de acceso
         this.app.use('/api/usuario', ruta_usuario_1.default);

@@ -2,7 +2,7 @@ export default
 {
     database:
     {
-        host: 'localhost',
+        host: 'loca12lhost',
         user: 'manager',
         password: 'developer',
         database: 'compraventa'

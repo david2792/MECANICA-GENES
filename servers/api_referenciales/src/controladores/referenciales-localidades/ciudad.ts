@@ -6,7 +6,7 @@ class CiudadesControlador
 {
  public async listar (req:Request,res:Response){
     const familias = await pool.query('SELECT * FROM vciudades');
-    res.json(familias);
+    res.json(familias); 
   } 
 
   public async crear(req:Request, res:Response):Promise<void>

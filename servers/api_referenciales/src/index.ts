@@ -1,6 +1,8 @@
+
 import express, { Application } from 'express';
-import morgan from 'morgan';
+import morgan, { token } from 'morgan';
 import cors from 'cors';
+import {TokenValidation}  from './libs/validateToken'
 
 // inidex rutas
 import indexRutas from './rutas/indexRutas'
@@ -40,22 +42,22 @@ class Server {
         //instanciamos el index de rutas
         this.app.use(indexRutas);
         // instanciamos las rutas de referenciales
-        this.app.use('/api/depositos', presentacionesRutas);
-        this.app.use('/api/marcas' ,marcasRutas);
-        this.app.use('/api/unidades', medidasRutas);
-        this.app.use('/api/impuestos', impuestosRutas);
+        this.app.use('/api/depositos', TokenValidation,presentacionesRutas);
+        this.app.use('/api/marcas' ,TokenValidation,marcasRutas);
+        this.app.use('/api/unidades', TokenValidation,medidasRutas);
+        this.app.use('/api/impuestos', TokenValidation,impuestosRutas);
         //this.app.use('/api/familias',familiaRutas);
-        this.app.use('/api/categorias', categoriaRutas);
-        this.app.use('/api/productos', productosRutas);
-        this.app.use('/api/listasprecios', listaRutas);
-        this.app.use('/api/clientes', clienteRutas);
+        this.app.use('/api/categorias', TokenValidation,categoriaRutas);
+        this.app.use('/api/productos', TokenValidation,productosRutas);
+        this.app.use('/api/listasprecios',TokenValidation ,listaRutas);
+        this.app.use('/api/clientes', TokenValidation,clienteRutas);
         // referenciales localidades
-        this.app.use('/api/ciudades', ciudadRutas);
-        this.app.use('/api/departamentos', departamentoRutas);
-        this.app.use('/api/paises', paisesRutas);
+        this.app.use('/api/ciudades',TokenValidation,ciudadRutas);
+        this.app.use('/api/departamentos',TokenValidation, departamentoRutas);
+        this.app.use('/api/paises',TokenValidation, paisesRutas);
         // fin de referenciales
         // ruta de acceso
-        this.app.use('/api/usuario', usuarioRutas)
+        this.app.use('/api/usuario',usuarioRutas)
     }
 
     iniciar(): void {

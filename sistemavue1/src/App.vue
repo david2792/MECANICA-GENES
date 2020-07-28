@@ -1,8 +1,14 @@
 <template >
-  <v-app id="app"  >
-    <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.mdAndUp" app v-model="drawer"  v-if="!$route.meta.allowAnonymous">
+  <v-app id="app">
+    <v-navigation-drawer
+      fixed
+      :clipped="$vuetify.breakpoint.mdAndUp"
+      app
+      v-model="drawer"
+      v-if="logueado"
+    >
       <v-list dense color="primary">
-        <template>
+        <template v-if="esAdministrador">
           <v-list-tile :to="{name:'home'}">
             <v-list-tile-action>
               <v-icon color="black">home</v-icon>
@@ -53,7 +59,7 @@
             </v-list-tile>
           </v-list-group>
         </template>
-         <template>
+        <template>
           <v-list-group>
             <v-list-tile slot="activator">
               <v-list-tile-content>
@@ -78,7 +84,7 @@
                 <v-list-tile-title>Departamentos</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-             <v-list-tile :to="{name: 'ciudad'}">
+            <v-list-tile :to="{name: 'ciudad'}">
               <v-list-tile-action>
                 <v-icon>table_chart</v-icon>
               </v-list-tile-action>
@@ -88,7 +94,7 @@
             </v-list-tile>
           </v-list-group>
         </template>
-         <template>
+        <template>
           <v-list-group>
             <v-list-tile slot="activator">
               <v-list-tile-content>
@@ -191,24 +197,32 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <span class="hidden-sm-and-down">Mecanica Genes</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <!-- <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>apps</v-icon>
+      </v-btn> -->
+            <v-spacer></v-spacer>
+      <v-btn @click="salir()" icon v-if="logueado">
+        <v-icon>logout</v-icon> Salir
+      </v-btn>
+      <v-btn :to="{name: 'login'}" icon v-else>
+        <v-icon>apps</v-icon> Login
       </v-btn>
     </v-toolbar>
-    <v-content>
+    <!-- aqui va el contenido -->
+    <v-content  class="d-flex align-start flex-column mb-6 pt-4">
       <v-container fluid fill-height>
         <v-slide-y-transition mode="out-in">
           <router-view />
         </v-slide-y-transition>
       </v-container>
     </v-content>
-
-    <v-footer dark height="auto">
+    <!-- termina el contenido -->
+    <v-footer dark height="70" >
       <v-layout justify-center>
         <v-flex text-xs-center>
-          <v-card flat tile color="green" class="white--text">
-            <v-card-text class="white--text pt-0">SMART SYSTEMS &copy;2020</v-card-text>
+          <v-card flat tile color="green" height="70" class="white--text">
+            <v-card-text class="white--text pt-10">SMART SYSTEMS &copy;2020</v-card-text>
           </v-card>
         </v-flex>
       </v-layout>
@@ -221,8 +235,40 @@ export default {
   name: "App",
   data() {
     return {
-      drawer: null
+      drawer: true
     };
+  },
+  computed: {
+    logueado() {
+   return this.$store.state.usuario;
+    },
+    esAdministrador() {
+      return (
+        this.$store.state.usuario &&
+        this.$store.state.usuario.NivelUsuario == "ADMINISTRADOR"
+
+      );
+       
+    },
+    esAlmacenero() {
+      return (
+        this.$store.state.usuario &&
+        this.$store.state.usuario.rol == "Almacenero"
+      );
+    },
+    esVendedor() {
+      return (
+        this.$store.state.usuario && this.$store.state.usuario.NivelUsuario == "Vendedor"
+      );
+    }
+  },
+  created() {
+    this.$store.dispatch("autoLogin");
+  },
+  methods: {
+    salir() {
+      this.$store.dispatch("salir");
+    }
   }
 };
 </script>
