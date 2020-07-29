@@ -1,1 +1,7 @@
 https://www.youtube.com/watch?v=pbU9JxMriOo&list=PL4cUxeGkcC9g0MQZfHwKcuB0Yswgb3gA5&index=7
+https://www.youtube.com/watch?v=pbU9JxMriOo&list=PL4cUxeGkcC9g0MQZfHwKcuB0Yswgb3gA5&index=7
+
+sudo apt install wget
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+nvm ls-remote
+nvm install 12.18
