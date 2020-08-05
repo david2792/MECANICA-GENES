@@ -38,3 +38,45 @@ FROM `productos`
         
 AGREGAR CAMPO ESTADO A LA LISTA DE PRECIO VARCHAR DEFAUL ACTIVO
 
+GENES
+vistas 
+
+CREATE
+    /*[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+    [DEFINER = { user | CURRENT_USER }]
+    [SQL SECURITY { DEFINER | INVOKER }]*/
+    VIEW `compraventa`.`vclientevehiculos` 
+    AS
+(SELECT
+    `clientes`.`Cedula`
+    , `clientes`.`Ruc`
+    , `clientes`.`RazonSocial`
+    , `tipostransmision`.`nombre` AS transmicion
+    , `tracciones`.`nombre` AS traccion
+    , `modelosvehiculos`.`nombre` AS modelo
+    , `marcasvehiculos`.`nombre` AS marca
+    , `tiposcombustibles`.`nombre` AS combustible
+    , `colores`.`nombre` AS color
+    , `vehiculos`.`numerochapa` AS chapa
+    , `vehiculos`.`numerochasis` AS chasis
+FROM
+    `compraventa`.`detallesvehiculos`
+    INNER JOIN `compraventa`.`clientes` 
+        ON (`detallesvehiculos`.`codigocliente` = `clientes`.`CodigoCliente`)
+    INNER JOIN `compraventa`.`vehiculos` 
+        ON (`detallesvehiculos`.`codigovehiculo` = `vehiculos`.`codigo`)
+    INNER JOIN `compraventa`.`tipostransmision` 
+        ON (`vehiculos`.`codigotransmision` = `tipostransmision`.`codigo`)
+    INNER JOIN `compraventa`.`tracciones` 
+        ON (`vehiculos`.`codigotraccion` = `tracciones`.`codigo`)
+    INNER JOIN `compraventa`.`modelosvehiculos` 
+        ON (`vehiculos`.`codigomodelo` = `modelosvehiculos`.`codigo`)
+    INNER JOIN `compraventa`.`marcasvehiculos` 
+        ON (`vehiculos`.`codigomarca` = `marcasvehiculos`.`codigo`)
+    INNER JOIN `compraventa`.`tiposcombustibles` 
+        ON (`vehiculos`.`codigotipocombustible` = `tiposcombustibles`.`codigo`)
+    INNER JOIN `compraventa`.`colores` 
+        ON (`vehiculos`.`codigocolor` = `colores`.`codigo`)
+    INNER JOIN `compraventa`.`anios` 
+        ON (`vehiculos`.`codigoanio` = `anios`.`codigo`));
+

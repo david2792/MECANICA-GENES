@@ -14,7 +14,6 @@ class CiudadesControlador
     const codigo =await pool.query('SELECT MAX(CodigoCiudad)+1 AS Codigo FROM ciudades')
     JSON.stringify(codigo);
     const CodigoCiudad = codigo[0].Codigo;
-    console.log(CodigoCiudad);
    const departamento= req.body.Departamento;
    const Nombre = req.body.Nombre;
    const id= await pool.query('SELECT CodigoDepartamento FROM departamentos  WHERE Nombre =?',departamento);

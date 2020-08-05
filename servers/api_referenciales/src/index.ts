@@ -21,6 +21,24 @@ import departamentoRutas from './rutas/rutas-localidades/ruta_departamento';
 import paisesRutas from './rutas/rutas-localidades/ruta_pais';
 import usuarioRutas from './rutas/rutas-acceso/ruta_usuario';
 
+import estadoRecepcionRutas from './rutas/rutas-taller/ruta-estadoRecepecion';
+import tipoNivelesCombus from './rutas/rutas-taller/ruta-nivelCombustible';
+import tipoTransmicionRutas from './rutas/rutas-taller/ruta-tipoTransmicion';
+import traccionRuta from './rutas/rutas-taller/ruta-traccion';
+import modeloVehiculoRuta from './rutas/rutas-taller/ruta-modeloVehiculo';
+import marcaVechiculoRutas from './rutas/rutas-taller/ruta-marcaVehiculo';
+import tipoCombustibleRutas from './rutas/rutas-taller/ruta-tipoCombustible';
+import colorRutas from './rutas/rutas-taller/ruta-color';
+import aniosRutas from './rutas/rutas-taller/ruta-anios';
+import estadoReparacion from './rutas/rutas-taller/ruta-estadoReparacion';
+import estdoTrabajoRutas from './rutas/rutas-taller/ruta-estadorecepcion';
+import vehiculoRuta from './rutas/rutas-taller/ruta-vehiculo';
+
+
+
+
+
+
 // fin referenciales productos
 class Server {
 
@@ -54,7 +72,21 @@ class Server {
         // referenciales localidades
         this.app.use('/api/ciudades',TokenValidation,ciudadRutas);
         this.app.use('/api/departamentos',TokenValidation, departamentoRutas);
-        this.app.use('/api/paises',TokenValidation, paisesRutas);
+        this.app.use('/api/paises',TokenValidation ,paisesRutas);
+        // referenciales taller
+         this.app.use('/api/estadorecepciones',TokenValidation,estadoRecepcionRutas);
+        this.app.use('/api/nivelcombustibles',TokenValidation,tipoNivelesCombus);
+         this.app.use('/api/estadorepaciones',TokenValidation,estadoReparacion);
+         this.app.use('/api/estadotransmiciones',TokenValidation,tipoTransmicionRutas);
+          this.app.use('/api/tracciones',TokenValidation,traccionRuta);
+         this.app.use('/api/modelovechiculos',TokenValidation,modeloVehiculoRuta);
+         this.app.use('/api/marcavehiculos',TokenValidation,marcaVechiculoRutas);
+         this.app.use('/api/tipocombustibles',TokenValidation,tipoCombustibleRutas);
+         this.app.use('/api/colores',TokenValidation,colorRutas);
+          this.app.use('/api/anios',TokenValidation,aniosRutas);
+         this.app.use('/api/estadotrabajos',TokenValidation,estdoTrabajoRutas);
+         this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
+
         // fin de referenciales
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)

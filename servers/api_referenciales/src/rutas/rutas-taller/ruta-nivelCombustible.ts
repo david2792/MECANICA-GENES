@@ -1,7 +1,7 @@
 import { nivelesCombustiblesControlador } from '../../controladores/referenciales-taller/nivelCombustible';
 import { Router } from 'express';
 
-class TipoCombustibleRutas
+class TipoNivelesCombus
 {
    public router: Router = Router(); 
 
@@ -17,5 +17,5 @@ class TipoCombustibleRutas
    }
 }
 
-const tipoCombustibleRutas = new TipoCombustibleRutas();
- export default tipoCombustibleRutas.router;
+const tipoNivelesCombus = new TipoNivelesCombus();
+ export default tipoNivelesCombus.router;

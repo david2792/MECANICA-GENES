@@ -1,4 +1,4 @@
-import { estadoRecepcionControlador } from '../../controladores/referenciales-taller/estadoRecepcion';
+import { estadoTrabajoControlador } from '../../controladores/referenciales-taller/Estadosorentrabajos';
 import { Router } from 'express';
 
 class EstadoRecepcionRutas
@@ -11,11 +11,11 @@ class EstadoRecepcionRutas
    }
    config():void
    {
-       this.router.get('/',estadoRecepcionControlador.listar);
-       this.router.post('/',estadoRecepcionControlador.crear);
-       this.router.put('/',estadoRecepcionControlador.actualizar);
+       this.router.get('/',estadoTrabajoControlador.listar);
+       this.router.post('/',estadoTrabajoControlador.crear);
+       this.router.put('/',estadoTrabajoControlador.actualizar);
    }
 }
 
-const estadoRecepcionRutas = new EstadoRecepcionRutas();
- export default estadoRecepcionRutas.router;
+const estdoTrabajoRutas = new EstadoRecepcionRutas();
+ export default estdoTrabajoRutas.router;

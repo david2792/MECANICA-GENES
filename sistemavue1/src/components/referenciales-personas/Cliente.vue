@@ -122,6 +122,7 @@ export default {
     return {
       dialog: false,
       search: "",
+      aux:[],
       personas: [],
       headers: [
         { text: "Opciones", value: "opciones", sortable: false },
@@ -168,6 +169,7 @@ export default {
     this.selectCiudad();
   },
   methods: {
+    
     listar() {
       let header={"auth-token":this.$store.state.token};
       let configuracion={headers:header};
@@ -343,5 +345,7 @@ export default {
       this.limpiar();
     }
   }
+
 };
+
 </script>

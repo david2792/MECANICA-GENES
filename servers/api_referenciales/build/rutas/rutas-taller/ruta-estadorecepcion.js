@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const estadoRecepcion_1 = require("../../controladores/referenciales-taller/estadoRecepcion");
+const Estadosorentrabajos_1 = require("../../controladores/referenciales-taller/Estadosorentrabajos");
 const express_1 = require("express");
 class EstadoRecepcionRutas {
     constructor() {
@@ -8,10 +8,10 @@ class EstadoRecepcionRutas {
         this.config();
     }
     config() {
-        this.router.get('/', estadoRecepcion_1.estadoRecepcionControlador.listar);
-        this.router.post('/', estadoRecepcion_1.estadoRecepcionControlador.crear);
-        this.router.put('/', estadoRecepcion_1.estadoRecepcionControlador.actualizar);
+        this.router.get('/', Estadosorentrabajos_1.estadoTrabajoControlador.listar);
+        this.router.post('/', Estadosorentrabajos_1.estadoTrabajoControlador.crear);
+        this.router.put('/', Estadosorentrabajos_1.estadoTrabajoControlador.actualizar);
     }
 }
-const estadoRecepcionRutas = new EstadoRecepcionRutas();
-exports.default = estadoRecepcionRutas.router;
+const estdoTrabajoRutas = new EstadoRecepcionRutas();
+exports.default = estdoTrabajoRutas.router;

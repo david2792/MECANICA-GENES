@@ -26,7 +26,6 @@ class CiudadesControlador {
             const codigo = yield conexionBD_1.default.query('SELECT MAX(CodigoCiudad)+1 AS Codigo FROM ciudades');
             JSON.stringify(codigo);
             const CodigoCiudad = codigo[0].Codigo;
-            console.log(CodigoCiudad);
             const departamento = req.body.Departamento;
             const Nombre = req.body.Nombre;
             const id = yield conexionBD_1.default.query('SELECT CodigoDepartamento FROM departamentos  WHERE Nombre =?', departamento);

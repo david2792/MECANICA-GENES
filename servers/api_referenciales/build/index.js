@@ -22,6 +22,18 @@ const ruta_ciudad_1 = __importDefault(require("./rutas/rutas-localidades/ruta_ci
 const ruta_departamento_1 = __importDefault(require("./rutas/rutas-localidades/ruta_departamento"));
 const ruta_pais_1 = __importDefault(require("./rutas/rutas-localidades/ruta_pais"));
 const ruta_usuario_1 = __importDefault(require("./rutas/rutas-acceso/ruta_usuario"));
+const ruta_estadoRecepecion_1 = __importDefault(require("./rutas/rutas-taller/ruta-estadoRecepecion"));
+const ruta_nivelCombustible_1 = __importDefault(require("./rutas/rutas-taller/ruta-nivelCombustible"));
+const ruta_tipoTransmicion_1 = __importDefault(require("./rutas/rutas-taller/ruta-tipoTransmicion"));
+const ruta_traccion_1 = __importDefault(require("./rutas/rutas-taller/ruta-traccion"));
+const ruta_modeloVehiculo_1 = __importDefault(require("./rutas/rutas-taller/ruta-modeloVehiculo"));
+const ruta_marcaVehiculo_1 = __importDefault(require("./rutas/rutas-taller/ruta-marcaVehiculo"));
+const ruta_tipoCombustible_1 = __importDefault(require("./rutas/rutas-taller/ruta-tipoCombustible"));
+const ruta_color_1 = __importDefault(require("./rutas/rutas-taller/ruta-color"));
+const ruta_anios_1 = __importDefault(require("./rutas/rutas-taller/ruta-anios"));
+const ruta_estadoReparacion_1 = __importDefault(require("./rutas/rutas-taller/ruta-estadoReparacion"));
+const ruta_estadorecepcion_1 = __importDefault(require("./rutas/rutas-taller/ruta-estadorecepcion"));
+const ruta_vehiculo_1 = __importDefault(require("./rutas/rutas-taller/ruta-vehiculo"));
 // fin referenciales productos
 class Server {
     constructor() {
@@ -53,6 +65,19 @@ class Server {
         this.app.use('/api/ciudades', validateToken_1.TokenValidation, ruta_ciudad_1.default);
         this.app.use('/api/departamentos', validateToken_1.TokenValidation, ruta_departamento_1.default);
         this.app.use('/api/paises', validateToken_1.TokenValidation, ruta_pais_1.default);
+        // referenciales taller
+        this.app.use('/api/estadorecepciones', validateToken_1.TokenValidation, ruta_estadoRecepecion_1.default);
+        this.app.use('/api/nivelcombustibles', validateToken_1.TokenValidation, ruta_nivelCombustible_1.default);
+        this.app.use('/api/estadorepaciones', validateToken_1.TokenValidation, ruta_estadoReparacion_1.default);
+        this.app.use('/api/estadotransmiciones', validateToken_1.TokenValidation, ruta_tipoTransmicion_1.default);
+        this.app.use('/api/tracciones', validateToken_1.TokenValidation, ruta_traccion_1.default);
+        this.app.use('/api/modelovechiculos', validateToken_1.TokenValidation, ruta_modeloVehiculo_1.default);
+        this.app.use('/api/marcavehiculos', validateToken_1.TokenValidation, ruta_marcaVehiculo_1.default);
+        this.app.use('/api/tipocombustibles', validateToken_1.TokenValidation, ruta_tipoCombustible_1.default);
+        this.app.use('/api/colores', validateToken_1.TokenValidation, ruta_color_1.default);
+        this.app.use('/api/anios', validateToken_1.TokenValidation, ruta_anios_1.default);
+        this.app.use('/api/estadotrabajos', validateToken_1.TokenValidation, ruta_estadorecepcion_1.default);
+        this.app.use('/api/vehiculos', validateToken_1.TokenValidation, ruta_vehiculo_1.default);
         // fin de referenciales
         // ruta de acceso
         this.app.use('/api/usuario', ruta_usuario_1.default);

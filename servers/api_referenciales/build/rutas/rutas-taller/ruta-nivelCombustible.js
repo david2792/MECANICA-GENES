@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const nivelCombustible_1 = require("../../controladores/referenciales-taller/nivelCombustible");
 const express_1 = require("express");
-class TipoCombustibleRutas {
+class TipoNivelesCombus {
     constructor() {
         this.router = express_1.Router();
         this.config();
@@ -13,5 +13,5 @@ class TipoCombustibleRutas {
         this.router.put('/', nivelCombustible_1.nivelesCombustiblesControlador.actualizar);
     }
 }
-const tipoCombustibleRutas = new TipoCombustibleRutas();
-exports.default = tipoCombustibleRutas.router;
+const tipoNivelesCombus = new TipoNivelesCombus();
+exports.default = tipoNivelesCombus.router;

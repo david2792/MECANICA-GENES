@@ -9,7 +9,7 @@
     >
       <v-list dense color="primary">
         <template v-if="esAdministrador">
-          <v-list-tile :to="{name:'home'}">
+          <v-list-tile :to="{name:'Bienvenida'}">
             <v-list-tile-action>
               <v-icon color="black">home</v-icon>
             </v-list-tile-action>
@@ -94,6 +94,105 @@
             </v-list-tile>
           </v-list-group>
         </template>
+         <template>
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  <v-icon dark color="black">mdi-wrench</v-icon>Referenciales Taller
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'estadorecepcion'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Estado Recepcion</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'nivelcombustible'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Nivel Combustible</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'estadoreparacion'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Estado Reparacion</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+               <v-list-tile :to="{name: 'anio'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Años</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+               <v-list-tile :to="{name: 'color'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Color</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+               <v-list-tile :to="{name: 'estadotransmicion'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Tipo Transmicion</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+             <v-list-tile :to="{name: 'marcavehiculo'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Marca Vehiculo</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'modelovehiculo'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Modelo Vehiculo</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'tipocombustible'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Tipo Combustible</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'traccion'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Traccion</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'estadotrabajo'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Estado del Trabajo</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-group>
+        </template>
         <template>
           <v-list-group>
             <v-list-tile slot="activator">
@@ -144,6 +243,33 @@
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Configuracion</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-group>
+        </template>
+        <template>
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  <v-icon dark color="black">mdi-wrench</v-icon>ADM Taller
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'vehiculo'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Vehiculos</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: ''}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Proveedores</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
@@ -210,7 +336,7 @@
       </v-btn>
     </v-toolbar>
     <!-- aqui va el contenido -->
-    <v-content  class="d-flex align-start flex-column mb-6 pt-4">
+    <v-content >
       <v-container fluid fill-height>
         <v-slide-y-transition mode="out-in">
           <router-view />

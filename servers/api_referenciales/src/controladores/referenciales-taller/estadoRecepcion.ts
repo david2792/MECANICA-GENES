@@ -4,13 +4,14 @@ import pool from '../../conexionBD';
 class EstadoRecepcionControlador
 {
  public async listar (req:Request,res:Response){
-    const marcas = await pool.query('SELECT * FROM nivelescombustibles');
+    const marcas = await pool.query('SELECT * FROM estadosrecepciones');
+    console.log("marcas")
     res.json(marcas);
   } 
 
   public async listarUno (req:Request,res:Response):Promise<any>{
     const { id }= req.params;
-    const marcas =  await pool.query('SELECT * FROM nivelescombustibles WHERE codigo=?',[id]);
+    const marcas =  await pool.query('SELECT * FROM estadosrecepciones WHERE codigo=?',[id]);
     if(marcas.length > 0){
       return res.json(marcas[0]);
       console.log(marcas);
@@ -21,13 +22,16 @@ class EstadoRecepcionControlador
 
   public async crear(req:Request, res:Response):Promise<void>
   {
+    console.log("hoka");
     try {
-      const Codigo =await pool.query('SELECT MAX(codigo)+1 AS Codigo FROM estadosrecepciones')
+      
+      const Codigo =await pool.query('SELECT MAX(codigo)+1 AS codigo FROM estadosrecepciones')
       JSON.stringify(Codigo);
-      const codigo = Codigo[0].Codigo;
+      const codigo = Codigo[0].codigo;
       console.log(codigo);
       const descripcion = req.body.descripcion;
       const values={codigo,descripcion};
+      console.log(values)
       await pool.query('INSERT INTO estadosrecepciones  SET ?',values);
        res.json({message:"el estadosrecepciones fue guardado"});
     } catch (error) {

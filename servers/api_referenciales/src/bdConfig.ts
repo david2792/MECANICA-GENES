@@ -2,9 +2,9 @@ export default
 {
     database:
     {
-        host: 'loca12lhost',
+        host: 'localhost',
         user: 'manager',
-        password: 'developer',
+        password: '<Developer>12345',
         database: 'compraventa'
     }
     

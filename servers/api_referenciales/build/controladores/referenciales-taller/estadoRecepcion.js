@@ -17,14 +17,15 @@ const conexionBD_1 = __importDefault(require("../../conexionBD"));
 class EstadoRecepcionControlador {
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const marcas = yield conexionBD_1.default.query('SELECT * FROM nivelescombustibles');
+            const marcas = yield conexionBD_1.default.query('SELECT * FROM estadosrecepciones');
+            console.log("marcas");
             res.json(marcas);
         });
     }
     listarUno(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const marcas = yield conexionBD_1.default.query('SELECT * FROM nivelescombustibles WHERE codigo=?', [id]);
+            const marcas = yield conexionBD_1.default.query('SELECT * FROM estadosrecepciones WHERE codigo=?', [id]);
             if (marcas.length > 0) {
                 return res.json(marcas[0]);
                 console.log(marcas);
@@ -34,13 +35,15 @@ class EstadoRecepcionControlador {
     }
     crear(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("hoka");
             try {
-                const Codigo = yield conexionBD_1.default.query('SELECT MAX(codigo)+1 AS Codigo FROM estadosrecepciones');
+                const Codigo = yield conexionBD_1.default.query('SELECT MAX(codigo)+1 AS codigo FROM estadosrecepciones');
                 JSON.stringify(Codigo);
-                const codigo = Codigo[0].Codigo;
+                const codigo = Codigo[0].codigo;
                 console.log(codigo);
                 const descripcion = req.body.descripcion;
                 const values = { codigo, descripcion };
+                console.log(values);
                 yield conexionBD_1.default.query('INSERT INTO estadosrecepciones  SET ?', values);
                 res.json({ message: "el estadosrecepciones fue guardado" });
             }

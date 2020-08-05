@@ -13,7 +13,20 @@ import Cliente from './components/referenciales-personas/Cliente.vue'
 import Pais from './components/referenciales-localidades/Pais.vue'
 import Departamento from './components/referenciales-localidades/Departamento.vue'
 import Ciudad from './components/referenciales-localidades/Ciudad.vue'
-
+// TALLER
+import EstadoRecepcion from './components/referenciales-taller/EstadoRecepcion.vue'
+import NivelCombustible from './components/referenciales-taller/NivelCombustible.vue'
+import EstadoReparacion from './components/referenciales-taller/EstadoReparacion.vue'
+import Anio from './components/referenciales-taller/Anio.vue'
+import Color from './components/referenciales-taller/Color.vue'
+import EstadoTrabajo from './components/referenciales-taller/EstadoTrabajo.vue'
+import EstadoTransmicion from './components/referenciales-taller/EstadoTransmicion.vue'
+import MarcaVehiculo from './components/referenciales-taller/MarcaVehiculo.vue'
+import ModeloVehiculo from './components/referenciales-taller/ModeloVehiculo.vue'
+import TipoCombustible from './components/referenciales-taller/TipoCombustible.vue'
+import Traccion from './components/referenciales-taller/Traccion.vue'
+// ADM TALLER
+import registrarVehiculo from './components/adm-taller/registrarVehiculo.vue'
 import Login from './components/acceso/Login.vue'
 Vue.use(Router)
 
@@ -113,6 +126,104 @@ var router = new Router({
         administrador:true
         }
     },
+    // referenciales taller
+    {
+      path:'/estadorecepciones',
+      name:'estadorecepcion',
+      component:EstadoRecepcion,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/nivelcombustibles',
+      name:'nivelcombustible',
+      component:NivelCombustible,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/estadoreparaciones',
+      name:'estadoreparacion',
+      component:EstadoReparacion,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/anios',
+      name:'anio',
+      component:Anio,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/colores',
+      name:'color',
+      component:Color,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/estadotrabajos',
+      name:'estadotrabajo',
+      component:EstadoTrabajo,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/estadotransmiciones',
+      name:'estadotransmicion',
+      component:EstadoTransmicion,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/marcavehiculos',
+      name:'marcavehiculo',
+      component:MarcaVehiculo,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/modelovehiculos',
+      name:'modelovehiculo',
+      component:ModeloVehiculo,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/tipocombustibles',
+      name:'tipocombustible',
+      component:TipoCombustible,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/tracciones',
+      name:'traccion',
+      component:Traccion,
+      meta:{
+        administrador:true
+      }
+    },
+// ADM Taller
+    {
+      path:'/vehiculos',
+      name:'vehiculo',
+      component:registrarVehiculo,
+      meta:{
+        administrador:true
+      }
+    },
     // acceso
     {
       path:'/login',
@@ -130,7 +241,6 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.libre)){
     next();
   } else if ( store.state.usuario && store.state.usuario.NivelUsuario == 'ADMINISTRADOR'){
-    console.log("estoy aca "+store.state.usuario)
     if (to.matched.some(record => record.meta.administrador)){
       next();
     }
