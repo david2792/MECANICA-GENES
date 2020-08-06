@@ -38,7 +38,7 @@ var router = new Router({
   routes: [
     {
       path: '/bienvenida',
-      name: 'Bienvenida',
+      name: 'bienvenida',
       component: bienvenida,
       meta: {
         administrador:true

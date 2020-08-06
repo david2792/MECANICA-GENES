@@ -92,13 +92,10 @@ class Server {
          this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
 
         // fin de referenciales
-<<<<<<< HEAD
         //referenciales rutas
         this.app.use('/api/timbrados', timbradosRutas);
-=======
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
->>>>>>> refs/remotes/origin/master
     }
 
     iniciar(): void {

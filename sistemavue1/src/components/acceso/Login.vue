@@ -73,32 +73,13 @@ export default {
       }
     }
   },
-
   methods: {
-
     ingresar(){
             let me =this;
             const da=[];
             const da1='';
             axios.post('usuario/login',{usuario: this.usuario, password: this.password})
             .then(respuesta =>{
-              me.da=respuesta.data;
-            //  me.da.NivelUsuario
-              console.log ( me.da.users);
-              this.$router.push({name: 'bienvenida',params:{
-                  rol:me.da.NivelUsuario,
-                  users:me.da.users
-                }});
-            })
-            .then(response =>{
-                
-                // this.$router.push({name: 'bienvenida',params:{
-                //   rol:rol
-                // }})
-                ;
-            })
-            .catch(error =>{
-                //console.log(eror);
              return respuesta.data;
              // console.log (respuesta.data.tokenData);
             }).then(data=>{

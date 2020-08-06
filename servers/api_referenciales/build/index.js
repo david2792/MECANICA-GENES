@@ -21,6 +21,7 @@ const ruta_cliente_1 = __importDefault(require("./rutas/rutas-clientes/ruta_clie
 const ruta_ciudad_1 = __importDefault(require("./rutas/rutas-localidades/ruta_ciudad"));
 const ruta_departamento_1 = __importDefault(require("./rutas/rutas-localidades/ruta_departamento"));
 const ruta_pais_1 = __importDefault(require("./rutas/rutas-localidades/ruta_pais"));
+const ruta_usuario_1 = __importDefault(require("./rutas/rutas-acceso/ruta_usuario"));
 const ruta_estadoRecepecion_1 = __importDefault(require("./rutas/rutas-taller/ruta-estadoRecepecion"));
 const ruta_nivelCombustible_1 = __importDefault(require("./rutas/rutas-taller/ruta-nivelCombustible"));
 const ruta_tipoTransmicion_1 = __importDefault(require("./rutas/rutas-taller/ruta-tipoTransmicion"));
@@ -80,7 +81,10 @@ class Server {
         this.app.use('/api/estadotrabajos', validateToken_1.TokenValidation, ruta_estadorecepcion_1.default);
         this.app.use('/api/vehiculos', validateToken_1.TokenValidation, ruta_vehiculo_1.default);
         // fin de referenciales
+        //referenciales rutas
         this.app.use('/api/timbrados', ruta_timbrado_1.default);
+        // ruta de acceso
+        this.app.use('/api/usuario', ruta_usuario_1.default);
     }
     iniciar() {
         this.app.listen(this.app.get('port'), () => {
