@@ -27,7 +27,8 @@ import TipoCombustible from './components/referenciales-taller/TipoCombustible.v
 import Traccion from './components/referenciales-taller/Traccion.vue'
 // ADM TALLER
 import registrarVehiculo from './components/adm-taller/registrarVehiculo.vue'
-import Login from './components/acceso/Login.vue'
+import RecepcionVehiculo from "./components/adm-taller/RecepcionVehiculo.vue";
+import Login from './components/acceso/Login.vue' 
 Vue.use(Router)
 
 var router = new Router({
@@ -224,6 +225,15 @@ var router = new Router({
         administrador:true
       }
     },
+     {
+      path:'/recepciones',
+      name:'recepcion',
+      component:RecepcionVehiculo,
+      meta:{
+        administrador:true
+      }
+    },
+    
     // acceso
     {
       path:'/login',

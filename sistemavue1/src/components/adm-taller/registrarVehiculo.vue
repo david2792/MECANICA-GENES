@@ -40,15 +40,15 @@
               </v-btn>
             </template>
           </td>
-          <td>{{ props.item.Ruc }}</td>
+          <td>{{ props.item.CodigoCliente }}</td>
           <td>{{ props.item.RazonSocial }}</td>
           <td>{{ props.item.chapa }}</td>
           <td>{{ props.item.chasis }}</td>
           <td>{{ props.item.transmicion }}</td>
-          <td>{{ props.item.traccion }}</td>
+          <!-- <td>{{ props.item.traccion }}</td> -->
           <td>{{ props.item.modelo }}</td>
           <td>{{ props.item.marca }}</td>
-          <td>{{ props.item.combustible }}</td>
+          <!-- <td>{{ props.item.combustible }}</td> -->
           <td>{{ props.item.color }}</td>
         </template>
         <template v-slot:no-data>
@@ -60,11 +60,11 @@
           <v-flex xs12 sm8 md8 lg8 xl8>
             <v-autocomplete :items="clientes" v-model="cliente" item-value="value" label="cliente"></v-autocomplete>
           </v-flex>
-          <v-flex xs1 sm2 md2 lg2 xl2>
+          <!-- <v-flex xs1 sm2 md2 lg2 xl2>
             <v-btn small fab dark color="teal" @click="mostrarModalArticulos()">
               <v-icon dark>list</v-icon>
             </v-btn>
-          </v-flex>
+          </v-flex> -->
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete
               :items="transmiciones"
@@ -73,14 +73,14 @@
               label="Tipo Transmicion"
             ></v-autocomplete>
           </v-flex>
-          <v-flex xs12 sm4 md4 lg4 xl4>
+          <!-- <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete
               :items="tracciones"
               v-model="traccion"
               item-value="value"
               label="Tipo Traccion"
             ></v-autocomplete>
-          </v-flex>
+          </v-flex> -->
 
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="modelos" v-model="modelo" item-value="value" label="Modelo"></v-autocomplete>
@@ -88,26 +88,26 @@
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="marcas" v-model="marca" item-value="value" label="Marca"></v-autocomplete>
           </v-flex>
-          <v-flex xs12 sm4 md4 lg4 xl4>
+          <!-- <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete
               :items="combustibles"
               v-model="combustible"
               item-value="value"
               label="Combustible"
             ></v-autocomplete>
-          </v-flex>
+          </v-flex> -->
 
-          <v-flex xs12 sm4 md4 lg4 xl4>
+          <!-- <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="anios" v-model="anio" item-value="value" label="Anios"></v-autocomplete>
-          </v-flex>
+          </v-flex> -->
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="colores" v-model="color" item-value="value" label="Colores"></v-autocomplete>
           </v-flex>
           <v-flex xs12 sm4 md4 lg4 xl4>
-            <v-text-field v-model="chasis" label="N. Chasis"></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm4 md4 lg4 xl4>
             <v-text-field v-model="chapa" label="N. Chapa"></v-text-field>
+          </v-flex>
+          <v-flex xs12 sm12 md8 lg8 xl8>
+            <v-text-field v-model="chasis" label="Observacion"></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md12 lg12 xl12>    
           </v-flex>
@@ -134,15 +134,15 @@ export default {
       vehiculo: [],
       headers: [
         { text: "Opciones", value: "opciones", sortable: false },
-        { text: "RUC ", value: "Ruc", sortable: true },
+        { text: "CODIGO CLIENTE ", value: "CodigoCliente", sortable: true },
         { text: "RAZON SOCIAL", value: "RazonSocial", sortable: true },
         { text: "CHAPA", value: "chapa", sortable: true },
-        { text: "CHASIS", value: "chasi", sortable: false },
+        { text: "OBSERVACION", value: "chasi", sortable: false },
         { text: "TRANSMICION", value: "transmicion", sortable: false },
-        { text: "TRACCION", value: "traccion", sortable: false },
+        // { text: "TRACCION", value: "traccion", sortable: false },
         { text: "MODELO", value: "modelo", sortable: false },
         { text: "MARCA", value: "marca", sortable: false },
-        { text: "COMBUSTIBLE", value: "combustible", sortable: false },
+        // { text: "COMBUSTIBLE", value: "combustible", sortable: false },
         { text: "COLOR", value: "color", sortable: false },
       ],
       _id: "",
@@ -229,12 +229,12 @@ export default {
     this.listar();
     this.selectPersona();
     this.selectTransmicion();
-    this.selectTraccion();
+    //this.selectTraccion();
     this.selectModelo();
     this.selectMarca();
-    this.selectCombustible();
+  //  this.selectCombustible();
     this.selectColores();
-    this.selectAnios();
+    //this.selectAnios();
   },
   methods: {
     selectPersona() {
