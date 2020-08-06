@@ -231,8 +231,6 @@ export default {
     selectCiudad() {
       let me = this;
       let ciudadArray = [];
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
       let header={"auth-token":this.$store.state.token};
       let configuracion={headers:header};
       axios
@@ -252,8 +250,6 @@ export default {
     },
     guardar() {
       let me = this;
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
       let header={"auth-token":this.$store.state.token};
       let configuracion={headers:header};
       if (this.validar()) {
