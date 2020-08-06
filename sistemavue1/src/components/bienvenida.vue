@@ -6,11 +6,20 @@
     </v-layout>
     <v-layout text-xs-center wrap>
       <v-flex xs12>
-        <v-img :src="require('../assets/genes.jpg')" class="my-3" contain height="200"></v-img>
+        <v-img :src="require('../assets/genes.jpeg')" class="my-3" contain height="200"></v-img>
       </v-flex>
 
       <v-flex mb-4>
         <h1 class="display-2 font-weight-bold mb-3">Bienvenido al Sistema</h1>
+        
+          <v-chip
+      class="ma-2"
+      color="primary"
+      label
+    >
+      <v-icon left>mdi-account-circle-outline</v-icon>
+      <span class="headline">{{ listar }}</span>
+    </v-chip>
         <p class="subheading font-weight-regular">
           Sistema de Gestion Comercial
           <br />Desarrollador por Smart Systems
@@ -91,8 +100,26 @@ export default {
       "deep-purple accent-4"
     ],
     slides: ["First", "Second", "Third", "Fourth", "Fifth"]
-  })
-};
+  }),
+
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "Nuevo registro" : "Editar registro";
+    },
+      listar() {
+          let rol =this.$route.params.users;
+         return rol
+         // console.log(idproducto)
+        },
+  },
+    methods: {
+        // listar() {
+        //   let rol =this.$route.params.rol;
+        //  return rol
+        //  // console.log(idproducto)
+        // },
+}
+}
 </script>
 
 <style>

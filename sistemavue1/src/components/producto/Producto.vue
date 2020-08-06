@@ -14,6 +14,10 @@
           hide-details
         ></v-text-field>
         <v-spacer></v-spacer>
+        <v-btn @click="dialogo_reporte = true">
+          Generar Reporte.
+          <v-icon>print</v-icon>
+        </v-btn>
         <v-dialog v-model="dialog" max-width="1200px">
           <template v-slot:activator="{ on }">
             <v-btn color="amber darken-4" dark class="mb-2" v-on="on">
@@ -189,10 +193,33 @@
         </template>
       </v-data-table>
     </v-flex>
+    <!-- Dialogo para guardar o imprimir informe -->
+    <v-dialog v-model="dialogo_reporte" max-width="500px">
+      <v-card>
+        <v-card-title>Opciones de reportes</v-card-title>
+          <v-card-text>
+            <v-autocomplete
+              :items="Categorias"
+              v-model="CodigoCategoria"
+              item-value="CodigoCategoria"
+              label="Categoria"
+            >
+            </v-autocomplete>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" dark @click='generarInforme()'>Ver informe</v-btn>
+            <v-btn color="primary" dark @click='Imprimir_reporte()'>Imprimir</v-btn>
+            <v-btn color="primary" text @click="dialogo_reporte = false"> Cancelar</v-btn>
+          </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-layout>
 </template>
 <script>
 import axios from "axios";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import printJS from 'print-js';
 import Listaprecio from "../producto/Listaprecio";
 import { create } from "domain";
 export default {
@@ -200,6 +227,7 @@ export default {
     return {
       dialog: false,
       dialogoConfirmacion: false,
+      dialogo_reporte: false,
       search: "",
       code: "",
       productos: [],
@@ -241,7 +269,9 @@ export default {
       adModal: 0,
       adAccion: 0,
       adNombre: "",
-      adId: ""
+      adId: "",
+      valida:'',
+      CodigoCategoria: '',
     };
   },
   computed: {
@@ -265,6 +295,59 @@ export default {
     this.selectImpuesto();
   },
   methods: {
+    generarInforme(){
+      let list_productos = [];
+      if(this.CodigoCategoria) {
+        const producto_F = this.productos.filter(pro => pro.Categoria == this.CodigoCategoria);
+        list_productos = producto_F;
+      }else{
+        list_productos = productos;
+      }
+      var columns = [
+        {title: 'Código', dataKey:'codigo'},
+        {title: 'Producto', dataKey:'descripcion'},
+        {title: 'Precio de compra', dataKey:'precio_compra'},
+        {title: 'Precio de venta', dataKey:'precio_venta'},
+        {title: 'Stack actual', dataKey:'stock_actual'},
+        {title: 'Stock minimo', dataKey:'stockm_inimo'},
+        // {title: 'Marca', datakey:'marca'},
+        // {title: '', datakey:''},
+        // {title: '', datakey:''},
+        // {title: '', datakey:''},
+        // {title: '', datakey:''},
+        // {title: '', datakey:''},
+      ];
+      var rows = [];
+      list_productos.map(function(producto){
+        console.log("Marca: ", producto.Descripcion);
+        rows.push({
+          codigo: producto.CodigoBarra,
+          descripcion: producto.Descripcion,
+          precio_compra: producto.PrecioCompra,
+          precio_venta: producto.PrecioVenta,
+          stock_actual: producto.StockActual,
+          stockm_inimo: producto.StockMinimo,
+          // marca: producto.marca.Descripcion,
+        });
+      });
+
+      var doc = new jsPDF('l', 'pt');
+      doc.autoTable(columns, rows, {
+        margin: {top:60},
+        addPageContent: function(data){
+          doc.text("Lista de Productos", 40, 30);
+          // doc.text(this.Categoria);
+        },
+        // printHeader: true,
+      });
+      // if(print){
+        doc.output('dataurlnewwindow');
+      // }else{
+      //   doc.save("informe_productos.pdf");
+      // }
+      
+      this.dialogo_reporte = false;
+    },
     selectMarcas() {
       let me = this;
       let marcaArray = [];
@@ -345,6 +428,7 @@ export default {
       axios
         .get("productos/listar")
         .then(function(response) {
+          console.log(response.data);
           me.productos = response.data;
         })
         .catch(function(error) {
@@ -554,7 +638,19 @@ export default {
           deposito: item.Deposito
         }
       });
-    }
+    },
+    customFilter(item, queryText, itemText) {
+      const textOne = item.Descripcion.toLowerCase();
+      const searchText = queryText.toLowerCase();
+      return (
+        textOne.indexOf(searchText) > -1
+      );
+    },
+    Imprimir_reporte(){
+      const producto_F = this.productos.filter(pro => pro.Categoria == this.CodigoCategoria);
+      // console.log(producto_F);
+      printJS({printable: producto_F, properties: ['CodigoProducto', 'CodigoBarra', 'Descripcion'], type: 'json'})
+    },
   }
 };
 </script>

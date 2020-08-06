@@ -8,6 +8,13 @@ import Medida from './components/referenciales-productos/Medida.vue'
 import Impuesto from './components/referenciales-productos/Impuesto.vue'
 import Producto from './components/producto/Producto.vue'
 import Listaprecio from './components/producto/Listaprecio.vue'
+import Cliente from './components/referenciales-personas/Cliente.vue'
+import Pais from './components/referenciales-localidades/Pais.vue'
+import Departamento from './components/referenciales-localidades/Departamento.vue'
+import Ciudad from './components/referenciales-localidades/Ciudad.vue'
+import Timbrado from './components/timbrado/timbrado.vue'
+
+import Login from './components/acceso/Login.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -51,13 +58,44 @@ export default new Router({
           component: Listaprecio
         },
     // fin de productos
+    // cliente
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path:'/clientes',
+      name:'cliente',
+      component: Cliente
+    },
+    // Localidades
+    {
+      path:'/paises',
+      name:'pais',
+      component: Pais
+    },
+    {
+      path:'/departamentos',
+      name:'departamento',
+      component: Departamento
+    },
+    {
+      path:'/ciudades',
+      name:'ciudad',
+      component: Ciudad
+    },
+    // acceso
+    {
+      path:'/login',
+      name:'Login',
+      component: Login,
+      meta: {
+        allowAnonymous: true
+      }
+    },
+
+    // referenciales Factura
+    {
+      path: '/timbrados',
+      name: 'Timbrado',
+      component: Timbrado
+    },
+ 
   ]
 })
