@@ -226,7 +226,6 @@
               <v-list-tile-content>
                 <v-list-tile-title>
                   <v-icon dark color="black">mdi-file</v-icon>Mantener Stock
->>>>>>> refs/remotes/origin/master
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>

@@ -80,12 +80,11 @@ export default {
             const da1='';
             axios.post('usuario/login',{usuario: this.usuario, password: this.password})
             .then(respuesta =>{
-             return respuesta.data;
-             // console.log (respuesta.data.tokenData);
+            return respuesta.data;
             }).then(data=>{
-  
-              this.$store.dispatch("guardarToken",data.token);
-              this.$router.push({name:'Bienvenida'})
+           
+             this.$store.dispatch("guardarToken",data.token);
+             this.$router.push({name:'Bienvenida'})
             })
             .catch(error =>{
                 console.log(eror);
