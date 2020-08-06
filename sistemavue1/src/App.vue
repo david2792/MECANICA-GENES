@@ -1,7 +1,4 @@
 <template >
-  <v-app id="app"  >
-    <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.mdAndUp" app v-model="drawer"  v-if="!$route.meta.allowAnonymous">
-=======
   <v-app id="app">
     <v-navigation-drawer
       fixed

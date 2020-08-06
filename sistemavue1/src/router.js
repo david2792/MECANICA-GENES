@@ -262,7 +262,7 @@ var router = new Router({
       name:'Login',
       component: Login,
       meta: {
-        allowAnonymous: true
+        libre: true
       }
     },
 
@@ -270,7 +270,10 @@ var router = new Router({
     {
       path: '/timbrados',
       name: 'Timbrado',
-      component: Timbrado
+      component: Timbrado,
+      meta:{
+        administrador:true
+      }
     },
  
   ]
