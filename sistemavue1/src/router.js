@@ -100,30 +100,7 @@ var router = new Router({
       name:'cliente',
       component: Cliente
     },
-    // Localidades
-    {
-      path:'/paises',
-      name:'pais',
-      component: Pais
-    },
-    {
-      path:'/departamentos',
-      name:'departamento',
-      component: Departamento
-    },
-    {
-      path:'/ciudades',
-      name:'ciudad',
-      component: Ciudad
-    },
-    {
-      path:'/clientes',
-      name:'cliente',
-      component: Cliente,
-      meta: {
-        administrador:true
-        }
-    },
+
     // Localidades
     {
       path:'/paises',

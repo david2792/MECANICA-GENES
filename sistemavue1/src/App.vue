@@ -210,73 +210,21 @@
                 <v-list-tile-title>Clientes</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-list-tile :to="{name: ''}">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Proveedores</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
           </v-list-group>
         </template>
         <template>
-          <v-list-group>
-            <v-list-tile slot="activator">
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  <v-icon dark color="black">mdi-file</v-icon>Mantener Stock
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile :to="{name: 'pais'}">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Paises</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile :to="{name: 'departamento'}">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Departamentos</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-             <v-list-tile :to="{name: 'ciudad'}">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Ciudades</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list-group>
+      
         </template>
          <template>
           <v-list-group>
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  <v-icon dark color="black">mdi-wrench</v-icon>Referenciales Personas
+                  <v-icon dark color="black">mdi-file</v-icon>Taller
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-list-tile :to="{name: 'cliente'}">
-                  <v-icon dark color="black">mdi-wrench</v-icon>ADM Taller
-            </v-list-tile>
-            <v-list-tile :to="{name: 'vehiculo'}">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Clientes</v-list-tile-title>
-                <v-list-tile-title>Vehiculos</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile :to="{name: 'recepcion'}">
+             <v-list-tile :to="{name: 'recepcion'}">
               <v-list-tile-action>
                 <v-icon>table_chart</v-icon>
               </v-list-tile-action>
@@ -284,6 +232,16 @@
                 <v-list-tile-title>Recepcion de Vehiculo</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
+             <v-list-tile :to="{name: 'vehiculo'}">
+              <v-list-tile-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Registro de Vehiculo</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            
+       
           </v-list-group>
         </template>
         <template>
@@ -309,8 +267,6 @@
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Configuracion</v-list-tile-title>
-=======
->>>>>>> refs/remotes/origin/master
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
@@ -328,31 +284,6 @@
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Usuarios</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list-group>
-        </template>
-        <template>
-          <v-list-group>
-            <v-list-tile slot="activator">
-              <v-list-tile-content>
-                <v-list-tile-title>Consultas</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile :to="{name: ''}">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Consulta Compras</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile :to="{name: ''}">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Consulta Ventas</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
@@ -413,6 +344,7 @@ export default {
       return (
         this.$store.state.usuario &&
         this.$store.state.usuario.NivelUsuario == "ADMINISTRADOR"
+       
 
       );
        

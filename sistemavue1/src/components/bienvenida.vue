@@ -28,7 +28,7 @@
       label
     >
       <v-icon left>mdi-account-circle-outline</v-icon>
-      <span class="headline">{{ listar }}</span>
+      <span class="headline">{{listar}}</span>
     </v-chip>
         <p class="subheading font-weight-regular">
           Sistema de Gestion Comercial
@@ -47,8 +47,6 @@
       </v-flex>
     </v-layout>
   </v-container>
-</template>
-
 </template>
 <script>
 export default {
@@ -114,10 +112,6 @@ export default {
   }),
 
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "Nuevo registro" : "Editar registro";
-    },
-  computed: {
       listar() {
           let rol =this.$store.state.usuario.users;
          return rol
@@ -130,7 +124,6 @@ export default {
         //  return rol
         //  // console.log(idproducto)
         // },
-}
 }
 }
 </script>
