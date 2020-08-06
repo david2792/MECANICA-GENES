@@ -28,10 +28,10 @@ class VehiculoControlador {
             const codigomarca = req.body.marca;
             const codigomodelo = req.body.modelo;
             const codigotransmision = req.body.transmicion;
-            const codigotipocombustible = req.body.combustible;
-            const codigotraccion = req.body.traccion;
+            const codigotipocombustible = "1";
+            const codigotraccion = "1";
             const codigocolor = req.body.color;
-            const codigoanio = req.body.anio;
+            const codigoanio = "1";
             const numerochapa = req.body.chapa;
             const numerochasis = req.body.chasis;
             const vehiculos = {

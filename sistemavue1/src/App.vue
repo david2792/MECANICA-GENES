@@ -280,12 +280,12 @@
                 <v-list-tile-title>Vehiculos</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-list-tile :to="{name: ''}">
+            <v-list-tile :to="{name: 'recepcion'}">
               <v-list-tile-action>
                 <v-icon>table_chart</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
-                <v-list-tile-title>Proveedores</v-list-tile-title>
+                <v-list-tile-title>Recepcion de Vehiculo</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
