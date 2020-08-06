@@ -13,6 +13,10 @@ import marcasRutas from './rutas/rutas-referenciales/ruta_marca';
 import productosRutas from './rutas/rutas-producto/ruta_producto';
 import listaRutas from './rutas/rutas-producto/ruta_lista';
 
+// referenciales factura
+
+import timbradosRutas from './rutas/rutas-referenciales-factura/ruta_timbrado';
+
 // fin referenciales productos
 
 class Server
@@ -46,6 +50,8 @@ class Server
         this.app.use('/api/productos',productosRutas);
         this.app.use('/api/listasprecios',listaRutas);
         // fin de referenciales
+        //referenciales rutas
+        this.app.use('/api/timbrados', timbradosRutas);
     }
     iniciar():void
     {

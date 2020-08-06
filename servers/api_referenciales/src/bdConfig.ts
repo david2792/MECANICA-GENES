@@ -4,7 +4,7 @@ export default
     {
         host: 'localhost',
         user: 'manager',
-        password: 'developer',
+        password: '<Developer>123',
         database: 'compraventa'
     }
     

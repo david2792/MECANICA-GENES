@@ -16,6 +16,8 @@ const ruta_impuesto_1 = __importDefault(require("./rutas/rutas-referenciales/rut
 const ruta_marca_1 = __importDefault(require("./rutas/rutas-referenciales/ruta_marca"));
 const ruta_producto_1 = __importDefault(require("./rutas/rutas-producto/ruta_producto"));
 const ruta_lista_1 = __importDefault(require("./rutas/rutas-producto/ruta_lista"));
+// referenciales factura
+const ruta_timbrado_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta_timbrado"));
 // fin referenciales productos
 class Server {
     constructor() {
@@ -43,6 +45,8 @@ class Server {
         this.app.use('/api/productos', ruta_producto_1.default);
         this.app.use('/api/listasprecios', ruta_lista_1.default);
         // fin de referenciales
+        //referenciales rutas
+        this.app.use('/api/timbrados', ruta_timbrado_1.default);
     }
     iniciar() {
         this.app.listen(this.app.get('port'), () => {
