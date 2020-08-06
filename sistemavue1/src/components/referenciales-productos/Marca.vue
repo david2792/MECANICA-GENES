@@ -126,9 +126,11 @@ export default {
   },
   methods: {
     listar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       axios
-        .get("marcas/")
+        .get("marcas/",configuracion)
         .then(function(response) {
           me.marcas = response.data;
         })
@@ -154,13 +156,14 @@ export default {
       return this.valida;
     },
     guardar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       if (this.validar()) {
         return;
       }
       if (this.editedIndex > -1) {
         //Código para editar
-        console.log(this.CodigoMarca, this.Descripcion);
         axios
           .put("marcas/", {
             CodigoMarca: this.CodigoMarca,

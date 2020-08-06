@@ -122,6 +122,7 @@ export default {
     return {
       dialog: false,
       search: "",
+      aux:[],
       personas: [],
       headers: [
         { text: "Opciones", value: "opciones", sortable: false },
@@ -169,9 +170,11 @@ export default {
   },
   methods: {
     listar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       axios
-        .get("clientes/")
+        .get("clientes/",configuracion)
         .then(function(response) {
           me.personas = response.data;
         })
@@ -230,6 +233,8 @@ export default {
       let ciudadArray = [];
       let header = { Token: this.$store.state.token };
       let configuracion = { headers: header };
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       axios
         .get("ciudades/", configuracion)
         .then(function(response) {
@@ -249,6 +254,8 @@ export default {
       let me = this;
       let header = { Token: this.$store.state.token };
       let configuracion = { headers: header };
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       if (this.validar()) {
         return;
       }

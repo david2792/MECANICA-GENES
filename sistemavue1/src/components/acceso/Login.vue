@@ -30,6 +30,9 @@
                     :error="error"
                     @click:append="hidePassword = !hidePassword"/>
                 </v-form>
+                <v-flex class="red--text" v-if="errorM">
+                        {{errorM}}
+                    </v-flex>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -60,6 +63,7 @@ export default {
       users:'',
       usuario: '',
       password: '',
+      errorM:null,
       hidePassword: true,
       error: false,
       showResult: false,
@@ -95,6 +99,15 @@ export default {
             })
             .catch(error =>{
                 //console.log(eror);
+             return respuesta.data;
+             // console.log (respuesta.data.tokenData);
+            }).then(data=>{
+  
+              this.$store.dispatch("guardarToken",data.token);
+              this.$router.push({name:'Bienvenida'})
+            })
+            .catch(error =>{
+                console.log(eror);
                 this.errorM=null;
                 if (error.response.status==404){
                     this.errorM='No existe el usuario o las credenciales son   incorrectas.';

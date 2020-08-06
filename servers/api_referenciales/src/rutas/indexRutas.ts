@@ -14,6 +14,8 @@ class IndexRutas
        this.router.get('/',indexControlador.index);
 
    }
+
+   
 }
 
 const indexRutas = new IndexRutas();

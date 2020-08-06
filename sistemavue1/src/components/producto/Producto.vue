@@ -265,6 +265,7 @@ export default {
       Categoria: "",
       Impuesto: "",
       Deposito: "",
+      valida:'',
       validaMensaje: [],
       adModal: 0,
       adAccion: 0,
@@ -351,7 +352,7 @@ export default {
     selectMarcas() {
       let me = this;
       let marcaArray = [];
-      let header = { Token: this.$store.state.token };
+      let header={"auth-token":this.$store.state.token}
       let configuracion = { headers: header };
       axios
         .get("marcas/", configuracion)
@@ -369,7 +370,7 @@ export default {
     selectCategoria() {
       let me = this;
       let categoriaArray = [];
-      let header = { Token: this.$store.state.token };
+      let header={"auth-token":this.$store.state.token};
       let configuracion = { headers: header };
       axios
         .get("categorias/", configuracion)
@@ -390,7 +391,7 @@ export default {
     selectDeposito() {
       let me = this;
       let depositoArray = [];
-      let header = { Token: this.$store.state.token };
+      let header={"auth-token":this.$store.state.token};
       let configuracion = { headers: header };
       axios
         .get("depositos/", configuracion)
@@ -408,7 +409,7 @@ export default {
     selectImpuesto() {
       let me = this;
       let impuestoArray = [];
-      let header = { Token: this.$store.state.token };
+      let header={"auth-token":this.$store.state.token};
       let configuracion = { headers: header };
       axios
         .get("impuestos/", configuracion)
@@ -424,9 +425,11 @@ export default {
         });
     },
     listar() {
+       let header={"auth-token":this.$store.state.token};
+      let configuracion = { headers: header };
       let me = this;
       axios
-        .get("productos/listar")
+        .get("productos/listar",configuracion)
         .then(function(response) {
           console.log(response.data);
           me.productos = response.data;
@@ -436,9 +439,11 @@ export default {
         });
     },
     cod() {
+      let header={"auth-token":this.$store.state.token}
+      let configuracion = { headers: header };
       let me = this;
       axios
-        .get("productos/codigo")
+        .get("productos/codigo",configuracion)
         .then(function(response) {
           me.code = response.data;
           //  this.CodigoProducto=me.code;
@@ -509,6 +514,8 @@ export default {
       }
       if (this.editedIndex > -1) {
         //Código para editar
+         let header={"auth-token":this.$store.state.token}
+         let configuracion = { headers: header };
         console.log(this.editedIndex);
         axios
           .put("productos/update", {
@@ -523,7 +530,7 @@ export default {
             StockMinimo: this.StockMinimo,
             PrecioCompra: this.PrecioCompra,
             PrecioVentaMinorista: this.PrecioVentaMinorista
-          })
+          },configuracion)
           .then(function(response) {
             me.close();
             me.listar();
@@ -536,6 +543,8 @@ export default {
           });
       } else {
         console.log(this.code);
+        let header={"auth-token":this.$store.state.token}
+        let configuracion = { headers: header };
         axios
           .post("productos/add", {
             CodigoProducto: this.code,
@@ -549,7 +558,7 @@ export default {
             StockMinimo: this.StockMinimo,
             PrecioCompra: this.PrecioCompra,
             PrecioVentaMinorista: this.PrecioVentaMinorista
-          })
+          },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();

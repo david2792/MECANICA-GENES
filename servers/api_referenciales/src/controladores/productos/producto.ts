@@ -67,10 +67,6 @@ class ProductoControlador {
         CodigoProducto, CodigoBarra, Descripcion, cantidadpaquete, peso, perecedero, estado,
         CodigoRepresentante, CodigoUnidad, CodigoMarca, CodigoCategoria, CodigImpuesto
       };// datos de productos
-
-      // console.log(productos);
-
-      // se recupera los datos del detalle
       const codigoDeposito = iddeposito[0].codigoDeposito;
       const StockActual = req.body.StockActual;
       const StockMinimo = req.body.StockMinimo;
@@ -85,16 +81,17 @@ class ProductoControlador {
         PrecioVentaMayorista
       }
       // console.log(stock)
-      await transaccion.query("SET autocommit=0")
-     // await pool.query("START TRANSACTION");// se inica la transaccion
-      await transaccion.query('INSERT INTO productos  SET ?', productos);// se inserta los datos en la tabla productos
-      await transaccion.query('INSERT INTO stock  SET ?', stock);// se inserta los datos en la tabla stock
-      await transaccion.query("COMMIT");// se confirma la transaccion
-      await transaccion.query("SET autocommit=1")
+      const set0=  transaccion.query("SET autocommit=0")
+      const prod= transaccion.query('INSERT INTO productos  SET ?', productos);// se inserta los datos en la tabla productos
+      const sto= transaccion.query('INSERT INTO stock  SET ?', stock);// se inserta los datos en la tabla stock
+      const comi= transaccion.query("COMMIT");// se confirma la transaccion
+      const set1= transaccion.query("SET autocommit=1")
+      await Promise.all([set0,prod,sto,comi,set1])
       res.json({ message: "el producto fue guardado" })
     } catch (error) {
-      await transaccion.query("ROLLBACK");
-      await transaccion.query("SET autocommit=1")
+      const rol= transaccion.query("ROLLBACK");
+      const set11= transaccion.query("SET autocommit=1")
+      await Promise.all([rol,set11]);
       console.log("ocurrio un error: " + error);
       throw error
     }
@@ -140,9 +137,6 @@ class ProductoControlador {
       CodigoProducto, CodigoBarra, Descripcion, cantidadpaquete, peso, perecedero, estado,
       CodigoRepresentante, CodigoUnidad, CodigoMarca, CodigoCategoria, CodigImpuesto
     };// datos de productos
-    // console.log(productos);
-    // se recupera los datos del detalle
-    // se recupera los datos del detalle
     const codigoDeposito = iddeposito[0].codigoDeposito;
     const StockActual = req.body.StockActual;
     const StockMinimo = req.body.StockMinimo;
@@ -157,16 +151,19 @@ class ProductoControlador {
       PrecioVentaMayorista
     }
     try {
-      await transaccion.query("SET autocommit=0")
-      //await pool.query("START TRANSACTION");// se inica la transaccion
-      await transaccion.query('UPDATE productos  SET ? WHERE codigoproducto= ?', [productos, CodigoProducto]);// se inserta los datos en la tabla productos
-      await transaccion.query('UPDATE  stock  SET ? WHERE codigoproducto= ?', [stock, CodigoProducto]);// se inserta los datos en la tabla stock
-      await transaccion.query("COMMIT");// se confirma la transaccion
-      await transaccion.query("SET autocommit=1")
+      console.time('loop');
+      let set = transaccion.query("SET autocommit=0")
+      let produc = transaccion.query('UPDATE productos  SET ? WHERE codigoproducto= ?', [productos, CodigoProducto]);// se inserta los datos en la tabla productos
+      let sto = transaccion.query('UPDATE  stock  SET ? WHERE codigoproducto= ?', [stock, CodigoProducto]);// se inserta los datos en la tabla stock
+      let comi = transaccion.query("COMMIT");// se confirma la transaccion
+      let set1 = transaccion.query("SET autocommit=1")
+      await Promise.all([set, produc, sto, comi, set1])
       res.json({ message: "el producto fue actualizado" });
+      console.timeEnd('loop');
     } catch (error) {
-      await transaccion.query("ROLLBACK");
-      await transaccion.query("SET autocommit=1")
+      let ro= transaccion.query("ROLLBACK");
+      let a11= transaccion.query("SET autocommit=1")
+      await Promise.all([ro,a11]);
       console.log("ocurrio un error: " + error);
       throw error
     }

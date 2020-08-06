@@ -12,6 +12,7 @@
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.5.6",
     "print-js": "^1.0.63",
+    "jwt-decode": "^2.2.0",
     "vue": "^2.6.10",
     "vue-numeric": "^2.3.0",
     "vue-router": "^3.0.3",

@@ -126,9 +126,12 @@ export default {
   },
   methods: {
     listar() {
+
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       axios
-        .get("paises/")
+        .get("paises/",configuracion)
         .then(function(response) {
           me.paises = response.data;
         })
@@ -154,19 +157,20 @@ export default {
       return this.valida;
     },
     guardar() {
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
       let me = this;
       if (this.validar()) {
         return;
       }
       if (this.editedIndex > -1) {
-        //Código para editar
+      
         console.log(this.CodigoPais, this.Nombre);
         axios
           .put("paises/", {
             CodigoPais: this.CodigoPais,
             Nombre: this.Nombre
-          })
-          .then(function(response) {
+          },configuracion).then(function(response) {
             me.limpiar();
             me.close();
             me.listar();
@@ -177,7 +181,7 @@ export default {
           });
       } else {
         axios
-          .post("paises/", { Nombre: this.Nombre })
+          .post("paises/", { Nombre: this.Nombre },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();
