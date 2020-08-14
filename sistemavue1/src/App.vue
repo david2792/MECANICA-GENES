@@ -316,11 +316,11 @@
       </v-container>
     </v-content>
     <!-- termina el contenido -->
-    <v-footer dark height="70" >
+    <v-footer>
       <v-layout justify-center>
         <v-flex text-xs-center>
-          <v-card flat tile color="green" height="70" class="white--text">
-            <v-card-text class="white--text pt-10">SMART SYSTEMS &copy;2020</v-card-text>
+          <v-card flat tile color="green" height="70"  class="white--text">
+            <v-card-text class="white--text pt-50">SMART SYSTEMS &copy;2020</v-card-text>
           </v-card>
         </v-flex>
       </v-layout>

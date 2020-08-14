@@ -34,7 +34,7 @@ import estadoReparacion from './rutas/rutas-taller/ruta-estadoReparacion';
 import estdoTrabajoRutas from './rutas/rutas-taller/ruta-estadorecepcion';
 import vehiculoRuta from './rutas/rutas-taller/ruta-vehiculo';
 
-
+import recepcionVehiculoRuta from './rutas/rutas-taller/ruta-recepcionvehiculo'
 
 
 
@@ -90,6 +90,7 @@ class Server {
           this.app.use('/api/anios',TokenValidation,aniosRutas);
          this.app.use('/api/estadotrabajos',TokenValidation,estdoTrabajoRutas);
          this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
+        this.app.use('/api/rvehiculo',TokenValidation,recepcionVehiculoRuta);
 
         // fin de referenciales
         //referenciales rutas

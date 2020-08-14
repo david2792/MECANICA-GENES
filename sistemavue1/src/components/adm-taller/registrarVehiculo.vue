@@ -172,7 +172,6 @@ export default {
       serie_comprobante: "",
       num_comprobante: "",
       impuesto: 0.18,
-      codigo: "",
       cabeceraDetalles: [
         { text: "Borrar", value: "borrar", sortable: false },
         { text: "Artículo", value: "articulo", sortable: false },

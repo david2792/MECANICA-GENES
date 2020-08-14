@@ -35,9 +35,12 @@ class AniosControlador {
     crear(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const Codigo = yield conexionBD_1.default.query('SELECT MAX(codigo)+1 AS Codigo FROM anios');
+                let Codigo = yield conexionBD_1.default.query('SELECT MAX(codigo)+1 AS Codigo FROM anios');
                 JSON.stringify(Codigo);
-                const codigo = Codigo[0].Codigo;
+                let codigo = Codigo[0].Codigo;
+                if (codigo == null) {
+                    codigo = 1;
+                }
                 console.log(codigo);
                 const nombre = req.body.nombre;
                 const values = { codigo, nombre };

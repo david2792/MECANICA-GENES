@@ -1,13 +1,13 @@
 <template>
-  <v-app id="login" class="secondary">
+<!--  <v-app id="login" class="secondary">-->
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4 lg4>
-            <v-card class="elevation-1 pa-3">
+          <v-flex xs12 sm12 md5 lg4>
+            <v-card class="elevation-5 pa-3">
               <v-card-text>
                 <div class="layout column align-center">
-                  <img src="../../assets/genes.jpeg" alt="Vue Material Admin" width="380" height="180">
+                  <img src="../../assets/genes.jpeg" alt="Vue Material Admin" width="280" height="180">
                   <h1 class="flex my-4 red--text">ACCESO AL SISTEMA</h1>
                 </div>
                 <v-form>
@@ -42,14 +42,14 @@
           </v-flex>
         </v-layout>
       </v-container>
-      <v-snackbar
-        v-model="showResult"
-        :timeout="2000"
-        top>
-        {{ result }}
-      </v-snackbar>
+<!--      <v-snackbar-->
+<!--        v-model="showResult"-->
+<!--        :timeout="2000"-->
+<!--        top>-->
+<!--        {{ result }}-->
+<!--      </v-snackbar>-->
     </v-content>
-  </v-app>
+<!--  </v-app>-->
 </template>
 
 <script>
@@ -76,13 +76,12 @@ export default {
   methods: {
     ingresar(){
             let me =this;
-            const da=[];
-            const da1='';
             axios.post('usuario/login',{usuario: this.usuario, password: this.password})
             .then(respuesta =>{
+            console.log(respuesta.data.tokenData)
             return respuesta.data;
             }).then(data=>{
-           
+
              this.$store.dispatch("guardarToken",data.token);
              this.$router.push({name:'Bienvenida'})
             })
@@ -93,14 +92,14 @@ export default {
                     this.errorM='No existe el usuario o las credenciales son   incorrectas.';
                 } else{
                     this.errorM='Ocurrió un error con el servidor.';
-                } 
+                }
             });
     },
   }
 }
 </script>
 
-<style scoped lang="css">
+<style  lang="css">
   #login {
     height: 50%;
     width: 100%;

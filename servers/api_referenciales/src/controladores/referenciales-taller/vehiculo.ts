@@ -24,7 +24,12 @@ class VehiculoControlador {
 
             const codigomaximo = await pool.query('SELECT MAX(codigo)+1 AS codigo FROM vehiculos');
             JSON.stringify(codigomaximo);
-            const codigo = codigomaximo[0].codigo;
+            let codigo = codigomaximo[0].codigo;
+            if (codigo==null)
+            {
+                codigo=1
+            }
+
             const codigomarca = req.body.marca;
             const codigomodelo = req.body.modelo;
             const codigotransmision = req.body.transmicion;

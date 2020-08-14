@@ -11,12 +11,14 @@ class UsuarioControlador {
     public async acceso(req: Request, res: Response): Promise<void> {
         var SECRET = "SECRETO_PARA_ENCRIPTACION"
         try {
-            const usuario = await pool.query('SELECT * FROM vusuarios');
+            const usuario = await pool.query('SELECT * FROM vusuarios GROUP BY CodigoUsuario  ');
             JSON.stringify(usuario);
             const cod= usuario[0].CodigoUsuario;
             const Usuario = usuario[0].Usuario;
             const Clave = usuario[0].Clave;
             const NivelUsuario = usuario[0].NivelUsuario;
+            const PuntoExpedicion= usuario[0].PuntoExpedicion;
+            const CodigoSucursal =usuario[0].CodigoSucursal
             const value = { Usuario, Clave };
             const users = req.body.usuario;
             const pass = req.body.password;
@@ -27,7 +29,10 @@ class UsuarioControlador {
                     codigo:cod,
                     users: users,
                     pass: pass,
-                    NivelUsuario: NivelUsuario
+                    NivelUsuario: NivelUsuario,
+                    PuntoExpedicion:PuntoExpedicion,
+                    CodigoSucursal:CodigoSucursal
+
 
                     // ANY DATA
                 }
@@ -37,6 +42,7 @@ class UsuarioControlador {
                     expiresIn: "8h" // expires in 24 hours
                 })
                // console.log(token)
+               console.log(tokenData)
                 res.header('auth-token',token).json({token,tokenData})
             }else{
                 

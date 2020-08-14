@@ -98,7 +98,10 @@ var router = new Router({
     {
       path:'/clientes',
       name:'cliente',
-      component: Cliente
+      component: Cliente,
+      meta: {
+        administrador:true
+      }
     },
 
     // Localidades
@@ -272,7 +275,10 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else{
-    next({name: 'Login'});
+
+      next({name: 'Login'});
+
+
   }
 })
 export default router

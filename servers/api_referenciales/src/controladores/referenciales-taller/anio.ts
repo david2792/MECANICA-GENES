@@ -22,9 +22,13 @@ class AniosControlador
   public async crear(req:Request, res:Response):Promise<void>
   {
     try {
-      const Codigo =await pool.query('SELECT MAX(codigo)+1 AS Codigo FROM anios')
+      let Codigo =await pool.query('SELECT MAX(codigo)+1 AS Codigo FROM anios');
       JSON.stringify(Codigo);
-      const codigo = Codigo[0].Codigo;
+      let codigo = Codigo[0].Codigo;
+        if (codigo==null)
+        {
+            codigo=1
+        }
       console.log(codigo);
       const nombre = req.body.nombre;
       const values={codigo,nombre};

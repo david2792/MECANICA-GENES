@@ -80,3 +80,36 @@ FROM
     INNER JOIN `compraventa`.`anios` 
         ON (`vehiculos`.`codigoanio` = `anios`.`codigo`));
 
+DELIMITER $$
+***********************************************************************
+ALTER ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vusuarios` AS (
+SELECT
+  `usuarios`.`CodigoUsuario`      AS `CodigoUsuario`,
+  `usuarios`.`Cedula`             AS `Cedula`,
+  `usuarios`.`Nombre`             AS `Nombre`,
+  `usuarios`.`Apellido`           AS `Apellido`,
+  `usuarios`.`FechaNacimiento`    AS `FechaNacimiento`,
+  `usuarios`.`Direccion`          AS `Direccion`,
+  `usuarios`.`Telefono`           AS `Telefono`,
+  `usuarios`.`Email`              AS `Email`,
+  `usuarios`.`Usuario`            AS `Usuario`,
+  `usuarios`.`Clave`              AS `Clave`,
+  `nivelesusuarios`.`CodigoNivel` AS `CodigoNivel`,
+  `nivelesusuarios`.`Descripcion` AS `NivelUsuario`,
+  `empresas`.`RUC`                AS `RUC`,
+  `empresas`.`RazonSocial`        AS `Empresa`,
+  `sucursales`.`CodigoSucursal`   AS `CodigoSucursal`,
+  `sucursales`.`Nombre`           AS `Sucursal`,
+  `usuarios`.`Activo`             AS `Activo`,
+   `timbrados`.`PuntoExpedicion` AS  `PuntoExpedicion`
+FROM ((((`usuarios`
+     JOIN `nivelesusuarios`
+       ON ((`usuarios`.`CodigoNivel` = `nivelesusuarios`.`CodigoNivel`)))
+    JOIN `sucursales`
+      ON ((`usuarios`.`CodigoSucursal` = `sucursales`.`CodigoSucursal`)))
+   JOIN `empresas`
+     ON ((`empresas`.`CodigoEmpresas` = `sucursales`.`CodigoEmpresas`)))
+     JOIN `timbrados` 
+      ON ((`timbrados`.`CodigoSucursal` = `sucursales`.`CodigoSucursal`))))$$
+
+DELIMITER ;
