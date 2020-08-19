@@ -15,6 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.controladorCliente = void 0;
 const conexionBD_1 = __importDefault(require("../../conexionBD"));
 class ClienteControlador {
+    listarMecanico(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const mecanico = yield conexionBD_1.default.query('SELECT * FROM vmecanico where CodigoNivel=3');
+            res.json(mecanico);
+        });
+    }
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuario = yield conexionBD_1.default.query('SELECT * FROM vclientes');

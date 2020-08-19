@@ -6,12 +6,14 @@
       app
       v-model="drawer"
       v-if="logueado"
-    >
-      <v-list dense color="primary">
+     
+       
+    > 
+      <v-list  color="error">
         <template v-if="esAdministrador">
           <v-list-tile :to="{name:'Bienvenida'}">
             <v-list-tile-action>
-              <v-icon color="black">home</v-icon>
+              <v-icon color="black">home_work</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Inicio</v-list-tile-title>
           </v-list-tile>
@@ -21,7 +23,7 @@
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  <v-icon dark color="black">mdi-wrench</v-icon>Referenciales Productos
+                  <v-icon dark color="black">construction</v-icon>Referenciales Productos
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -64,7 +66,7 @@
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  <v-icon dark color="black">mdi-wrench</v-icon>Referenciales Localidades
+                  <v-icon dark color="black">construction</v-icon>Referenciales Localidades
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -99,13 +101,13 @@
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  <v-icon dark color="black">mdi-wrench</v-icon>Referenciales Taller
+                  <v-icon dark color="black">construction</v-icon>Referenciales Taller
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-list-tile :to="{name: 'estadorecepcion'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Estado Recepcion</v-list-tile-title>
@@ -113,7 +115,7 @@
             </v-list-tile>
             <v-list-tile :to="{name: 'nivelcombustible'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Nivel Combustible</v-list-tile-title>
@@ -121,7 +123,7 @@
             </v-list-tile>
             <v-list-tile :to="{name: 'estadoreparacion'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Estado Reparacion</v-list-tile-title>
@@ -129,7 +131,7 @@
             </v-list-tile>
                <v-list-tile :to="{name: 'anio'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Años</v-list-tile-title>
@@ -137,7 +139,7 @@
             </v-list-tile>
                <v-list-tile :to="{name: 'color'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Color</v-list-tile-title>
@@ -145,7 +147,7 @@
             </v-list-tile>
                <v-list-tile :to="{name: 'estadotransmicion'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Tipo Transmicion</v-list-tile-title>
@@ -153,7 +155,7 @@
             </v-list-tile>
              <v-list-tile :to="{name: 'marcavehiculo'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Marca Vehiculo</v-list-tile-title>
@@ -161,7 +163,7 @@
             </v-list-tile>
             <v-list-tile :to="{name: 'modelovehiculo'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Modelo Vehiculo</v-list-tile-title>
@@ -169,7 +171,7 @@
             </v-list-tile>
             <v-list-tile :to="{name: 'tipocombustible'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Tipo Combustible</v-list-tile-title>
@@ -177,7 +179,7 @@
             </v-list-tile>
             <v-list-tile :to="{name: 'traccion'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Traccion</v-list-tile-title>
@@ -185,7 +187,7 @@
             </v-list-tile>
             <v-list-tile :to="{name: 'estadotrabajo'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Estado del Trabajo</v-list-tile-title>
@@ -198,13 +200,13 @@
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  <v-icon dark color="black">mdi-wrench</v-icon>Referenciales Personas
+                  <v-icon dark color="black">follow_the_signs</v-icon>Referenciales Personas
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-list-tile :to="{name: 'cliente'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Clientes</v-list-tile-title>
@@ -220,21 +222,32 @@
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  <v-icon dark color="black">mdi-file</v-icon>Taller
+                  <v-icon dark color="black">commute</v-icon>Taller
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
+
              <v-list-tile :to="{name: 'recepcion'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Recepcion de Vehiculo</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
+
+             <v-list-tile :to="{name: 'orden'}">
+              <v-list-tile-action>
+                <v-icon>api</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Orden de Trabajo</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
              <v-list-tile :to="{name: 'vehiculo'}">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>api</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>Registro de Vehiculo</v-list-tile-title>
@@ -333,10 +346,15 @@ export default {
   name: "App",
   data() {
     return {
-      drawer: true
+      drawer: true,
+      background: false,
     };
+
   },
   computed: {
+    bg () {
+        return  'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg' 
+      },
     logueado() {
    return this.$store.state.usuario;
     },

@@ -1,8 +1,8 @@
-<template>
+<template  >
   <v-layout align-start>
     <v-flex>
       <v-toolbar flat color="white">
-        <v-toolbar-title>Recepcion de Vehiculo</v-toolbar-title>
+        <v-toolbar-title>Recepcion de Vehiculo<v-icon>commute</v-icon></v-toolbar-title>
         <v-divider
             class="mx-2"
             inset
@@ -12,7 +12,33 @@
         <v-text-field v-if="verNuevo==0" class="text-xs-center" v-model="search" append-icon="search"
                       label="Búsqueda" single-line hide-details></v-text-field>
         <v-spacer></v-spacer>
-        <v-btn color="primary" v-if="verNuevo==0" @click="mostrarNuevo()" dark class="mb-2">Nuevo</v-btn>
+        <v-btn color="purple darken-4" v-if="verNuevo==0" @click="mostrarNuevo()" dark class="mb-2">Nuevo<v-icon>create</v-icon></v-btn>
+              <!-- dialogo confirmacion -->
+        <template>
+          <v-dialog v-model="dialogoConfirmacion" persistent max-width="400">
+            <v-card dark color="blue lighten-3">
+              <v-card-title class="headline">
+                <v-img
+                  class="white--text align-end"
+                  :src="require('../../assets/ok.png')"
+                  contain
+                  height="100"
+                ></v-img>
+              </v-card-title>
+              <center>
+                <v-card-text>
+                  <h3 class="white--text align-end">REGISTRO GUARDADO</h3>
+                </v-card-text>
+              </center>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="orange" text @click="dialogoConfirmacion = false">Aceptar</v-btn>
+                <!-- <v-btn color="red " text @click="listarprecio(item)">Agregar Lista de Precio?</v-btn> -->
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </template>
+        <!-- fin dialogo -->
         <v-dialog v-model="dialog" max-width="1000px">
           <v-card>
             <v-card-title>
@@ -28,17 +54,21 @@
                       <v-data-table
                           :headers="cabeceraArticulos"
                           :items="articulos"
-                          class="elevation-1"
+                          class="elevation-10"
                       >
                         <template v-slot:items="props">
                           <td class="justify-center layout px-0">
-                            <v-icon
+                            <v-btn
+                                class="mx-2"
+                                fab
+                                dark
                                 small
-                                class="mr-2"
+                                color="purple darken-4"
                                 @click="agregarDetalle(props.item)"
-                            >
-                              add
-                            </v-icon>
+                              >
+                                <v-icon dark>
+                                  save_alt</v-icon>
+                              </v-btn>
                           </td>
                            <td>{{ props.item.codigo }}</td>
                           <td>{{ props.item.chapa }}</td>
@@ -96,50 +126,35 @@
         </v-dialog>
       </v-toolbar>
       <v-data-table
+        
           :headers="headers"
           :items="ventas"
           :search="search"
-          class="elevation-1"
+          class="elevation-24"
           v-if="verNuevo==0"
       >
         <template v-slot:items="props">
           <td class="justify-center layout px-0">
-            <v-icon small class="mr-2" @click="verIngreso(props.item)">
-              tab
-            </v-icon>
-            <template v-if="props.item.estado">
-              <v-icon
-                  small
-                  @click="activarDesactivarMostrar(2,props.item)"
-              >
-                block
-              </v-icon>
-            </template>
-            <template v-else>
-              <v-icon
-                  small
-                  @click="activarDesactivarMostrar(1,props.item)"
-              >
-                check
-              </v-icon>
-            </template>
+            <v-btn  class="mx-2"
+                fab
+                dark
+                small
+                color="purple darken-4"> <v-icon @click="verIngreso(props.item)">
+              settings
+            </v-icon></v-btn>
+           
+           
           </td>
-          <td>{{ props.item.numero }}</td>
+          <td >{{ props.item.numero }}</td>
           <td>{{ props.item.chapa }}</td>
           <td>{{ props.item.RazonSocial }}</td>
           <td>{{ props.item.observaciones }}</td>
           <td>{{ props.item.km }}</td>
           <td>{{ props.item.nivel }}</td>
           <td>{{ props.item.fechaentrada }}</td>
-          <!-- <td>{{ props.item.total }}</td> -->
-          <td>
-            <div v-if="props.item.estado">
-              <span class="blue--text">Aceptado</span>
-            </div>
-            <div v-else>
-              <span class="red--text">Anulado</span>
-            </div>
-          </td>
+         <td> {{ props.item.estadorecepcion }} </td>
+         
+         
         </template>
         <template v-slot:no-data>
           <v-btn color="primary" @click="listar()">Resetear</v-btn>
@@ -198,8 +213,9 @@
             </v-text-field>
           </v-flex>
           <v-flex xs12 sm2 md2 lg2 xl2>
-            <v-btn small fab dark color="red" @click="agregarTabla()">
-              <v-icon dark>add</v-icon>
+            <v-btn small fab dark color="pink accent-4" @click="agregarTabla()">
+              <v-icon>
+                  playlist_add</v-icon>
             </v-btn>
           </v-flex>
         
@@ -217,14 +233,15 @@
                   class="elevation-1"
               >
                 <template slot="items" slot-scope="props">
-                  <td>
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="eliminarDetalle(detalles,props.item)"
-                    >
-                      delete 
-                    </v-icon>
+              <td>
+                 
+             <v-btn  class="mx-2"
+                fab
+                dark
+                small
+                color="purple darken-4"> <v-icon   @click="eliminarDetalle(detalles,props.item)">
+              delete
+            </v-icon></v-btn>
                   </td>
                   <td class="text-xs-center">{{ props.item.Codigo}}</td>
                   <td class="text-xs-center"><v-text-field v-model="props.item.chapa" type="text"></v-text-field></td>
@@ -241,13 +258,13 @@
           </v-flex>
           <v-flex xs12 sm12 md12 v-show="valida">
             <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
-
             </div>
           </v-flex>
           <v-flex xs12 sm12 md12 lg12 xl12>
-            <v-btn color="blue darken-1" flat @click.native="ocultarNuevo()">Cancelar</v-btn>
-            <v-btn color="success" v-if="verDetalle==0" @click.native="guardar()">Guardar</v-btn>
+            <v-btn color="deep-purple darken-3" dark  @click.native="ocultarNuevo()">Cancelar<v-icon>clear</v-icon></v-btn>
+            <v-btn color="red " dark v-if="verDetalle==0" @click.native="guardar()">Guardar<v-icon>save</v-icon></v-btn>
           </v-flex>
+      
         </v-layout>
       </v-container>
     </v-flex>
@@ -262,19 +279,21 @@ export default {
       search:'',
       ventas:[],
       headers: [
-        { text: 'Opciones', value: 'opciones', sortable: false },
-        { text: 'Nro', value: 'numero', sortable: true },
-        { text: 'CHAPA', value: 'chapa', sortable: true },
-        { text: 'CLIENTE', value: 'RazonSocial', sortable: true },
-        { text: 'OBSERVACION', value: 'observaciones', sortable: false  },
-        { text: 'KM', value: 'km', sortable: false  },
-         { text: 'NIVEL COMBUSTIBLE', value: 'nivel', sortable: false  },
-        { text: 'FECHA ENTRADA', value: 'fechaentrada', sortable: false  },
-        // { text: 'Total', value: 'total', sortable: false  },
+        
+        { text: 'Opciones', value: 'opciones', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'Nro', value: 'numero', sortable: true, class: "cabecera colorCabecera--text" },
+        { text: 'CHAPA  ', value: 'chapa', sortable: true,class: "cabecera colorCabecera--text",},
+        { text: 'CLIENTE', value: 'RazonSocial', sortable: true,class: "cabecera colorCabecera--text" },
+        { text: 'OBSERVACION', value: 'observaciones', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'KM', value: 'km', sortable: false,class: "cabecera colorCabecera--text"  },
+         { text: 'NIVEL COMBUSTIBLE', value: 'nivel', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'FECHA ENTRADA', value: 'fechaentrada', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'ESTADO RECEPCION', value: 'estadorecepcion', sortable: false,class: "cabecera colorCabecera--text"  },
         // { text: 'Estado', value: 'estado', sortable: false  }
       ],
       _id:'',
       // codigonivel:'',
+       dialogoConfirmacion: false,
       persona:'',
       personas:[],
       CodigoSucursal:'',
@@ -295,11 +314,11 @@ export default {
       cliente:'',
       clientes:[],
       cabeceraDetalles:[
-        { text: 'Borrar', value: 'borrar', sortable: false },
-        { text: 'Codigo Vehiculo', value: 'Codigo', sortable: false },
-        { text: 'Chapa', value: 'Chapa', sortable: false },
-        { text: 'km de Entrada', value: 'km', sortable: false },
-        { text: 'Nivel Combustible', value: 'nivelcombustible', sortable: false },
+        { text: 'Borrar', value: 'borrar', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'Codigo Vehiculo', value: 'Codigo', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'Chapa', value: 'Chapa', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'km de Entrada', value: 'km', sortable: false ,class: "cabecera colorCabecera--text" },
+        { text: 'Nivel Combustible', value: 'nivelcombustible', sortable: false,class: "cabecera colorCabecera--text"  },
         { text: 'cod nivel', value: 'codigonivel', sortable: false, align: ' d-none'},
         // { text: 'Descuento', value: 'descuento', sortable: false },
         // { text: 'Sub Total', value: 'subtotal', sortable: false  }
@@ -313,14 +332,14 @@ export default {
       articulos:[],
       texto:'',
       cabeceraArticulos: [
-        { text: 'Seleccionar', value: 'seleccionar', sortable: false },
-         { text: 'CODIGO',value: 'codigo', sortable: false},
-        { text: 'CHAPA',value: 'chapa', sortable: false},
-        { text: 'MARCA',value: 'marca', sortable: false},
-        { text: 'MODELO',value: 'modelo', sortable: true},
-        { text: 'TRACCION',value: 'transmicion', sortable: true},
-        { text: 'COLOR',value: 'color', sortable: false},
-        { text: 'OBSERVACION', value: 'chasis', sortable: false },
+        { text: 'Seleccionar', value: 'seleccionar', sortable: false,class: "cabecera colorCabecera--text"  },
+         { text: 'CODIGO',value: 'codigo', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'CHAPA',value: 'chapa', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'MARCA',value: 'marca', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'MODELO',value: 'modelo', sortable: true,class: "cabecera colorCabecera--text" },
+        { text: 'TRACCION',value: 'transmicion', sortable: true,class: "cabecera colorCabecera--text" },
+        { text: 'COLOR',value: 'color', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'OBSERVACION', value: 'chasis', sortable: false,class: "cabecera colorCabecera--text"  },
         // { text: 'Estado', value: 'estado', sortable: false }
       ],
       verDetalle:0,
@@ -586,9 +605,11 @@ export default {
             'detalles':this.detalles
           },configuracion)
           .then(function(response){
+            me.dialogoConfirmacion = true;
             me.limpiar();
             me.close();
             me.listar();
+            me.ocultarNuevo();
           })
           .catch(function(error){
             console.log(error);
@@ -647,3 +668,9 @@ export default {
   }
 }
 </script>
+
+<style>
+v-layout{ 
+   border-style: solid;
+   border-color: red}
+</style>

@@ -35,7 +35,7 @@ import estdoTrabajoRutas from './rutas/rutas-taller/ruta-estadorecepcion';
 import vehiculoRuta from './rutas/rutas-taller/ruta-vehiculo';
 
 import recepcionVehiculoRuta from './rutas/rutas-taller/ruta-recepcionvehiculo'
-
+import ordenRuta from './rutas/rutas-taller/ruta-ordenTrabajo'
 
 
 
@@ -91,6 +91,7 @@ class Server {
          this.app.use('/api/estadotrabajos',TokenValidation,estdoTrabajoRutas);
          this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
         this.app.use('/api/rvehiculo',TokenValidation,recepcionVehiculoRuta);
+        this.app.use('/api/orden',TokenValidation,ordenRuta);
 
         // fin de referenciales
         //referenciales rutas

@@ -78,6 +78,7 @@ export default {
             let me =this;
             axios.post('usuario/login',{usuario: this.usuario, password: this.password})
             .then(respuesta =>{
+            console.log(respuesta)
             console.log(respuesta.data.tokenData)
             return respuesta.data;
             }).then(data=>{

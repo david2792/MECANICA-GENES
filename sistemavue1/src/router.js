@@ -29,6 +29,7 @@ import Traccion from './components/referenciales-taller/Traccion.vue'
 // ADM TALLER
 import registrarVehiculo from './components/adm-taller/registrarVehiculo.vue'
 import RecepcionVehiculo from "./components/adm-taller/RecepcionVehiculo.vue";
+import OrdenTrabajo from './components/adm-taller/OrdenTrabajo.vue'
 import Login from './components/acceso/Login.vue' 
 Vue.use(Router)
 
@@ -231,6 +232,14 @@ var router = new Router({
       path:'/recepciones',
       name:'recepcion',
       component:RecepcionVehiculo,
+      meta:{
+        administrador:true
+      }
+    },
+    {
+      path:'/ordenes',
+      name:'orden',
+      component:OrdenTrabajo,
       meta:{
         administrador:true
       }

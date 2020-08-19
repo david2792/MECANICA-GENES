@@ -35,6 +35,7 @@ const ruta_estadoReparacion_1 = __importDefault(require("./rutas/rutas-taller/ru
 const ruta_estadorecepcion_1 = __importDefault(require("./rutas/rutas-taller/ruta-estadorecepcion"));
 const ruta_vehiculo_1 = __importDefault(require("./rutas/rutas-taller/ruta-vehiculo"));
 const ruta_recepcionvehiculo_1 = __importDefault(require("./rutas/rutas-taller/ruta-recepcionvehiculo"));
+const ruta_ordenTrabajo_1 = __importDefault(require("./rutas/rutas-taller/ruta-ordenTrabajo"));
 // referenciales factura
 const ruta_timbrado_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta_timbrado"));
 // fin referenciales productos
@@ -82,6 +83,7 @@ class Server {
         this.app.use('/api/estadotrabajos', validateToken_1.TokenValidation, ruta_estadorecepcion_1.default);
         this.app.use('/api/vehiculos', validateToken_1.TokenValidation, ruta_vehiculo_1.default);
         this.app.use('/api/rvehiculo', validateToken_1.TokenValidation, ruta_recepcionvehiculo_1.default);
+        this.app.use('/api/orden', validateToken_1.TokenValidation, ruta_ordenTrabajo_1.default);
         // fin de referenciales
         //referenciales rutas
         this.app.use('/api/timbrados', ruta_timbrado_1.default);

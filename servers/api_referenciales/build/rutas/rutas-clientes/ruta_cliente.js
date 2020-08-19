@@ -9,6 +9,7 @@ class ClientesRutas {
     }
     config() {
         this.router.get('/', cliente_1.controladorCliente.listar);
+        this.router.get('/mecanico', cliente_1.controladorCliente.listarMecanico);
         this.router.post('/', cliente_1.controladorCliente.crear);
         this.router.put('/', cliente_1.controladorCliente.actualizar);
     }

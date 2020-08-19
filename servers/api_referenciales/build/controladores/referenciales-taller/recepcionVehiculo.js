@@ -34,9 +34,15 @@ class RecepcionVehiculoControlador {
     guardar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const codigomaximo = yield conexionBD_1.default.query('SELECT MAX(numero)+1 AS codigo FROM recepciones');
+                JSON.stringify(codigomaximo);
+                let numero = codigomaximo[0].codigo;
+                if (numero == null) {
+                    numero = 1;
+                }
                 const codigosucursal = req.body.CodigoSucursal;
                 const puntoexpedicion = req.body.PuntoExpedicion;
-                const numero = '1';
+                // const numero = '1';
                 const CodigoCliente = req.body.codigocliente;
                 const recibidopor = req.body.recibidopor;
                 const estado = req.body.estado;

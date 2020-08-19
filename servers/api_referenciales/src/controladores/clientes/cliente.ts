@@ -3,6 +3,12 @@ import pool from '../../conexionBD';
 
 
 class ClienteControlador {
+
+  public async listarMecanico(req: Request, res: Response) {
+    const mecanico = await pool.query('SELECT * FROM vmecanico where CodigoNivel=3');
+    res.json(mecanico);
+  }
+
   public async listar(req: Request, res: Response) {
     const usuario = await pool.query('SELECT * FROM vclientes');
     res.json(usuario);
