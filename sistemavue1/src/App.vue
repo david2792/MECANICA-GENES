@@ -385,6 +385,8 @@ export default {
   methods: {
     salir() {
       this.$store.dispatch("salir");
+      console.log("limpiar")
+      localStorage.clear();
     }
   }
 };

@@ -20,92 +20,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b080bf5-be0f-4437-940e-51c4b9860cc2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/recepcionVehiculo.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servers/api_referenciales/src/rutas/rutas-taller/ruta-recepcionvehiculo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/bdConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/bdConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/acceso/usuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/acceso/usuario.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/anio.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/anio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/vehiculo.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/vehiculo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/.bin/nodemon" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/.bin/nodemon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/binary-extensions.json" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/binary-extensions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/binary-extensions.json.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/binary-extensions.json.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/license" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/license" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/binary-extensions/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/lib/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/lib/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/lib/fsevents-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/lib/fsevents-handler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/lib/nodefs-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/lib/nodefs-handler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/types/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/chokidar/types/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/.jscsrc" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/.jscsrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/.jshintrc" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/.jshintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/bin/nodemon.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/bin/nodemon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/bin/postinstall.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/bin/postinstall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/commitlint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/commitlint.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/authors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/authors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/help.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/logo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/logo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/options.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/topics.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/topics.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/usage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/usage.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/whoami.txt" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/doc/cli/whoami.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/cli/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/cli/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/cli/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/cli/parse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/command.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/command.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/defaults.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/defaults.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/exec.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/exec.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/load.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/config/load.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/help/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/help/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/match.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/match.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/run.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/run.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/signals.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/signals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/watch.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/monitor/watch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/nodemon.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/nodemon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/rules/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/rules/add.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/rules/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/rules/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/rules/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/rules/parse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/spawn.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/spawn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/bus.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/bus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/clone.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/clone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/colour.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/colour.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/log.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/log.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/merge.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/utils/merge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/version.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/lib/version.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/nodemon/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/base64.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/base64.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/registry-url.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/registry-url.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/test/auth-token.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/test/auth-token.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/test/registry-url.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/node_modules/registry-auth-token/test/registry-url.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/bdConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/bdConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/acceso/usuario.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/acceso/usuario.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/anio.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/anio.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/vehiculo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/vehiculo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MECANICA-GENES.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/MECANICA-GENES.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MECANICA-GENES.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/MECANICA-GENES.mwb.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/ordenTrabajo.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/ordenTrabajo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/recepcionVehiculo.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/controladores/referenciales-taller/recepcionVehiculo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/build/rutas/rutas-taller/ruta-ordenTrabajo.js" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/build/rutas/rutas-taller/ruta-ordenTrabajo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/ordenTrabajo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/ordenTrabajo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/recepcionVehiculo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/controladores/referenciales-taller/recepcionVehiculo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servers/api_referenciales/src/rutas/rutas-taller/ruta-ordenTrabajo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servers/api_referenciales/src/rutas/rutas-taller/ruta-ordenTrabajo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/0a4d656660070af8af21ee815ac4763d.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/0a4d656660070af8af21ee815ac4763d.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/7ad1dadfef7044da6a7b86143e2e1353.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/7ad1dadfef7044da6a7b86143e2e1353.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/7ce44144f4d6ceab6133fb64294d1cf4.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/7ce44144f4d6ceab6133fb64294d1cf4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/f909f8c6cddbc1e66a629424ee61cef2.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/babel-loader/f909f8c6cddbc1e66a629424ee61cef2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/0a4db5fe2dec22b85f72429635b35165.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/0a4db5fe2dec22b85f72429635b35165.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/4b24e9e376a1776caac0b1739bcb150f.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/4b24e9e376a1776caac0b1739bcb150f.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/5ac111003c696be4d539dff36fbe3ba7.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/5ac111003c696be4d539dff36fbe3ba7.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/99c99b6af31912f0efe8d22051fcbf54.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/99c99b6af31912f0efe8d22051fcbf54.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/badf9f5646391fd2cfbda1906bd9c8d1.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/badf9f5646391fd2cfbda1906bd9c8d1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/bafa8fe2501baa7b277e5d04803fa5a4.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/bafa8fe2501baa7b277e5d04803fa5a4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/dc040f5e92a2ff7903c28ac5f0120a9d.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/dc040f5e92a2ff7903c28ac5f0120a9d.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/dd37c552baede3eca979acb32fe76a70.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/dd37c552baede3eca979acb32fe76a70.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/e5691128610018e648e06a1122eaea3f.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/e5691128610018e648e06a1122eaea3f.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/f3de6b2a42f9b50be5ab7d7cf1cbcedc.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/f3de6b2a42f9b50be5ab7d7cf1cbcedc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/f519feda7150e3af162e811c86248503.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/f519feda7150e3af162e811c86248503.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/fdc5b430909916013f61e86cc2665969.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/fdc5b430909916013f61e86cc2665969.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/fde17aa5ad9c190101ed42561730968d.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/fde17aa5ad9c190101ed42561730968d.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistemavue1/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistemavue1/src/components/acceso/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/components/acceso/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/RecepcionVehiculo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/RecepcionVehiculo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/registrarVehiculo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/registrarVehiculo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistemavue1/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistemavue1/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/OrdenTrabajo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/OrdenTrabajo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/src/components/bienvenida.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/components/bienvenida.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/src/components/producto/Listaprecio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/components/producto/Listaprecio.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +94,9 @@
       <workItem from="1597010773402" duration="77000" />
       <workItem from="1597010880430" duration="3305000" />
       <workItem from="1597174511525" duration="8252000" />
+      <workItem from="1598098191635" duration="16501000" />
+      <workItem from="1598219861945" duration="2421000" />
+      <workItem from="1598302771672" duration="4879000" />
     </task>
     <servers />
   </component>
@@ -166,5 +113,16 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="600" height="428" key="javadoc.popup" timestamp="1598225057855">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="600" height="428" key="javadoc.popup/0.0.1536.824@0.0.1536.824" timestamp="1598225057855" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1598118189309">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1280.984@0.0.1536.824" timestamp="1598118189309" />
   </component>
 </project>

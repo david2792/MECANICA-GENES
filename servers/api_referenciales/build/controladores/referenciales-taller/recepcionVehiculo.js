@@ -46,7 +46,7 @@ class RecepcionVehiculoControlador {
                 const CodigoCliente = req.body.codigocliente;
                 const recibidopor = req.body.recibidopor;
                 const estado = req.body.estado;
-                const fechaentrada = "2020-08-12";
+                const fechaentrada = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
                 const horaentrada = "00:00:00";
                 const observaciones = req.body.observaciones;
                 const recepciones = { codigosucursal, puntoexpedicion, numero, CodigoCliente, recibidopor, estado, fechaentrada,

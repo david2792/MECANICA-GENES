@@ -1,19 +1,5 @@
 
 <template>
-  <!-- <v-container>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        md="2"
-      >
-        <div
-          class="pa-6 text-center grey lighten-2 rounded-0"
-          v-text="`.rounded-0`"
-        ></div>
-      </v-col>
-    </v-row>
-  </v-container> -->
-
   <v-container fluid grid-list-xl>
     <v-layout text-xs-center wrap>
       <v-flex xs12>
@@ -22,6 +8,17 @@
 
       <v-flex mb-4>
         <h1 class="display-2 font-weight-bold mb-3">Bienvenido al Sistema</h1>
+<!--        <v-flex  xs12 sm8 md8 lg4 xl4>-->
+<!--          <v-card-->
+<!--              class="mx-auto"-->
+<!--              max-width="200"-->
+<!--              overline-->
+<!--              dark-->
+<!--              color="pink darken-2"-->
+<!--          >-->
+<!--            <v-img :src="require('../assets/auto.png')" class="my-3" contain height="200"></v-img>-->
+<!--          </v-card>-->
+<!--        </v-flex>-->
           <v-chip
       class="ma-2"
       color="primary"
@@ -30,6 +27,7 @@
       <v-icon left>mdi-account-circle-outline</v-icon>
       <span class="headline">{{listar}}</span>
     </v-chip>
+
         <p class="subheading font-weight-regular">
           Sistema de Gestion Comercial
           <br />Desarrollador por Smart Systems
@@ -47,6 +45,7 @@
       </v-flex>
     </v-layout>
   </v-container>
+
 </template>
 <script>
 export default {

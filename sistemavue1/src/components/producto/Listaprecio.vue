@@ -230,9 +230,6 @@ export default {
         });
     },
     limpiar() {
-      this.Descripcion = "";
-      this.Precio = "";
-      this.Cuotas = "";
       this.editedIndex = -1;
     },
     validar() {

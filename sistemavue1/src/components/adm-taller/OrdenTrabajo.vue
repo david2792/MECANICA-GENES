@@ -105,8 +105,8 @@
                                   label="Búsqueda "></v-text-field>
                     <template>
                       <v-data-table
-                          :headers="cabeceraRecepcion"
-                          :items="recepciones"
+                          :headers="cabeceraRepuesto"
+                          :items="repuestos"
                           class="elevation-10"
                           :search="texto"
                       >
@@ -118,17 +118,18 @@
                                 dark
                                 small
                                 color="purple darken-4"
-                                @click="agregarDetalle(props.item)"
+                                @click="agregarDatosRepuesto(props.item)"
                               >
                                 <v-icon dark>
                                   save_alt</v-icon>
                               </v-btn>
                           </td>
-                           <td>{{ props.item.numero }}</td>
-                          <td>{{ props.item.chapa }}</td>
-                          <td>{{ props.item.fechaentrada }}</td>
-                          <td>{{ props.item.observaciones }}</td>
-                          <td>{{ props.item.RazonSocial }}</td>
+                           <td>{{ props.item.CodigoProducto }}</td>
+                          <td>{{ props.item.Descripcion }}</td>
+                          <td>{{ props.item.PrecioVentaMinorista }}</td>
+                          <td>{{ props.item.Marca }}</td>
+                          <td>{{ props.item.StockActual }}</td>
+                           <td>{{ props.item.Deposito }}</td>
                         </template>
                       </v-data-table>
                     </template>
@@ -188,16 +189,16 @@
             Buscar
           </v-flex>
           <v-flex xs12 sm8 md8 lg10 xl10>
-          <v-text-field v-model="observacion" label="Observaciones de la recepcion ">
+          <v-text-field v-model="observacion" disabled solo  id="resaltar" label="Observaciones de la recepcion ">
             </v-text-field>
           </v-flex>
 
            <v-flex xs2 sm2 md2 lg2 xl2>
-            <v-text-field v-model="codigorecepcion" label="Codigo Recepcion ">
+            <v-text-field v-model="codigorecepcion" disabled solo  id="resaltar" label="Codigo Recepcion ">
             </v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md12 lg4 xl4>
-            <v-text-field v-model="chapa" label="Numero de Chapa ">
+            <v-text-field v-model="chapa" disabled  outlined solo  id="resaltar" label="Numero de Chapa ">
             </v-text-field>
           </v-flex>
           <!--  -->
@@ -206,43 +207,50 @@
            <!--  -->
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete
+                      solo
                       :items="ordenes"
                       v-model="orden"
                       item-value="value"
                       label="Estado del Orden de Trabajo"
                     ></v-autocomplete>
           </v-flex>
-          <v-flex xs12 sm4 md4 lg10 xl10>
-           <v-autocomplete
-                      :items="mecanicos"
-                      v-model="mecanico"
-                     item-value="descripcion" 
-                      label="Mecanico a Cargo"
-                    ></v-autocomplete>
+          <v-flex xs12 sm4 md4 lg6 xl6>
+            <v-autocomplete
+                solo
+                :items="mecanicos"
+                v-model="mecanico"
+                item-value="descripcion"
+                label="Mecanico a Cargo"
+            ></v-autocomplete>
           </v-flex>
+          <v-flex xs12 sm4 md4 lg6 xl6>
+            <v-text-field v-model="avisorden"  solo  id="resaltar" label="Observacion del Trabajo Realizado">
+            </v-text-field>
+          </v-flex>
+
           <v-flex xs12 sm4 md4 lg10 xl10>
-            <v-text-field v-model="km" label="Repuestos a Utilizar">
+            <v-text-field v-model="descripcion" disabled solo  id="resaltar" label="Repuestos a Utilizar">
             </v-text-field>
           </v-flex>
 
            <v-flex xs12 sm2 md2 lg2 xl2>
-            <v-btn small fab dark color="teal" @click="mostrarModalRepuestos()">
-              <v-icon dark>list</v-icon>
+            <v-btn small fab dark color="red" @click="mostrarModalRepuestos()">
+              <v-icon dark>add_task</v-icon>
             </v-btn>
           </v-flex>
 
          <v-flex xs12 sm12 md12 lg2 xl3>
-            <v-text-field v-model="observacion" label="Stock Actual">
+            <v-text-field v-model="stock" disabled solo  id="resaltar" label="Stock Actual">
             </v-text-field>
           </v-flex>
 
           <v-flex xs12 sm12 md12 lg2 xl3>
-            <v-text-field v-model="observacion" label="Cantidad">
+            <v-text-field v-model="cantidad" solo label="Cantidad">
             </v-text-field>
           </v-flex>
 
           <v-flex xs12 sm12 md12 lg2 xl3>
-            <v-text-field v-model="observacion" label="Precio">
+            <v-text-field v-model="precio" id="resaltar" disabled  solo label="Precio">
             </v-text-field>
           </v-flex>
 
@@ -253,12 +261,14 @@
                   playlist_add</v-icon>
             </v-btn>
           </v-flex>
-
          <v-flex xs12 sm12 md12 lg2 xl3>
-            <v-text-field v-model="observacion" label="Impuesto">
+            <v-text-field v-model="codigoimpuesto" v-if="2==3" label="Impuesto">
             </v-text-field>
           </v-flex>
-
+         <v-flex xs12 sm12 md12 lg2 xl3>
+            <v-text-field v-model="codigoproducto" v-if="2==3" label="cd producto">
+            </v-text-field>
+          </v-flex>
           
         
           <v-flex xs12 sm12 md12 lg12 xl2 v-show="errorArticulo">
@@ -285,17 +295,23 @@
               delete
             </v-icon></v-btn>
                   </td>
-                  <td class="text-xs-center">{{ props.item.Codigo}}</td>
-                  <td class="text-xs-center"><v-text-field v-model="props.item.chapa" type="text"></v-text-field></td>
-                  <td class="text-xs-center"><v-text-field v-model="props.item.km" type="text"></v-text-field></td>
-                  <td class="text-xs-center" ><v-text-field v-model="props.item.nivelcombustible" type="text"></v-text-field></td>
+                  <td class="text-xs-center">{{ props.item.codigoproducto}}</td>
+                  <td class="text-xs-center" ><v-text-field v-model="props.item.mecanico" type="text"></v-text-field></td>
+                  <td class="text-xs-center" v-if="2==3" ><v-text-field v-model="props.item.codigomecanico" type="text"></v-text-field></td>
+                  <td class="text-xs-center" v-if="2==3" ><v-text-field v-model="props.item.codigoimpuesto" type="text"></v-text-field></td>
+                  <td class="text-xs-center"><v-text-field v-model="props.item.descripcion" type="text"></v-text-field></td>
+                  <td class="text-xs-center"><v-text-field v-model="props.item.cantidad" type="text"></v-text-field></td>
+                  <td class="text-xs-center" ><v-text-field v-model="props.item.precio" type="text"></v-text-field></td>
                    <td class="text-xs-center" v-if="2==3" ><v-text-field v-model="props.item.codigonivel" type="text"></v-text-field></td>
-                  <!-- <td class="text-xs-right">$ {{ (props.item.cantidad * props.item.precio)-props.item.descuento}}</td> -->
+                  <td class="text-xs-right">${{ (props.item.cantidad * props.item.precio)}}</td>
                 </template>
                 <template slot="no-data">
                   <h3>No hay artículos agregados al detalle.</h3>
                 </template>
               </v-data-table>
+              <v-flex class="text-xs-right">
+                <strong>Total Neto:</strong> <strong>{{fromatodemoneda(subtotal=calcularTotal) }}</strong>
+              </v-flex>
             </template>
           </v-flex>
           <v-flex xs12 sm12 md12 v-show="valida">
@@ -327,6 +343,14 @@ export default {
       orden:'',
       mecanico:'',
       mecanicos:[],
+      repuestos:[],
+      codigoproducto:'',
+      cantidad:'',
+      precio:'',
+      stock:'',
+      codigoimpuesto:'',
+      descripcion:'',
+      avisorden:'',
       headers: [
         
         { text: 'Opciones', value: 'opciones', sortable: false,class: "cabecera colorCabecera--text" },
@@ -364,11 +388,15 @@ export default {
       clientes:[],
       cabeceraDetalles:[
         { text: 'Borrar', value: 'borrar', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'Codigo Vehiculo', value: 'Codigo', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'Chapa', value: 'Chapa', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'km de Entrada', value: 'km', sortable: false ,class: "cabecera colorCabecera--text" },
-        { text: 'Nivel Combustible', value: 'nivelcombustible', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'cod nivel', value: 'codigonivel', sortable: false, align: ' d-none'},
+        { text: 'Codigo Producto', value: 'codigoproducto', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'Mecanico', value: 'mecanico', sortable: false, class: "cabecera colorCabecera--text"},
+        { text: 'codigomecanico', value: 'codigomecanico', sortable: false, align: ' d-none'},
+        { text: 'codigoimpuesto', value: 'codigoimpuesto', sortable: false, align: ' d-none'},
+        { text: 'Descripciones', value: 'descripcion', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'Cantidad', value: 'cantidad', sortable: false ,class: "cabecera colorCabecera--text" },
+        { text: 'Precio', value: 'precio', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'Sub-Total', value: 'subtotal', sortable: false,class: "cabecera colorCabecera--text"  },
+
         // { text: 'Descuento', value: 'descuento', sortable: false },
         // { text: 'Sub Total', value: 'subtotal', sortable: false  }
       ],
@@ -389,6 +417,16 @@ export default {
         { text: 'CLIENTE',value: 'RazonSocial', sortable: true,class: "cabecera colorCabecera--text" },
         // { text: 'Estado', value: 'estado', sortable: false }
       ],
+         cabeceraRepuesto: [
+        { text: 'Seleccionar', value: 'seleccionar', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'CODIGO',value: 'CodigoProducto', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'DESCRIPCION',value: 'Descripcion', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'PRECIO VENTA',value: 'PrecioVentaMinorista', sortable: true,class: "cabecera colorCabecera--text" },
+        { text: 'MARCA',value: 'Marca', sortable: false,class: "cabecera colorCabecera--text" },
+        { text: 'STOCK ACTUAL',value: 'StockActual', sortable: true,class: "cabecera colorCabecera--text" },
+        { text: 'DEPOSITO',value: 'Deposito', sortable: true,class: "cabecera colorCabecera--text" },
+        // { text: 'Estado', value: 'estado', sortable: false }
+      ],
       verDetalle:0,
       valida:0,
       validaMensaje:[],
@@ -402,7 +440,7 @@ export default {
     calcularTotal: function(){
       let resultado=0.0;
       for(var i=0;i<this.detalles.length;i++){
-        resultado=resultado+((this.detalles[i].cantidad*this.detalles[i].precio)-this.detalles[i].descuento);
+        resultado=resultado+((this.detalles[i].cantidad*this.detalles[i].precio));
       }
       return resultado;
     }
@@ -421,11 +459,15 @@ export default {
      this.selectMecanico();
      this.selectEstado();
      this.selectNivel();
-  
+     this.listarRepuesto();
     //  this.capturarcodigo();
    // this.listarArticulos()
   },
   methods: {
+    fromatodemoneda(value) {
+      let val = (value/1).toFixed(0).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
     selecOrden(){
       let me=this;
       let ordenArray=[];
@@ -472,8 +514,9 @@ export default {
     capturarcodigo(texto){
        const cod = texto.split(' ')[0]
        return cod
-    }
-    ,
+    },
+
+
     selectNivel(){
       let me=this;
       let personaArray=[];
@@ -515,41 +558,56 @@ export default {
         this.codigorecepcion= data.numero;
         this.chapa=data.chapa;
         this.observacion=data.observaciones
-        // this.detalles.push(
-        //     {
-
-        //       // chapa:data.chapa,
-        //       // articulo:data.marca,
-        //       // cantidad:1,
-        //       // precio:data.precio_venta,
-        //       // descuento:0
-        //     }
-        // );
         this.codigo='';
       }
       this.close();
     },
+     agregarDatosRepuesto(data){
+
+        this.codigoproducto= data.CodigoProducto;
+        this.descripcion=data.Descripcion;
+        this.codigoimpuesto=data.CodigImpuesto;
+        this.stock=data.StockActual;
+        this.precio=data.PrecioVentaMinorista;
+
+        this.close();
+    },
+    limpiarDatosRepuesto(){
+      this.descripcion='';
+      this.cantidad='';
+      this.precio='';
+      this.stock='';
+    },
      agregarTabla(){
-       const codigonivel = this.capturarcodigo(this.nivelcombustible)
+       this.errorArticulo=null;
+       if(this.codigoproducto==''){
+         this.errorArticulo='DEBE DE SELECCIONAR UN REPUESTO';
+         return;
+       }
+      if (this.encuentra(this.codigoproducto)==true){
+            this.errorArticulo='El artículo ya ha sido agregado.';
+       }else{
         this.detalles.push(
-            {
-              
-              Codigo:this.Codigo,
-              chapa:this.chapa,
-              km:this.km,
-              nivelcombustible:this.nivelcombustible,
-              codigonivel:codigonivel
-             
-             // chapa:this.chapa,
-              
+            {  
+              codigoproducto:this.codigoproducto,
+              mecanico:this.mecanico,
+              codigomecanico:this.capturarcodigo(this.mecanico),
+              codigoimpuesto:this.codigoimpuesto,
+              orden: this.orden,
+              descripcion:this.descripcion,
+              cantidad:this.cantidad,
+              precio:this.precio,
             }
         );
-      
+        this.limpiarDetalle();
+       }
+        console.log(this.detalles)
+        this.limpiarDatosRepuesto()
     },
-    encuentra(chapa){
+    encuentra(codigoproducto){
       let sw=0;
       for (var i=0;i<this.detalles.length;i++){
-        if(this.detalles[i].chapa==chapa){
+        if(this.detalles[i].codigoproducto==codigoproducto){
           sw=true;
         }
       }
@@ -572,12 +630,22 @@ export default {
         console.log(error);
       });
     },
+    listarRepuesto(){
+      let me=this;
+      let header={"auth-token" : this.$store.state.token};
+      let configuracion= {headers : header};
+      axios.get('orden/repuesto',configuracion).then(function (response){
+        me.repuestos=response.data;
+        console.log(me.repuestos)
+      }).catch(function(error){
+        console.log(error);
+      });
+    },
     mostrarModalArticulos(){
       this.dialog=1;
       this.listarRecepcion();
     },
     mostrarModalRepuestos(){
-        console.log("repuesto")
         this.dialogrepuestos=1;
     },
     listarDetalles(){
@@ -595,7 +663,6 @@ export default {
       });
     },
     verIngreso(item){
-      console.log("cliente3")
       this.limpiar();
       this.tipo_comprobante=item.tipo_comprobante;
       this.serie_comprobante=item.serie_comprobante;
@@ -618,14 +685,31 @@ export default {
       });
 
     },
-    limpiar(){
-      this.Codigo='';
+    limpiarDetalle(){
+      this.codigoimpuesto='';
+      this.codigoproducto='';
+      this.stock='';
+      this.precio='';
+      this.cantidad='';
+      this.descripcion='';
+      this.validaMensaje=[];
+      this.verDetalle=0;
+    },
+    limpiarTodo(){
+      this.recepcion = "";
       this.observacion='';
-      this.cliente='';
-      this.nivelcombustible='';
-      this.estadorecepcion='';
-      this.chapa='';
-      this.km='';
+      this.codigorecepcion = "";
+      this.chapa = "";
+      this.orden="";
+      this.mecanico='';
+      this.avisorden='';
+      this.codigoimpuesto='';
+      this.codigoproducto='';
+      this.stock='';
+      this.precio='';
+      this.cantidad='';
+      this.repuesto='';
+      this.descripcion='';
       this.detalles=[];
       this.validaMensaje=[];
       this.verDetalle=0;
@@ -665,19 +749,19 @@ export default {
       let header={"auth-token" : this.$store.state.token};
       let configuracion= {headers : header};
       console.log(this.$store.state.usuario)         
-      axios.post('rvehiculo/',
+      axios.post('orden/guardar',
           {
             'CodigoSucursal':this.$store.state.usuario.CodigoSucursal,
             'PuntoExpedicion':this.$store.state.usuario.PuntoExpedicion,
-            'recibidopor':this.$store.state.usuario.codigo,
-            'codigocliente':this.cliente,
-            'estado':this.estadorecepcion,
-            'observaciones':this.observacion,
+            'numero':this.codigorecepcion,
+            'codigoestadoorden':this.capturarcodigo(this.orden),
+            'observacion': this.avisorden,
             'detalles':this.detalles
           },configuracion)
           .then(function(response){
             me.dialogoConfirmacion = true;
-            me.limpiar();
+            me.limpiarDetalle();
+            me.limpiarTodo();
             me.close();
             me.listar();
             me.ocultarNuevo();
@@ -735,14 +819,20 @@ export default {
     },
     close () {
       this.dialog = false;
-      ths.dialogrepuestos=false;
+      this.dialogrepuestos=false;
     }
   }
 }
 </script>
 
 <style>
-v-layout{ 
-   border-style: solid;
-   border-color: red}
+#resaltar{
+  color: brown;
+  font-weight: 600;
+}
+strong{
+  color: brown;
+  font-weight: 600;
+  font-size: 20px;
+}
 </style>
