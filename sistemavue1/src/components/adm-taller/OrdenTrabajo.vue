@@ -158,20 +158,20 @@
                 fab
                 dark
                 small
-                color="purple darken-4"> <v-icon @click="verIngreso(props.item)">
-              settings
+                color="purple darken-4"> <v-icon @click="entregado(props.item)">
+              mdi-wrench
             </v-icon></v-btn>
            
            
           </td>
           <td >{{ props.item.numero }}</td>
-          <td>{{ props.item.chapa }}</td>
+          <td>{{ props.item.numerochapa }}</td>
           <td>{{ props.item.RazonSocial }}</td>
-          <td>{{ props.item.observaciones }}</td>
-          <td>{{ props.item.km }}</td>
-          <td>{{ props.item.nivel }}</td>
+          <td>{{ props.item.observacionorden }}</td>
+          <td>{{ props.item.observacionrecepcion }}</td>
+          <td>{{ props.item.fechaemision }}</td>
           <td>{{ props.item.fechaentrada }}</td>
-         <td> {{ props.item.estadorecepcion }} </td>
+         <td> {{ props.item.estadorden }} </td>
          
          
         </template>
@@ -357,11 +357,11 @@ export default {
         { text: 'Nro', value: 'numero', sortable: true, class: "cabecera colorCabecera--text" },
         { text: 'CHAPA  ', value: 'chapa', sortable: true,class: "cabecera colorCabecera--text",},
         { text: 'CLIENTE', value: 'RazonSocial', sortable: true,class: "cabecera colorCabecera--text" },
-        { text: 'OBSERVACION', value: 'observaciones', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'KM', value: 'km', sortable: false,class: "cabecera colorCabecera--text"  },
-         { text: 'NIVEL COMBUSTIBLE', value: 'nivel', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'FECHA ENTRADA', value: 'fechaentrada', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'ESTADO RECEPCION', value: 'estadorecepcion', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'OBSERVACION ORDEN', value: 'observacionorden', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'OBSERVACION RECEPCION', value: 'observacionrecepcion', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'FECHA ORDEN', value: 'fechaemision', sortable: false,class: "cabecera colorCabecera--text"  },
+         { text: 'FECHA RECEPCION', value: 'fechaentrada', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'ESTADO DEL TRABAJO', value: 'estadorden', sortable: false,class: "cabecera colorCabecera--text"  },
         // { text: 'Estado', value: 'estado', sortable: false  }
       ],
       _id:'',
@@ -459,7 +459,6 @@ export default {
      this.selectMecanico();
      this.selectEstado();
      this.selectNivel();
-     this.listarRepuesto();
     //  this.capturarcodigo();
    // this.listarArticulos()
   },
@@ -647,13 +646,13 @@ export default {
     },
     mostrarModalRepuestos(){
         this.dialogrepuestos=1;
+       this.listarRepuesto();
     },
     listarDetalles(){
       console.log("cliente 2")
       let me=this;
       let header={"auth-token" : this.$store.state.token};
       let configuracion= {headers : header};
-      console.log("hola")
       cliente:this.cliente;
       console.log(cliente)
        axios.get('rvehiculo/'+cliente,configuracion).then(function (response){
@@ -673,11 +672,27 @@ export default {
       this.verNuevo=1;
       this.verDetalle=1;
     },
+    entregado(item) {
+      let me = this;
+      let header={"auth-token" : this.$store.state.token};
+      let configuracion= {headers : header};
+      this.numero = item.numero;
+      console.log(this.numero);
+      axios
+          .put("orden/entregado",{ numero: this.numero},configuracion)
+          .then(function(response) {
+            me.listar();
+          })
+          .catch(function(error) {
+            console.log(error);
+            console.log("error");
+          });
+    },
     listar(){
       let me=this;
       let header={"auth-token" : this.$store.state.token};
       let configuracion= {headers : header};
-      axios.get('orden/recepcion/',configuracion).then(function (response){
+      axios.get('orden/listar/',configuracion).then(function (response){
         me.ventas=response.data;
         console.log(me.ventas)
       }).catch(function(error){
@@ -742,7 +757,7 @@ export default {
     },
     ocultarNuevo(){
       this.verNuevo=0;
-      this.limpiar();
+      // this.limpiar();
     },
     guardar(){
       let me=this;
@@ -785,38 +800,7 @@ export default {
     activarDesactivarCerrar(){
       this.adModal=0;
     },
-    activar(){
-      let me=this;
-      let header={"Token" : this.$store.state.token};
-      let configuracion= {headers : header};
-      axios.put('venta/activate',{'_id':this.adId},configuracion)
-          .then(function(response){
-            me.adModal=0;
-            me.adAccion=0;
-            me.adNombre='';
-            me.adId='';
-            me.listar();
-          })
-          .catch(function(error){
-            console.log(error);
-          });
-    },
-    desactivar(){
-      let me=this;
-      let header={"Token" : this.$store.state.token};
-      let configuracion= {headers : header};
-      axios.put('venta/deactivate',{'_id':this.adId},configuracion)
-          .then(function(response){
-            me.adModal=0;
-            me.adAccion=0;
-            me.adNombre='';
-            me.adId='';
-            me.listar();
-          })
-          .catch(function(error){
-            console.log(error);
-          });
-    },
+
     close () {
       this.dialog = false;
       this.dialogrepuestos=false;

@@ -7,14 +7,30 @@ class OrdenControlador {
     const productos = await pool.query('SELECT * FROM vproductos where CodigoProducto>0');
     res.json(productos);
   }
+  public async entregado(req: Request, res: Response): Promise<any> {
+    try {
+      const numero = req.body.numero;
+      const codigoestadoorden=2;
+      const values = { numero }
+      console.log(numero)
+      const lista = await pool.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?', [codigoestadoorden,numero]);
+      res.json(lista);
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 
     public async listar(req: Request, res: Response):Promise<any>  {
         const recepciones = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
         res.json(recepciones);
     }
-
-    public async listarRecepcion(req: Request, res: Response) {
-      const marcas = await pool.query('SELECT * FROM vrecepciones');
+  public async listarOrden(req: Request, res: Response):Promise<any> {
+    const recepciones = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
+    res.json(recepciones);
+  }
+  public async listarRecepcion(req: Request, res: Response) {
+      const marcas = await pool.query('SELECT * FROM vordentrabajo');
       res.json(marcas);
 
   }
@@ -54,6 +70,11 @@ class OrdenControlador {
               const detalle = {codigosucursal,puntoexpedicion,numero,codigoproducto,codigomecanico,cantidad,
                 descripcion,precio,codigoimpuesto,codigoestadoreparacion}
               await transaccion.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
+              const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
+              const stockanterior= consulta[0].StockActual;
+              console.log(stockanterior)
+              const stockactual = stockanterior-cantidad;
+              await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
           }
          await transaccion.query("COMMIT");// se confirma la transaccion
          await transaccion.query("SET autocommit=1")

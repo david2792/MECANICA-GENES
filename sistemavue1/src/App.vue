@@ -362,8 +362,6 @@ export default {
       return (
         this.$store.state.usuario &&
         this.$store.state.usuario.NivelUsuario == "ADMINISTRADOR"
-       
-
       );
        
     },

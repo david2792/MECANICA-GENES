@@ -11,7 +11,7 @@ class UsuarioControlador {
     public async acceso(req: Request, res: Response): Promise<void> {
         var SECRET = "SECRETO_PARA_ENCRIPTACION"
         try {
-            const usuario = await pool.query('SELECT * FROM vusuarios GROUP BY CodigoUsuario  ');
+            const usuario = await pool.query('SELECT * FROM vusuarios');
             JSON.stringify(usuario);
             const cod= usuario[0].CodigoUsuario;
             const Usuario = usuario[0].Usuario;
@@ -32,9 +32,7 @@ class UsuarioControlador {
                     NivelUsuario: NivelUsuario,
                     PuntoExpedicion:PuntoExpedicion,
                     CodigoSucursal:CodigoSucursal
-
-
-                    // ANY DATA
+    // ANY DATA
                 }
                 console.log("bienvenido")
                 // var token = jwt.sign(users:users, SECRET, { expiresIn: '1h' , algorithm: 'RS256' })
@@ -45,7 +43,7 @@ class UsuarioControlador {
                console.log(tokenData)
                 res.header('auth-token',token).json({token,tokenData})
             }else{
-                
+                localStorage.clear();
             }
 
 

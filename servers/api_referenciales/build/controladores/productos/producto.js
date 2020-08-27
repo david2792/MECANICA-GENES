@@ -95,18 +95,16 @@ class ProductoControlador {
                     PrecioVentaMayorista
                 };
                 // console.log(stock)
-                const set0 = transaccionBD_1.default.query("SET autocommit=0");
-                const prod = transaccionBD_1.default.query('INSERT INTO productos  SET ?', productos); // se inserta los datos en la tabla productos
-                const sto = transaccionBD_1.default.query('INSERT INTO stock  SET ?', stock); // se inserta los datos en la tabla stock
-                const comi = transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
-                const set1 = transaccionBD_1.default.query("SET autocommit=1");
-                yield Promise.all([set0, prod, sto, comi, set1]);
+                yield transaccionBD_1.default.query("SET autocommit=0");
+                yield transaccionBD_1.default.query('INSERT INTO productos  SET ?', productos); // se inserta los datos en la tabla productos
+                yield transaccionBD_1.default.query('INSERT INTO stock  SET ?', stock); // se inserta los datos en la tabla stock
+                yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
+                yield transaccionBD_1.default.query("SET autocommit=1");
                 res.json({ message: "el producto fue guardado" });
             }
             catch (error) {
-                const rol = transaccionBD_1.default.query("ROLLBACK");
-                const set11 = transaccionBD_1.default.query("SET autocommit=1");
-                yield Promise.all([rol, set11]);
+                yield transaccionBD_1.default.query("ROLLBACK");
+                yield transaccionBD_1.default.query("SET autocommit=1");
                 console.log("ocurrio un error: " + error);
                 throw error;
             }
@@ -165,19 +163,17 @@ class ProductoControlador {
             };
             try {
                 console.time('loop');
-                let set = transaccionBD_1.default.query("SET autocommit=0");
-                let produc = transaccionBD_1.default.query('UPDATE productos  SET ? WHERE codigoproducto= ?', [productos, CodigoProducto]); // se inserta los datos en la tabla productos
-                let sto = transaccionBD_1.default.query('UPDATE  stock  SET ? WHERE codigoproducto= ?', [stock, CodigoProducto]); // se inserta los datos en la tabla stock
-                let comi = transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
-                let set1 = transaccionBD_1.default.query("SET autocommit=1");
-                yield Promise.all([set, produc, sto, comi, set1]);
+                yield transaccionBD_1.default.query("SET autocommit=0");
+                yield transaccionBD_1.default.query('UPDATE productos  SET ? WHERE codigoproducto= ?', [productos, CodigoProducto]); // se inserta los datos en la tabla productos
+                yield transaccionBD_1.default.query('UPDATE  stock  SET ? WHERE codigoproducto= ?', [stock, CodigoProducto]); // se inserta los datos en la tabla stock
+                yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
+                yield transaccionBD_1.default.query("SET autocommit=1");
                 res.json({ message: "el producto fue actualizado" });
                 console.timeEnd('loop');
             }
             catch (error) {
-                let ro = transaccionBD_1.default.query("ROLLBACK");
-                let a11 = transaccionBD_1.default.query("SET autocommit=1");
-                yield Promise.all([ro, a11]);
+                yield transaccionBD_1.default.query("ROLLBACK");
+                yield transaccionBD_1.default.query("SET autocommit=1");
                 console.log("ocurrio un error: " + error);
                 throw error;
             }

@@ -11,6 +11,13 @@ class RecepcionVehiculoControlador {
         res.json(marcas);
 
     }
+    public async listarUno(req: Request, res: Response):Promise<any>  {
+        const { id } = req.params;
+        const marcas = await pool.query('SELECT * FROM vrecepciones WHERE numero=?',id);
+        console.log(marcas)
+        res.json(marcas);
+
+    }
 
     public async listarRecepcion(req: Request, res: Response) {
       const marcas = await pool.query('SELECT * FROM vrecepciones');

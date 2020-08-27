@@ -25,7 +25,7 @@ class UsuarioControlador {
         return __awaiter(this, void 0, void 0, function* () {
             var SECRET = "SECRETO_PARA_ENCRIPTACION";
             try {
-                const usuario = yield conexionBD_1.default.query('SELECT * FROM vusuarios GROUP BY CodigoUsuario  ');
+                const usuario = yield conexionBD_1.default.query('SELECT * FROM vusuarios');
                 JSON.stringify(usuario);
                 const cod = usuario[0].CodigoUsuario;
                 const Usuario = usuario[0].Usuario;
@@ -58,6 +58,7 @@ class UsuarioControlador {
                     res.header('auth-token', token).json({ token, tokenData });
                 }
                 else {
+                    localStorage.clear();
                 }
             }
             catch (error) {

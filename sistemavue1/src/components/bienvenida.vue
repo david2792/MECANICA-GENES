@@ -1,50 +1,148 @@
 
 <template>
-  <v-container fluid grid-list-xl>
-    <v-layout text-xs-center wrap>
-      <v-flex xs12>
-        <v-img :src="require('../assets/genes.jpeg')" class="my-3" contain height="200"></v-img>
-      </v-flex>
+    <v-layout align-start justify-center  row wrap >
+      <v-flex   xs12 sm12 md12 lg12 xl12 >
+        <h1  class="display-3 font-weight-bold mb-3" align="center">BIENVENIDO AL SISTEMA</h1>
 
-      <v-flex mb-4>
-        <h1 class="display-2 font-weight-bold mb-3">Bienvenido al Sistema</h1>
-<!--        <v-flex  xs12 sm8 md8 lg4 xl4>-->
-<!--          <v-card-->
-<!--              class="mx-auto"-->
-<!--              max-width="200"-->
-<!--              overline-->
-<!--              dark-->
-<!--              color="pink darken-2"-->
-<!--          >-->
-<!--            <v-img :src="require('../assets/auto.png')" class="my-3" contain height="200"></v-img>-->
-<!--          </v-card>-->
-<!--        </v-flex>-->
-          <v-chip
-      class="ma-2"
-      color="primary"
-      label
-    >
-      <v-icon left>mdi-account-circle-outline</v-icon>
-      <span class="headline">{{listar}}</span>
-    </v-chip>
-
-        <p class="subheading font-weight-regular">
-          Sistema de Gestion Comercial
-          <br />Desarrollador por Smart Systems
-        </p>
+        <h1 align="center"><span>{{listar}}</span></h1>
+        <div align="center"><v-img :src="require('../assets/genes.jpeg')" class="my-3" max-width="600"  max-height="320"></v-img></div>
       </v-flex>
-      <v-flex xs12 mb-5>
-        <v-chip class="blak--text text--lighten-1" color="indigo lighten-5" outlined>
-          <v-icon left>mdi-server-plus</v-icon>Copia de Seguridad
-        </v-chip>
-
-        <v-chip class='white--text text--lighten-1' color="purple " outlined pill>
-          Salir del Sistema
-          <v-icon right>mdi-account-outline</v-icon>
-        </v-chip>
+      <v-flex  xs12 sm12 md2 lg2 xl2>
+        <v-card
+            class="mx-auto"
+            max-width="200"
+            max-height="170"
+        >
+          <v-img
+              class="white--text align-end"
+              :src="require('../assets/user.png')"
+              contain
+              height="100"
+          ></v-img>
+          <v-card-actions>
+            <v-btn
+                block
+                dark
+                text
+                color="deep-purple accent-4"
+                :to="{name: 'cliente'}"
+            >
+              Agregar Cliente
+            </v-btn>
+          </v-card-actions>
+        </v-card>
       </v-flex>
+      <v-flex  xs12 sm12 md2 lg2 xl2>
+        <v-card
+            class="mx-auto"
+            max-width="200"
+            max-height="170"
+        >
+          <v-img
+              class="white--text align-end"
+              :src="require('../assets/mecanica.png')"
+              contain
+              height="100"
+          ></v-img>
+          <v-card-actions>
+            <v-btn
+                block
+                dark
+                text
+                color="deep-purple accent-4"
+                :to="{name: 'orden'}"
+            >
+              Orden de Trabajo
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+      <v-flex  xs12 sm12 md2 lg2 xl2 >
+        <v-card
+            class="mx-auto "
+            max-width="200"
+            max-height="170"
+        >
+          <v-img
+              class="white--text align-end"
+              :src="require('../assets/auto.png')"
+              contain
+              height="100"
+          ></v-img>
+          <v-card-actions>
+            <v-btn
+                block
+                dark
+                text
+                color="deep-purple accent-4"
+                :to="{name: 'recepcion'}"
+            >
+              Recepcion Vehiculo
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+      <v-flex  xs12 sm12 md2 lg2 xl2 >
+        <v-card
+            class="mx-auto "
+            max-width="200"
+            max-height="170"
+        >
+          <v-img
+              class="white--text align-end"
+              :src="require('../assets/repuesto.png')"
+              contain
+              height="100"
+          ></v-img>
+          <v-card-actions>
+            <v-btn
+                block
+                dark
+                text
+                color="deep-purple accent-4"
+                :to="{name: 'producto'}"
+            >
+
+              Repuestos
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+      <v-flex  xs12 sm12 md2 lg2 xl2 >
+        <v-card
+            class="mx-auto "
+            max-width="200"
+            max-height="170"
+        >
+          <v-img
+              class="white--text align-end"
+              :src="require('../assets/vehiculo.png')"
+              contain
+              height="100"
+          ></v-img>
+          <v-card-actions>
+            <v-btn
+                block
+                dark
+                text
+                color="deep-purple accent-4"
+                :to="{name: 'vehiculo'}"
+            >
+
+              Vehiculos
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+<!--     <v-flex xs12 sm12 md12 lg5 xl5>-->
+<!--       <v-img-->
+<!--           class="white&#45;&#45;text align-light"-->
+<!--           :src="require('../assets/usuario.png')"-->
+<!--           contain-->
+<!--           height="100"-->
+<!--       ></v-img>-->
+<!--     </v-flex>-->
     </v-layout>
-  </v-container>
 
 </template>
 <script>

@@ -12,8 +12,9 @@ class OrdenoRuta
     config():void
     {
         this.router.get('/recepcion',ordenControlador.listar);
+        this.router.get('/listar',ordenControlador.listarOrden);
         this.router.get('/repuesto',ordenControlador.listarRepuestos);
-        // this.router.get('/',ordenControlador.listarRecepcion);
+        this.router.put('/entregado',ordenControlador.entregado);
         this.router.post('/guardar',ordenControlador.guardar);
         //    this.router.put('/',traccionesControlador.actualizar);
     

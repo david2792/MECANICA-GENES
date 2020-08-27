@@ -139,7 +139,7 @@
                 fab
                 dark
                 small
-                color="purple darken-4"> <v-icon @click="verIngreso(props.item)">
+                color="purple darken-4"> <v-icon @click="listarUno(props.item)">
               settings
             </v-icon></v-btn>
            
@@ -229,7 +229,7 @@
               <v-data-table
                   :headers="cabeceraDetalles"
                   :items="detalles"
-                  hide-actions
+
                   class="elevation-1"
               >
                 <template slot="items" slot-scope="props">
@@ -296,6 +296,7 @@ export default {
        dialogoConfirmacion: false,
       persona:'',
       personas:[],
+      numero:'',
       CodigoSucursal:'',
       estadorecepciones:[],
       estadorecepcion:'',
@@ -542,6 +543,20 @@ export default {
       axios.get('rvehiculo/',configuracion).then(function (response){
         me.ventas=response.data;
         console.log(me.ventas)
+      }).catch(function(error){
+        console.log(error);
+      });
+
+    },
+    listarUno(item){
+      let me=this;
+      let header={"auth-token" : this.$store.state.token};
+      let configuracion= {headers : header};
+      axios.get('rvehiculo/update/'+item.numero,configuracion).then(function (response){
+        me.detalles=response.data;
+        me.codigo="hola"
+        console.log(me.detalles)
+        me.mostrarNuevo();
       }).catch(function(error){
         console.log(error);
       });

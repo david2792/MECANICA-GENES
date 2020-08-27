@@ -22,15 +22,36 @@ class OrdenControlador {
             res.json(productos);
         });
     }
+    entregado(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const numero = req.body.numero;
+                const codigoestadoorden = 2;
+                const values = { numero };
+                console.log(numero);
+                const lista = yield conexionBD_1.default.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?', [codigoestadoorden, numero]);
+                res.json(lista);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const recepciones = yield conexionBD_1.default.query('SELECT * FROM vrecepciones WHERE estado=1');
             res.json(recepciones);
         });
     }
+    listarOrden(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const recepciones = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
+            res.json(recepciones);
+        });
+    }
     listarRecepcion(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const marcas = yield conexionBD_1.default.query('SELECT * FROM vrecepciones');
+            const marcas = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo');
             res.json(marcas);
         });
     }
@@ -68,6 +89,11 @@ class OrdenControlador {
                     const detalle = { codigosucursal, puntoexpedicion, numero, codigoproducto, codigomecanico, cantidad,
                         descripcion, precio, codigoimpuesto, codigoestadoreparacion };
                     yield transaccionBD_1.default.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
+                    const consulta = yield transaccionBD_1.default.query('SELECT StockActual FROM stock WHERE CodigoProducto=?', [codigoproducto]);
+                    const stockanterior = consulta[0].StockActual;
+                    console.log(stockanterior);
+                    const stockactual = stockanterior - cantidad;
+                    yield transaccionBD_1.default.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?', [stockactual, codigoproducto]);
                 }
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");

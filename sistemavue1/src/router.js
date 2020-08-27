@@ -286,6 +286,7 @@ router.beforeEach((to, from, next) => {
   } else{
 
       next({name: 'Login'});
+    localStorage.clear();
 
 
   }

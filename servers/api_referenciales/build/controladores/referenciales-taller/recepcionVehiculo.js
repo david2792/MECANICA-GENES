@@ -25,6 +25,14 @@ class RecepcionVehiculoControlador {
             res.json(marcas);
         });
     }
+    listarUno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const marcas = yield conexionBD_1.default.query('SELECT * FROM vrecepciones WHERE numero=?', id);
+            console.log(marcas);
+            res.json(marcas);
+        });
+    }
     listarRecepcion(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const marcas = yield conexionBD_1.default.query('SELECT * FROM vrecepciones');

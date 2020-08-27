@@ -12,6 +12,7 @@ class RecepcionVehiculoRuta
     config():void
     {
         this.router.get('/:id',recepcionvehiculoControlador.listar);
+        this.router.get('/update/:id',recepcionvehiculoControlador.listarUno);
         this.router.get('/',recepcionvehiculoControlador.listarRecepcion);
         this.router.post('/',recepcionvehiculoControlador.guardar);
         //    this.router.put('/',traccionesControlador.actualizar);
