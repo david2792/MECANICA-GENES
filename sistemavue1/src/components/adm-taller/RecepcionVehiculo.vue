@@ -167,7 +167,7 @@
                 <v-autocomplete
                       :items="clientes"
                       v-model="cliente"
-                      item-value="value"
+                      item-value="codigo"
                       label="Cliente"
                     ></v-autocomplete>
           </v-flex>
@@ -192,7 +192,7 @@
             <v-autocomplete
                       :items="estadorecepciones"
                       v-model="estadorecepcion"
-                      item-value="value"
+                      item-value="codigo"
                       label="Estado Recepcion"
                     ></v-autocomplete>
           </v-flex>
@@ -200,7 +200,7 @@
            <v-autocomplete
                       :items="nivelcombustibles"
                       v-model="nivelcombustible"
-                     item-value="descripcion" 
+                     item-value="codigo"
                       label="Nivel de Combustible"
                     ></v-autocomplete>
           </v-flex>
@@ -247,7 +247,7 @@
                   <td class="text-xs-center"><v-text-field v-model="props.item.chapa" type="text"></v-text-field></td>
                   <td class="text-xs-center"><v-text-field v-model="props.item.km" type="text"></v-text-field></td>
                   <td class="text-xs-center" ><v-text-field v-model="props.item.nivelcombustible" type="text"></v-text-field></td>
-                   <td class="text-xs-center" v-if="2==3" ><v-text-field v-model="props.item.codigonivel" type="text"></v-text-field></td>
+                   <td class="text-xs-center" ><v-text-field v-model="props.item.codigonivel" type="text"></v-text-field></td>
                   <!-- <td class="text-xs-right">$ {{ (props.item.cantidad * props.item.precio)-props.item.descuento}}</td> -->
                 </template>
                 <template slot="no-data">
@@ -310,17 +310,16 @@ export default {
       serie_comprobante:'',
       num_comprobante: '',
       impuesto: 0.18,
-      codigo:'',
       Codigo:'',
       cliente:'',
       clientes:[],
       cabeceraDetalles:[
         { text: 'Borrar', value: 'borrar', sortable: false,class: "cabecera colorCabecera--text"  },
         { text: 'Codigo Vehiculo', value: 'Codigo', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'Chapa', value: 'Chapa', sortable: false,class: "cabecera colorCabecera--text"  },
+        { text: 'Chapa', value: 'chapa', sortable: false,class: "cabecera colorCabecera--text"  },
         { text: 'km de Entrada', value: 'km', sortable: false ,class: "cabecera colorCabecera--text" },
         { text: 'Nivel Combustible', value: 'nivelcombustible', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'cod nivel', value: 'codigonivel', sortable: false, align: ' d-none'},
+        { text: 'cod nivel', value: 'codigonivel', sortable: false},
         // { text: 'Descuento', value: 'descuento', sortable: false },
         // { text: 'Sub Total', value: 'subtotal', sortable: false  }
       ],
@@ -383,7 +382,7 @@ export default {
       axios.get('clientes/',configuracion).then(function (response){
         personaArray=response.data;
         personaArray.map(function(x){
-          me.clientes.push({text:x.RazonSocial, value:x.CodigoCliente});
+          me.clientes.push({text:x.CodigoCliente+" "+x.RazonSocial, value:x.CodigoCliente});
         });
       }).catch(function(error){
         console.log(error);
@@ -397,7 +396,7 @@ export default {
       axios.get('estadorecepciones/',configuracion).then(function (response){
         personaArray=response.data;
         personaArray.map(function(x){
-          me.estadorecepciones.push({text:x.descripcion,value:x.codigo});
+          me.estadorecepciones.push({text:x.codigo+" "+x.descripcion,value:x.codigo});
         });
       }).catch(function(error){
         console.log(error);
@@ -448,17 +447,6 @@ export default {
        console.log( data.chapa)
         this.Codigo= data.codigo;
         this.chapa=data.chapa;
-        // this.detalles.push(
-        //     {
-
-        //       // chapa:data.chapa,
-        //       // articulo:data.marca,
-        //       // cantidad:1,
-        //       // precio:data.precio_venta,
-        //       // descuento:0
-        //     }
-        // );
-        this.codigo='';
       }
       this.close();
     },
@@ -466,7 +454,6 @@ export default {
        const codigonivel = this.capturarcodigo(this.nivelcombustible)
         this.detalles.push(
             {
-              
               Codigo:this.Codigo,
               chapa:this.chapa,
               km:this.km,
@@ -501,7 +488,6 @@ export default {
        let cliente = this.cliente;
       axios.get('rvehiculo/'+cliente,configuracion).then(function (response){
         me.articulos=response.data;
-        console.log(me.articulos)
       }).catch(function(error){
         console.log(error);
       });
@@ -554,13 +540,24 @@ export default {
       let configuracion= {headers : header};
       axios.get('rvehiculo/update/'+item.numero,configuracion).then(function (response){
         me.detalles=response.data;
-        me.codigo="hola"
-        console.log(me.detalles)
+        for (let i in me.detalles){
+         me.chapa=me.detalles[i].chapa
+         me.cliente=me.detalles[i].RazonSocial
+          me.Codigo=me.detalles[i].codigo
+          me.detalles[i].Codigo=me.detalles[i].codigo
+          me.estadorecepcion= me.detalles[i].estadorecepcion
+          me.nivelcombustible=me.detalles[i].nivel
+          me.detalles[i].nivelcombustible=me.detalles[i].nivel
+          me.km=me.detalles[i].km
+          me.detalles[i].codigonivel=me.detalles[i].codigonivelcombustible
+          me.observacion=me.detalles[i].observaciones
+         // console.log(me.cliente)
+        }
+
         me.mostrarNuevo();
       }).catch(function(error){
         console.log(error);
       });
-
     },
     limpiar(){
       this.Codigo='';
@@ -614,8 +611,8 @@ export default {
             'CodigoSucursal':this.$store.state.usuario.CodigoSucursal,
             'PuntoExpedicion':this.$store.state.usuario.PuntoExpedicion,
             'recibidopor':this.$store.state.usuario.codigo,
-            'codigocliente':this.cliente,
-            'estado':this.estadorecepcion,
+            'codigocliente':this.capturarcodigo(this.cliente),
+            'estado':this.capturarcodigo(this.estadorecepcion),
             'observaciones':this.observacion,
             'detalles':this.detalles
           },configuracion)
