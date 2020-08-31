@@ -13,9 +13,12 @@ class OrdenoRuta
     {
         this.router.get('/recepcion',ordenControlador.listar);
         this.router.get('/listar',ordenControlador.listarOrden);
+        this.router.get('/update/:id',ordenControlador.listarUno);
         this.router.get('/repuesto',ordenControlador.listarRepuestos);
         this.router.put('/entregado',ordenControlador.entregado);
         this.router.post('/guardar',ordenControlador.guardar);
+        this.router.post('/insertardetalle',ordenControlador.guardardetalle);
+        this.router.put('/eliminar',ordenControlador.eliminarDetalles);
         //    this.router.put('/',traccionesControlador.actualizar);
     
     }

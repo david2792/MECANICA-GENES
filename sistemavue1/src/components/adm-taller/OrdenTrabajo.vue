@@ -155,13 +155,19 @@
         <template v-slot:items="props">
           <td class="justify-center layout px-0">
             <v-btn  class="mx-2"
-                fab
+                
                 dark
                 small
                 color="purple darken-4"> <v-icon @click="entregado(props.item)">
-              mdi-wrench
-            </v-icon></v-btn>
-           
+              add
+            </v-icon>Confirmar</v-btn>
+               <v-btn  class="mx-2"
+                @click="editar(props.item)"
+                dark
+                small
+                color="red darken-4"> <v-icon>
+              edit
+            </v-icon>Editar</v-btn>
            
           </td>
           <td >{{ props.item.numero }}</td>
@@ -296,13 +302,13 @@
             </v-icon></v-btn>
                   </td>
                   <td class="text-xs-center">{{ props.item.codigoproducto}}</td>
-                  <td class="text-xs-center" ><v-text-field v-model="props.item.mecanico" type="text"></v-text-field></td>
-                  <td class="text-xs-center" v-if="2==3" ><v-text-field v-model="props.item.codigomecanico" type="text"></v-text-field></td>
-                  <td class="text-xs-center" v-if="2==3" ><v-text-field v-model="props.item.codigoimpuesto" type="text"></v-text-field></td>
-                  <td class="text-xs-center"><v-text-field v-model="props.item.descripcion" type="text"></v-text-field></td>
-                  <td class="text-xs-center"><v-text-field v-model="props.item.cantidad" type="text"></v-text-field></td>
-                  <td class="text-xs-center" ><v-text-field v-model="props.item.precio" type="text"></v-text-field></td>
-                   <td class="text-xs-center" v-if="2==3" ><v-text-field v-model="props.item.codigonivel" type="text"></v-text-field></td>
+                  <td class="text-xs-center" >{{props.item.mecanico}}</td>
+                  <td class="text-xs-center" v-if="2==3" >{{props.item.codigomecanico}}</td>
+                  <td class="text-xs-center" v-if="2==3" >{{props.item.codigoimpuesto}}</td>
+                  <td class="text-xs-center">{{props.item.descripcion}}</td>
+                  <td class="text-xs-center">{{props.item.cantidad}}</td>
+                  <td class="text-xs-center" >{{props.item.precio}}</td>
+                   <td class="text-xs-center" v-if="2==3" >{{props.item.codigonivel}}</td>
                   <td class="text-xs-right">${{ (props.item.cantidad * props.item.precio)}}</td>
                 </template>
                 <template slot="no-data">
@@ -320,7 +326,7 @@
           </v-flex>
           <v-flex xs12 sm12 md12 lg12 xl12>
             <v-btn color="deep-purple darken-3" dark  @click.native="ocultarNuevo()">Cancelar<v-icon>clear</v-icon></v-btn>
-            <v-btn color="red " dark v-if="verDetalle==0" @click.native="guardar()">Guardar<v-icon>save</v-icon></v-btn>
+            <v-btn color="red " dark v-if="verDetalle==0"  @click.native="guardar()">Guardar<v-icon>save</v-icon></v-btn>
           </v-flex>
       
         </v-layout>
@@ -386,6 +392,7 @@ export default {
       Codigo:'',
       cliente:'',
       clientes:[],
+      bandera:0,
       cabeceraDetalles:[
         { text: 'Borrar', value: 'borrar', sortable: false,class: "cabecera colorCabecera--text"  },
         { text: 'Codigo Producto', value: 'codigoproducto', sortable: false,class: "cabecera colorCabecera--text"  },
@@ -577,6 +584,34 @@ export default {
       this.precio='';
       this.stock='';
     },
+    agregarNuevo(){
+        let me=this;
+      let header={"auth-token" : this.$store.state.token};
+      let configuracion= {headers : header};
+      console.log(this.$store.state.usuario)         
+      axios.post('orden/insertardetalle',
+          {
+              'CodigoSucursal':this.$store.state.usuario.CodigoSucursal,
+              'PuntoExpedicion':this.$store.state.usuario.PuntoExpedicion,
+              'numero':this.codigorecepcion,
+              'codigoestadoorden':this.capturarcodigo(this.orden),
+              'observacion': this.avisorden,
+              'codigoproducto':this.codigoproducto,
+              'mecanico':this.mecanico,
+              'codigomecanico':this.capturarcodigo(this.mecanico),
+              'codigoimpuesto':this.codigoimpuesto,
+              'orden': this.orden,
+              'descripcion':this.descripcion,
+              'cantidad':this.cantidad,
+              'precio':this.precio,
+          },configuracion)
+          .then(function(response){
+           // me.limpiarDetalle();
+          })
+          .catch(function(error){
+            console.log(error);
+          });
+    },
      agregarTabla(){
        this.errorArticulo=null;
        if(this.codigoproducto==''){
@@ -586,6 +621,22 @@ export default {
       if (this.encuentra(this.codigoproducto)==true){
             this.errorArticulo='El artículo ya ha sido agregado.';
        }else{
+            if(this.bandera==1){
+                this.agregarNuevo()
+                this.detalles.push(
+            {  
+              codigoproducto:this.codigoproducto,
+              mecanico:this.mecanico,
+              codigomecanico:this.capturarcodigo(this.mecanico),
+              codigoimpuesto:this.codigoimpuesto,
+              orden: this.orden,
+              descripcion:this.descripcion,
+              cantidad:this.cantidad,
+              precio:this.precio,
+            }
+        );
+            }else{
+              {
         this.detalles.push(
             {  
               codigoproducto:this.codigoproducto,
@@ -600,6 +651,8 @@ export default {
         );
         this.limpiarDetalle();
        }
+            }
+       }
         console.log(this.detalles)
         this.limpiarDatosRepuesto()
     },
@@ -613,10 +666,26 @@ export default {
       return sw;
     },
     eliminarDetalle(arr,item){
+      if(this.bandera==1){
+      let me=this;
+      let header={ "auth-token" : this.$store.state.token};
+      let configuracion= {headers : header};
+      axios.put('orden/eliminar',
+      {
+       'codigoproducto':item.codigoproducto,
+       'cantidad':item.cantidad,
+       'codigorecepcion':this.codigorecepcion
+      },configuracion,).then(function (response){
+    
+      }).catch(function(error){
+        console.log(error);
+      });
+      }
       let i=arr.indexOf(item);
       if (i!= -1){
         arr.splice(i,1);
       }
+  
     },
     listarRecepcion(){
       let me=this;
@@ -636,6 +705,27 @@ export default {
       axios.get('orden/repuesto',configuracion).then(function (response){
         me.repuestos=response.data;
         console.log(me.repuestos)
+      }).catch(function(error){
+        console.log(error);
+      });
+    },
+     editar(item){
+      this.bandera=1;
+      let me=this;
+      let header={"auth-token" : this.$store.state.token};
+      let configuracion= {headers : header};
+      axios.get('orden/update/'+item.numero,configuracion).then(function (response){
+        me.detalles=response.data;
+        for (let i in me.detalles){
+         me.chapa=me.detalles[i].numerochapa
+         me.codigorecepcion=me.detalles[i].numero
+         me.orden=me.detalles[i].estadorden
+         me.mecanico=me.detalles[i].mecanico
+         me.avisorden=me.detalles[i].observacion
+          me.observacion=me.detalles[i].observaciones
+         // console.log(me.cliente)
+        }
+        me.mostrarNuevo();
       }).catch(function(error){
         console.log(error);
       });
@@ -757,10 +847,13 @@ export default {
     },
     ocultarNuevo(){
       this.verNuevo=0;
-      // this.limpiar();
+      this.bandera=0;
+      this.listar()
+      this.limpiarTodo()
     },
     guardar(){
-      let me=this;
+     if(this.bandera==0){
+        let me=this;
       let header={"auth-token" : this.$store.state.token};
       let configuracion= {headers : header};
       console.log(this.$store.state.usuario)         
@@ -784,6 +877,10 @@ export default {
           .catch(function(error){
             console.log(error);
           });
+     }else{
+       this.ocultarNuevo()
+       console.log("es una modificacion")
+     }
     },
     activarDesactivarMostrar(accion,item){
       this.adModal=1;

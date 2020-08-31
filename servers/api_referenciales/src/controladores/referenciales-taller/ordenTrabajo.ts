@@ -7,6 +7,13 @@ class OrdenControlador {
     const productos = await pool.query('SELECT * FROM vproductos where CodigoProducto>0');
     res.json(productos);
   }
+  public async listarUno(req: Request, res: Response):Promise<any>  {
+    const { id } = req.params;
+    const marcas = await pool.query('SELECT * FROM veditaroden WHERE numero=?',id);
+    console.log(marcas)
+    res.json(marcas);
+
+}
   public async entregado(req: Request, res: Response): Promise<any> {
     try {
       const numero = req.body.numero;
@@ -34,7 +41,82 @@ class OrdenControlador {
       res.json(marcas);
 
   }
-  
+  public async eliminarDetalles(req: Request, res: Response):Promise<any>  {
+    try {
+
+      const codigoproducto =req.body.codigoproducto
+      const cantidad = req.body.cantidad
+      const numero = req.body.codigorecepcion
+    console.log(codigoproducto)
+    await  transaccion.query("SET autocommit=0")
+            const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
+            const stockanterior= consulta[0].StockActual;
+            console.log(stockanterior)
+            console.log(cantidad)
+            const stockactual = stockanterior+cantidad;
+            await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+            await transaccion.query('DELETE FROM detallesordentrabajos WHERE  numero=?  AND CodigoProducto=?',[numero,codigoproducto])
+       await transaccion.query("COMMIT");// se confirma la transaccion
+       await transaccion.query("SET autocommit=1")
+       res.json({ message: "el detalle orden de trabajo fue eliminado" })
+    } catch (error) {
+      await transaccion.query("ROLLBACK");
+      await transaccion.query("SET autocommit=1")
+      console.log("ocurrio un error: " + error);
+      throw error
+    }
+  }  
+  public async actualizar(req: Request, res: Response):Promise<any>  {
+    try {
+
+      const codigosucursal=req.body.CodigoSucursal;
+      const puntoexpedicion =req.body.PuntoExpedicion;
+      const numero = req.body.numero;
+      const codigoestadoorden=req.body.codigoestadoorden;
+      const observacion=req.body.observacion;
+      const fechaemision= new Date().toJSON().slice(0,10).replace(/-/g,'/');
+      const horaemision="00:00:00";
+      const fechatentativaentrega="2020-01-01";
+      const horatentativaentrega="00:00:00";
+      const fechafinalizacion="2020-01-01";
+      const horafinalizacion="00:00:00";
+      const fechaentrega=  new Date().toJSON().slice(0,10).replace(/-/g,'/');
+      const horaentrega= "00:00:00";
+
+      const orden={codigosucursal,puntoexpedicion,numero,codigoestadoorden,observacion,
+        fechaemision,horaemision,fechatentativaentrega,horatentativaentrega,fechafinalizacion,horafinalizacion,fechaentrega,horaentrega}
+    console.log(orden)
+    await  transaccion.query("SET autocommit=0")
+    await transaccion.query('DELETE FROM detallesordentrabajos INTO ordenestrabajos  SET ?', orden);
+      let detalles=req.body.detalles;
+        console.log(detalles)
+          for (let i in detalles){
+            const codigoproducto =detalles[i].codigoproducto
+            const codigomecanico =detalles[i].codigomecanico
+            const cantidad= detalles[i].cantidad
+            const descripcion=detalles[i].descripcion
+            const precio = detalles[i].precio
+            const codigoimpuesto=detalles[i].codigoimpuesto
+            const codigoestadoreparacion = '1'
+            const detalle = {codigosucursal,puntoexpedicion,numero,codigoproducto,codigomecanico,cantidad,
+              descripcion,precio,codigoimpuesto,codigoestadoreparacion}
+            await transaccion.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
+            const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
+            const stockanterior= consulta[0].StockActual;
+            console.log(stockanterior)
+            const stockactual = stockanterior-cantidad;
+            await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+        }
+       await transaccion.query("COMMIT");// se confirma la transaccion
+       await transaccion.query("SET autocommit=1")
+       res.json({ message: "el orden de trabajo fue guardado" })
+    } catch (error) {
+      await transaccion.query("ROLLBACK");
+      await transaccion.query("SET autocommit=1")
+      console.log("ocurrio un error: " + error);
+      throw error
+    }
+  }  
     public async guardar(req: Request, res: Response):Promise<any>  {
       try {
 
@@ -86,7 +168,42 @@ class OrdenControlador {
         throw error
       }
     }   
+    public async guardardetalle(req: Request, res: Response):Promise<any>  {
+      try {
 
+         
+        
+      await  transaccion.query("SET autocommit=0")
+   //   await transaccion.query('INSERT INTO ordenestrabajos  SET ?', orden);
+              const codigosucursal=req.body.CodigoSucursal;
+              const puntoexpedicion =req.body.PuntoExpedicion;
+              const numero = req.body.numero;  
+              const codigoproducto =req.body.codigoproducto
+              const codigomecanico =req.body.codigomecanico
+              const cantidad= req.body.cantidad
+              const descripcion=req.body.descripcion
+              const precio = req.body.precio
+              const codigoimpuesto=req.body.codigoimpuesto
+              const codigoestadoreparacion = '1'
+              const detalle = {codigosucursal,puntoexpedicion,numero,codigoproducto,codigomecanico,cantidad,
+                descripcion,precio,codigoimpuesto,codigoestadoreparacion}
+              await transaccion.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
+              const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
+              const stockanterior= consulta[0].StockActual;
+              console.log(stockanterior)
+              const stockactual = stockanterior-cantidad;
+              await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+        
+         await transaccion.query("COMMIT");// se confirma la transaccion
+         await transaccion.query("SET autocommit=1")
+         res.json({ message: "el orden de trabajo fue guardado" })
+      } catch (error) {
+        await transaccion.query("ROLLBACK");
+        await transaccion.query("SET autocommit=1")
+        console.log("ocurrio un error: " + error);
+        throw error
+      }
+    }
 }
 
 export const ordenControlador = new OrdenControlador();

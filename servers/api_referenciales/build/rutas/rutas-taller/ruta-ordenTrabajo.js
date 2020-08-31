@@ -10,9 +10,12 @@ class OrdenoRuta {
     config() {
         this.router.get('/recepcion', ordenTrabajo_1.ordenControlador.listar);
         this.router.get('/listar', ordenTrabajo_1.ordenControlador.listarOrden);
+        this.router.get('/update/:id', ordenTrabajo_1.ordenControlador.listarUno);
         this.router.get('/repuesto', ordenTrabajo_1.ordenControlador.listarRepuestos);
         this.router.put('/entregado', ordenTrabajo_1.ordenControlador.entregado);
         this.router.post('/guardar', ordenTrabajo_1.ordenControlador.guardar);
+        this.router.post('/insertardetalle', ordenTrabajo_1.ordenControlador.guardardetalle);
+        this.router.put('/eliminar', ordenTrabajo_1.ordenControlador.eliminarDetalles);
         //    this.router.put('/',traccionesControlador.actualizar);
     }
 }
