@@ -161,7 +161,7 @@
                 color="purple darken-4"> <v-icon @click="entregado(props.item)">
               add
             </v-icon>Confirmar</v-btn>
-               <v-btn  class="mx-2"
+            <v-btn  class="mx-2"
                 @click="editar(props.item)"
                 dark
                 small
@@ -204,7 +204,7 @@
             </v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md12 lg4 xl4>
-            <v-text-field v-model="chapa" disabled  outlined solo  id="resaltar" label="Numero de Chapa ">
+            <v-text-field v-model="chapa" disabled   solo  id="resaltar" label="Numero de Chapa ">
             </v-text-field>
           </v-flex>
           <!--  -->
@@ -235,7 +235,7 @@
           </v-flex>
 
           <v-flex xs12 sm4 md4 lg10 xl10>
-            <v-text-field v-model="descripcion" disabled solo  id="resaltar" label="Repuestos a Utilizar">
+            <v-text-field v-model="descripcion"  solo  id="resaltar" label="Repuestos a Utilizar">
             </v-text-field>
           </v-flex>
 
@@ -256,7 +256,7 @@
           </v-flex>
 
           <v-flex xs12 sm12 md12 lg2 xl3>
-            <v-text-field v-model="precio" id="resaltar" disabled  solo label="Precio">
+            <v-text-field v-model="precio" id="resaltar"   solo label="Precio">
             </v-text-field>
           </v-flex>
 

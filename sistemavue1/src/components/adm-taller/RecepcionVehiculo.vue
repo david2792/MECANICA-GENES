@@ -319,7 +319,7 @@ export default {
         { text: 'Chapa', value: 'chapa', sortable: false,class: "cabecera colorCabecera--text"  },
         { text: 'km de Entrada', value: 'km', sortable: false ,class: "cabecera colorCabecera--text" },
         { text: 'Nivel Combustible', value: 'nivelcombustible', sortable: false,class: "cabecera colorCabecera--text"  },
-        { text: 'cod nivel', value: 'codigonivel', sortable: false},
+        { text: 'cod nivel', value: 'codigonivel', align: ' d-none', sortable: false},
         // { text: 'Descuento', value: 'descuento', sortable: false },
         // { text: 'Sub Total', value: 'subtotal', sortable: false  }
       ],
