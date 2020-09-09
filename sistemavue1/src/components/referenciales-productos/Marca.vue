@@ -168,7 +168,7 @@ export default {
           .put("marcas/", {
             CodigoMarca: this.CodigoMarca,
             Descripcion: this.Descripcion
-          })
+          },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();
@@ -180,7 +180,7 @@ export default {
           });
       } else {
         axios
-          .post("marcas/", { Descripcion: this.Descripcion })
+          .post("marcas/", { Descripcion: this.Descripcion },configuracion)
           .then(function(response) {
             me.limpiar();
             me.close();

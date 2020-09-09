@@ -22,6 +22,7 @@ const ruta_ciudad_1 = __importDefault(require("./rutas/rutas-localidades/ruta_ci
 const ruta_departamento_1 = __importDefault(require("./rutas/rutas-localidades/ruta_departamento"));
 const ruta_pais_1 = __importDefault(require("./rutas/rutas-localidades/ruta_pais"));
 const ruta_usuario_1 = __importDefault(require("./rutas/rutas-acceso/ruta_usuario"));
+const ruta_usuarioMecanico_1 = __importDefault(require("./rutas/rutas-usuario/ruta-usuarioMecanico"));
 const ruta_estadoRecepecion_1 = __importDefault(require("./rutas/rutas-taller/ruta-estadoRecepecion"));
 const ruta_nivelCombustible_1 = __importDefault(require("./rutas/rutas-taller/ruta-nivelCombustible"));
 const ruta_tipoTransmicion_1 = __importDefault(require("./rutas/rutas-taller/ruta-tipoTransmicion"));
@@ -84,6 +85,7 @@ class Server {
         this.app.use('/api/vehiculos', validateToken_1.TokenValidation, ruta_vehiculo_1.default);
         this.app.use('/api/rvehiculo', validateToken_1.TokenValidation, ruta_recepcionvehiculo_1.default);
         this.app.use('/api/orden', validateToken_1.TokenValidation, ruta_ordenTrabajo_1.default);
+        this.app.use('/api/mecanico', validateToken_1.TokenValidation, ruta_usuarioMecanico_1.default);
         // fin de referenciales
         //referenciales rutas
         this.app.use('/api/timbrados', ruta_timbrado_1.default);

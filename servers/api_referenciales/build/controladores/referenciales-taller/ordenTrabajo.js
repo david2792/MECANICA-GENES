@@ -38,6 +38,7 @@ class OrdenControlador {
                 const values = { numero };
                 console.log(numero);
                 const lista = yield conexionBD_1.default.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?', [codigoestadoorden, numero]);
+                yield transaccionBD_1.default.query('UPDATE recepciones SET estado=? WHERE numero=?', ["2", numero]);
                 res.json(lista);
             }
             catch (error) {

@@ -21,6 +21,7 @@ class OrdenControlador {
       const values = { numero }
       console.log(numero)
       const lista = await pool.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?', [codigoestadoorden,numero]);
+      await transaccion.query('UPDATE recepciones SET estado=? WHERE numero=?',["2",numero])
       res.json(lista);
     } catch (error) {
       console.log(error)
@@ -157,6 +158,7 @@ class OrdenControlador {
               console.log(stockanterior)
               const stockactual = stockanterior-cantidad;
               await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+             
           }
          await transaccion.query("COMMIT");// se confirma la transaccion
          await transaccion.query("SET autocommit=1")

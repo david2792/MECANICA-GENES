@@ -212,6 +212,14 @@
                 <v-list-tile-title>Clientes</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
+            <v-list-tile :to="{name: 'mecanico'}">
+              <v-list-tile-action>
+                <v-icon>api</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Mecanicos</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
           </v-list-group>
         </template>
         <template>
@@ -271,7 +279,7 @@
                 <v-icon color="black">info</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
-                <v-list-tile-title>Alta Productos</v-list-tile-title>
+                <v-list-tile-title>Repuestos</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-list-tile :to="{}">

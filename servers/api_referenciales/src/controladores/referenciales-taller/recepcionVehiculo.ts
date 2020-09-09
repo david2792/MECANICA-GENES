@@ -7,7 +7,7 @@ class RecepcionVehiculoControlador {
         const { id } = req.params;
         const CodigoCliente=req.body.cliente;
         console.log(CodigoCliente)
-        const marcas = await pool.query('SELECT * FROM vclientevehiculos WHERE CodigoCliente=?',id);
+        const marcas = await pool.query('SELECT * FROM vclientevehiculos WHERE  CodigoCliente=?',id);
         res.json(marcas);
 
     }
@@ -20,7 +20,7 @@ class RecepcionVehiculoControlador {
     }
 
     public async listarRecepcion(req: Request, res: Response) {
-      const marcas = await pool.query('SELECT * FROM vrecepciones');
+      const marcas = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
       res.json(marcas);
 
   }

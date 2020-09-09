@@ -14,6 +14,7 @@ import Pais from './components/referenciales-localidades/Pais.vue'
 import Departamento from './components/referenciales-localidades/Departamento.vue'
 import Ciudad from './components/referenciales-localidades/Ciudad.vue'
 import Timbrado from './components/timbrado/timbrado.vue'
+import Mecanico from './components/referenciales-personas/Mecanico.vue'
 // TALLER
 import EstadoRecepcion from './components/referenciales-taller/EstadoRecepcion.vue'
 import NivelCombustible from './components/referenciales-taller/NivelCombustible.vue'
@@ -104,7 +105,14 @@ var router = new Router({
         administrador:true
       }
     },
-
+    {
+      path:'/mecanicos',
+      name:'mecanico',
+      component: Mecanico,
+      meta: {
+        administrador:true
+      }
+    },
     // Localidades
     {
       path:'/paises',

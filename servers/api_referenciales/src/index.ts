@@ -20,7 +20,7 @@ import ciudadRutas from './rutas/rutas-localidades/ruta_ciudad';
 import departamentoRutas from './rutas/rutas-localidades/ruta_departamento';
 import paisesRutas from './rutas/rutas-localidades/ruta_pais';
 import usuarioRutas from './rutas/rutas-acceso/ruta_usuario';
-
+import usuariomecanicoRutas from './rutas/rutas-usuario/ruta-usuarioMecanico'
 import estadoRecepcionRutas from './rutas/rutas-taller/ruta-estadoRecepecion';
 import tipoNivelesCombus from './rutas/rutas-taller/ruta-nivelCombustible';
 import tipoTransmicionRutas from './rutas/rutas-taller/ruta-tipoTransmicion';
@@ -92,7 +92,7 @@ class Server {
          this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
         this.app.use('/api/rvehiculo',TokenValidation,recepcionVehiculoRuta);
         this.app.use('/api/orden',TokenValidation,ordenRuta);
-
+        this.app.use('/api/mecanico',TokenValidation,usuariomecanicoRutas);
         // fin de referenciales
         //referenciales rutas
         this.app.use('/api/timbrados', timbradosRutas);

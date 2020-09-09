@@ -154,8 +154,7 @@
       >
         <template v-slot:items="props">
           <td class="justify-center layout px-0">
-            <v-btn  class="mx-2"
-                
+            <v-btn  class="mx-2" 
                 dark
                 small
                 color="purple darken-4"> <v-icon @click="entregado(props.item)">

@@ -2,7 +2,7 @@
   <v-layout align-start>
     <v-flex>
       <v-toolbar flat color="white">
-        <v-toolbar-title>Registrar Producto</v-toolbar-title>
+        <v-toolbar-title>Registrar Repuestos</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-text-field
@@ -54,7 +54,7 @@
                       :items="Depositos"
                       v-model="Deposito"
                       item-value="Deposito"
-                      label="Desposito"
+                      label="Deposito"
                     ></v-autocomplete>
                   </v-flex>
                   <v-flex xs12 sm12 md2>

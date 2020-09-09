@@ -21,7 +21,7 @@ class RecepcionVehiculoControlador {
             const { id } = req.params;
             const CodigoCliente = req.body.cliente;
             console.log(CodigoCliente);
-            const marcas = yield conexionBD_1.default.query('SELECT * FROM vclientevehiculos WHERE CodigoCliente=?', id);
+            const marcas = yield conexionBD_1.default.query('SELECT * FROM vclientevehiculos WHERE  CodigoCliente=?', id);
             res.json(marcas);
         });
     }
@@ -35,7 +35,7 @@ class RecepcionVehiculoControlador {
     }
     listarRecepcion(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const marcas = yield conexionBD_1.default.query('SELECT * FROM vrecepciones');
+            const marcas = yield conexionBD_1.default.query('SELECT * FROM vrecepciones WHERE estado=1');
             res.json(marcas);
         });
     }
