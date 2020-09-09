@@ -13,8 +13,9 @@ import Cliente from './components/referenciales-personas/Cliente.vue'
 import Pais from './components/referenciales-localidades/Pais.vue'
 import Departamento from './components/referenciales-localidades/Departamento.vue'
 import Ciudad from './components/referenciales-localidades/Ciudad.vue'
-import Timbrado from './components/timbrado/timbrado.vue'
 import Mecanico from './components/referenciales-personas/Mecanico.vue'
+// REFERENCIALES FACTURAS
+import Timbrado from './components/referenciales-facturas/Timbrado.vue'
 // TALLER
 import EstadoRecepcion from './components/referenciales-taller/EstadoRecepcion.vue'
 import NivelCombustible from './components/referenciales-taller/NivelCombustible.vue'
@@ -32,6 +33,10 @@ import registrarVehiculo from './components/adm-taller/registrarVehiculo.vue'
 import RecepcionVehiculo from "./components/adm-taller/RecepcionVehiculo.vue";
 import OrdenTrabajo from './components/adm-taller/OrdenTrabajo.vue'
 import Login from './components/acceso/Login.vue' 
+
+// INFORMES
+import Informe_Recepcion from './components/informes/Informe_Recepcion.vue';
+import Informe_OrdenTrabajo from './components/informes/Informe_OrdenTrabajo.vue';
 Vue.use(Router)
 
 var router = new Router({
@@ -244,6 +249,37 @@ var router = new Router({
         administrador:true
       }
     },
+
+    // referenciales Factura
+    {
+      path: '/timbrados',
+      name: 'timbrados',
+      component: Timbrado,
+      meta:{
+        administrador:true
+      }
+    },
+    // Informes
+    {
+      path:'/irecepcion',
+      name:'irecepcion',
+      component: Informe_Recepcion,
+      meta:{
+        administrador: true
+      },
+    },
+    
+    {
+      path: '/iordentrabajo',
+      name: 'iordentrabajo',
+      component: Informe_OrdenTrabajo,
+      meta:{
+        administrador: true
+      }
+    },
+    // Fin Informes
+
+
     {
       path:'/ordenes',
       name:'orden',

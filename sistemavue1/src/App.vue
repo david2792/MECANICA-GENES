@@ -292,6 +292,54 @@
             </v-list-tile>
           </v-list-group>
         </template>
+
+        <!-- Inicio Referenciales Factura -->
+        <template>
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-content>
+                <v-list-tile-title>Referenciales Facturas</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'timbrados'}">
+              <v-list-tile-action>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Timbrados</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-group>
+        </template>
+        <!-- Fin Referenciales Factura -->
+        <!-- INFORMES -->
+        <template>
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-content>
+                <v-list-tile-title><v-icon color="black">print</v-icon>Informes</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'irecepcion'}">
+              <v-list-tile-action>
+                <v-icon color="black">input</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Recepción</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile :to="{name: 'iordentrabajo'}">
+              <v-list-tile-action>
+                <v-icon color='black'>build</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Orden de Trabajo</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-group>
+        </template>
+        <!-- FIN INFORMES -->
+
+
         <template>
           <v-list-group>
             <v-list-tile slot="activator">
