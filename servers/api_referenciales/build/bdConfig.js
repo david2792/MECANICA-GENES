@@ -7,6 +7,7 @@ exports.default = {
         user: 'manager',
         password: '<developer>1234',
         //    password: 'developer',
+
         database: 'compraventa'
     }
 };

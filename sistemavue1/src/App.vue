@@ -5,9 +5,7 @@
       :clipped="$vuetify.breakpoint.mdAndUp"
       app
       v-model="drawer"
-      v-if="logueado"
-     
-       
+      v-if="logueado"       
     > 
       <v-list  color="error">
         <template v-if="esAdministrador">
@@ -338,8 +336,6 @@
           </v-list-group>
         </template>
         <!-- FIN INFORMES -->
-
-
         <template>
           <v-list-group>
             <v-list-tile slot="activator">

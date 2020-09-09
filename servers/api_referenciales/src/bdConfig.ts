@@ -7,6 +7,7 @@ export default
         user: 'manager',
        password: '<developer>1234', // red digital ocean
     //    password: 'developer',
+
        database: 'compraventa'
     }
     
