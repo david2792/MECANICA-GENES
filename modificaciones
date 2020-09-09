@@ -1,0 +1,115 @@
+MODIFICACIONES A LA BD
+
+SHOW ENGINE INNODB STATUS\G
+
+CREATE
+    /*[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+    [DEFINER = { user | CURRENT_USER }]
+    [SQL SECURITY { DEFINER | INVOKER }]*/
+    VIEW `compraventa`.`listaprecio1` 
+    AS
+(SELECT
+  `listaprecios`.`Codigo`       AS `Codigo`,
+  `productos`.`Descripcion`     AS `producto`,
+  `listaprecios`.`Descripcion`  AS `Descripcion`,
+  `listaprecios`.`Precio`       AS `Precio`,
+  `listaprecios`.`Porcentaje`   AS `Porcentaje`,
+  `listaprecios`.`PrecioCompra` AS `PrecioCompra`,
+  `listaprecios`.`Cuotas`       AS `cuotas`,
+  `productos`.`CodigoProducto`  AS `CodigoProducto`,
+  `productos`.`CodigoBarra`     AS `CodigoBarra`,
+  `stock`.`StockActual`         AS `StockActual`,
+  `stock`.`codigoDeposito`      AS `codigoDeposito`,
+  `listaprecios`.`Estado`          AS `Estado`,
+  `marcas`.`CodigoMarca`        AS `CodigoMarca`,
+  `marcas`.`Descripcion`        AS `Marca`,
+  `depositos`.`Nombre` AS  `Nombre`
+FROM `productos`
+     JOIN `marcas`
+       ON `productos`.`CodigoMarca` = `marcas`.`CodigoMarca`
+    JOIN `stock`
+      ON `stock`.`CodigoProducto` = `productos`.`CodigoProducto`
+   JOIN `listaprecios`
+     ON `listaprecios`.`codigoDeposito` = `stock`.`codigoDeposito`
+          AND `listaprecios`.`CodigoProducto` = `stock`.`CodigoProducto`
+    JOIN `depositos` 
+        ON `stock`.`codigoDeposito` = `depositos`.`codigoDeposito`);
+        
+        
+AGREGAR CAMPO ESTADO A LA LISTA DE PRECIO VARCHAR DEFAUL ACTIVO
+
+GENES
+vistas 
+
+CREATE
+    /*[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+    [DEFINER = { user | CURRENT_USER }]
+    [SQL SECURITY { DEFINER | INVOKER }]*/
+    VIEW `compraventa`.`vclientevehiculos` 
+    AS
+(SELECT
+    `clientes`.`Cedula`
+    , `clientes`.`Ruc`
+    , `clientes`.`RazonSocial`
+    , `tipostransmision`.`nombre` AS transmicion
+    , `tracciones`.`nombre` AS traccion
+    , `modelosvehiculos`.`nombre` AS modelo
+    , `marcasvehiculos`.`nombre` AS marca
+    , `tiposcombustibles`.`nombre` AS combustible
+    , `colores`.`nombre` AS color
+    , `vehiculos`.`numerochapa` AS chapa
+    , `vehiculos`.`numerochasis` AS chasis
+FROM
+    `compraventa`.`detallesvehiculos`
+    INNER JOIN `compraventa`.`clientes` 
+        ON (`detallesvehiculos`.`codigocliente` = `clientes`.`CodigoCliente`)
+    INNER JOIN `compraventa`.`vehiculos` 
+        ON (`detallesvehiculos`.`codigovehiculo` = `vehiculos`.`codigo`)
+    INNER JOIN `compraventa`.`tipostransmision` 
+        ON (`vehiculos`.`codigotransmision` = `tipostransmision`.`codigo`)
+    INNER JOIN `compraventa`.`tracciones` 
+        ON (`vehiculos`.`codigotraccion` = `tracciones`.`codigo`)
+    INNER JOIN `compraventa`.`modelosvehiculos` 
+        ON (`vehiculos`.`codigomodelo` = `modelosvehiculos`.`codigo`)
+    INNER JOIN `compraventa`.`marcasvehiculos` 
+        ON (`vehiculos`.`codigomarca` = `marcasvehiculos`.`codigo`)
+    INNER JOIN `compraventa`.`tiposcombustibles` 
+        ON (`vehiculos`.`codigotipocombustible` = `tiposcombustibles`.`codigo`)
+    INNER JOIN `compraventa`.`colores` 
+        ON (`vehiculos`.`codigocolor` = `colores`.`codigo`)
+    INNER JOIN `compraventa`.`anios` 
+        ON (`vehiculos`.`codigoanio` = `anios`.`codigo`));
+
+DELIMITER $$
+***********************************************************************
+ALTER ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vusuarios` AS (
+SELECT
+  `usuarios`.`CodigoUsuario`      AS `CodigoUsuario`,
+  `usuarios`.`Cedula`             AS `Cedula`,
+  `usuarios`.`Nombre`             AS `Nombre`,
+  `usuarios`.`Apellido`           AS `Apellido`,
+  `usuarios`.`FechaNacimiento`    AS `FechaNacimiento`,
+  `usuarios`.`Direccion`          AS `Direccion`,
+  `usuarios`.`Telefono`           AS `Telefono`,
+  `usuarios`.`Email`              AS `Email`,
+  `usuarios`.`Usuario`            AS `Usuario`,
+  `usuarios`.`Clave`              AS `Clave`,
+  `nivelesusuarios`.`CodigoNivel` AS `CodigoNivel`,
+  `nivelesusuarios`.`Descripcion` AS `NivelUsuario`,
+  `empresas`.`RUC`                AS `RUC`,
+  `empresas`.`RazonSocial`        AS `Empresa`,
+  `sucursales`.`CodigoSucursal`   AS `CodigoSucursal`,
+  `sucursales`.`Nombre`           AS `Sucursal`,
+  `usuarios`.`Activo`             AS `Activo`,
+   `timbrados`.`PuntoExpedicion` AS  `PuntoExpedicion`
+FROM ((((`usuarios`
+     JOIN `nivelesusuarios`
+       ON ((`usuarios`.`CodigoNivel` = `nivelesusuarios`.`CodigoNivel`)))
+    JOIN `sucursales`
+      ON ((`usuarios`.`CodigoSucursal` = `sucursales`.`CodigoSucursal`)))
+   JOIN `empresas`
+     ON ((`empresas`.`CodigoEmpresas` = `sucursales`.`CodigoEmpresas`)))
+     JOIN `timbrados` 
+      ON ((`timbrados`.`CodigoSucursal` = `sucursales`.`CodigoSucursal`))))$$
+
+DELIMITER ;

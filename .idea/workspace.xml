@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7b080bf5-be0f-4437-940e-51c4b9860cc2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/14b5d11c367c3a0440e72436e5a3c43f.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/14b5d11c367c3a0440e72436e5a3c43f.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/37edbbf977306e10c6e8cd54988cb879.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/37edbbf977306e10c6e8cd54988cb879.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/eb1d0acfbe73fd15cfb62f527fe23458.json" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/node_modules/.cache/vue-loader/eb1d0acfbe73fd15cfb62f527fe23458.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/RecepcionVehiculo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sistemavue1/src/components/adm-taller/RecepcionVehiculo.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1fsWvl0leIrMhfqAnqQBnhQonpg" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b080bf5-be0f-4437-940e-51c4b9860cc2" name="Default Changelist" comment="" />
+      <created>1597007514401</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597007514401</updated>
+      <workItem from="1597007517105" duration="1157000" />
+      <workItem from="1597010587016" duration="41000" />
+      <workItem from="1597010773402" duration="77000" />
+      <workItem from="1597010880430" duration="3305000" />
+      <workItem from="1597174511525" duration="8252000" />
+      <workItem from="1598098191635" duration="16501000" />
+      <workItem from="1598219861945" duration="2421000" />
+      <workItem from="1598302771672" duration="4879000" />
+      <workItem from="1598353366494" duration="16026000" />
+      <workItem from="1598446103531" duration="9381000" />
+      <workItem from="1598485212396" duration="4747000" />
+      <workItem from="1598567418779" duration="10289000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="395" y="91" key="#Inspections" timestamp="1598571846448">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="91" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1598571846448" />
+    <state x="554" y="115" key="RollbackChangesDialog" timestamp="1598388112414">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="554" y="115" key="RollbackChangesDialog/0.0.1536.824/1920.0.1280.984@0.0.1536.824" timestamp="1598388112414" />
+    <state width="600" height="428" key="javadoc.popup" timestamp="1598225057855">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="600" height="428" key="javadoc.popup/0.0.1536.824@0.0.1536.824" timestamp="1598225057855" />
+    <state x="886" y="172" width="672" height="678" key="search.everywhere.popup" timestamp="1598586290434">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1280.984@0.0.1536.824" timestamp="1598118189309" />
+    <state x="886" y="172" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1598586290434" />
+  </component>
+</project>
