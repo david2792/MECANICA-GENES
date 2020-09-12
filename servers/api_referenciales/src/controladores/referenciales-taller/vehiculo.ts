@@ -39,9 +39,10 @@ class VehiculoControlador {
             const codigoanio = "1";
             const numerochapa = req.body.chapa;
             const numerochasis = req.body.chasis;
+            const observacion=req.body.observacion;
             const vehiculos = {
                 codigo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
-                codigoanio, numerochapa, numerochasis
+                codigoanio, numerochapa, numerochasis,observacion
             };
             const codigocliente = req.body.cliente;
             const codigovehiculo=codigo;

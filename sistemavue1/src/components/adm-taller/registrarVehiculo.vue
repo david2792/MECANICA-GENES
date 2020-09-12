@@ -16,7 +16,8 @@
           hide-details
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-btn color="primary" v-if="verNuevo==0" @click="mostrarNuevo()" dark class="mb-2">Nuevo</v-btn>
+        <v-btn color="purple darken-4" v-if="verNuevo==0" @click="mostrarCliente()" dark class="mb-2">Aregar Cliente</v-btn>
+        <v-btn color="primary" v-if="verNuevo==0" @click="mostrarNuevo()" dark class="mb-2">Nuevo Registro</v-btn>
       </v-toolbar>
       <v-data-table
         :headers="headers"
@@ -44,6 +45,7 @@
           <td>{{ props.item.RazonSocial }}</td>
           <td>{{ props.item.chapa }}</td>
           <td>{{ props.item.chasis }}</td>
+           <td>{{ props.item.observacion }}</td>
           <td>{{ props.item.transmicion }}</td>
           <!-- <td>{{ props.item.traccion }}</td> -->
           <td>{{ props.item.modelo }}</td>
@@ -55,8 +57,16 @@
           <v-btn color="primary" @click="listar()">Resetear</v-btn>
         </template>
       </v-data-table>
-      <v-container grid-list-sm class="pa-4 white" v-if="verNuevo">
-        <v-layout row wrap>
+       <v-spacer></v-spacer>
+        <v-dialog v-model="dialog" max-width="800px">
+          <v-card>
+            <v-card-title>
+              <span class="headline"></span>
+            </v-card-title>
+            <v-card-text>
+              <v-container grid-list-md>
+                <v-layout wrap>
+                  <v-layout row wrap>
           <v-flex xs12 sm8 md8 lg8 xl8>
             <v-autocomplete :items="clientes" v-model="cliente" item-value="value" label="cliente"></v-autocomplete>
           </v-flex>
@@ -83,10 +93,10 @@
           </v-flex> -->
 
           <v-flex xs12 sm4 md4 lg4 xl4>
-            <v-autocomplete :items="modelos" v-model="modelo" item-value="value" label="Modelo"></v-autocomplete>
-          </v-flex>
-          <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="marcas" v-model="marca" item-value="value" label="Marca"></v-autocomplete>
+          </v-flex>
+           <v-flex xs12 sm4 md4 lg4 xl4>
+            <v-autocomplete :items="modelos" v-model="modelo" item-value="value" label="Modelo"></v-autocomplete>
           </v-flex>
           <!-- <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete
@@ -107,19 +117,77 @@
             <v-text-field v-model="chapa" label="N. Chapa"></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md8 lg8 xl8>
-            <v-text-field v-model="chasis" label="Observacion"></v-text-field>
+            <v-text-field v-model="chasis" label="Numero Chasis"></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md12 lg12 xl12>    
+             <v-text-field v-model="observacion" label="Observacion"></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md12 v-show="valida">
             <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v"></div>
           </v-flex>
-          <v-flex xs12 sm12 md12 lg12 xl12>
-            <v-btn color="blue darken-1" flat @click.native="ocultarNuevo()">Cancelar</v-btn>
-            <v-btn color="success" @click="guardar()">Guardar</v-btn>
-          </v-flex>
         </v-layout>
-      </v-container>
+                  <v-flex xs12 sm12 md12 v-show="valida">
+                    <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v"></div>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
+              <v-btn color="blue darken-1" flat @click="guardar">Guardar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialogoCliente" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="headline"></span>
+            </v-card-title>
+            <v-card-text>
+              <v-container grid-list-md>
+                <v-layout wrap>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field v-model="RazonSocial" label="Razon Social"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field v-model="Ruc" label="RUC"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field v-model="Cedula" label="Número Documento"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field v-model="Direccion" label="Dirección"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field v-model="Telefono" label="Teléfono"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-text-field v-model="Email" label="Email"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md6>
+                    <v-autocomplete
+                      :items="Ciudades"
+                      v-model="Ciudad"
+                      item-value="Ciudad"
+                      label="Ciudad"
+                      value="CodigoCiudad"
+                    ></v-autocomplete>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12 v-show="valida">
+                    <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v"></div>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-1" flat @click="close">Cancelar</v-btn>
+              <v-btn color="blue darken-1" flat @click="guardarCliente">Guardar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
     </v-flex>
   </v-layout>
 </template>
@@ -130,6 +198,7 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogoCliente:false,
       search: "",
       vehiculo: [],
       headers: [
@@ -137,7 +206,8 @@ export default {
         { text: "CODIGO CLIENTE ", value: "CodigoCliente", sortable: true },
         { text: "RAZON SOCIAL", value: "RazonSocial", sortable: true },
         { text: "CHAPA", value: "chapa", sortable: true },
-        { text: "OBSERVACION", value: "chasi", sortable: false },
+         { text: "CHASIS", value: "chasi", sortable: true },
+        { text: "OBSERVACION", value: "observacion", sortable: false },
         { text: "TRANSMICION", value: "transmicion", sortable: false },
         // { text: "TRACCION", value: "traccion", sortable: false },
         { text: "MODELO", value: "modelo", sortable: false },
@@ -150,6 +220,7 @@ export default {
       personas: [],
       transmiciones: [],
       marcas: [],
+      observacion:'',
       modelos: [],
       combustibles: [],
       tracciones: [],
@@ -205,6 +276,16 @@ export default {
       adAccion: 0,
       adNombre: "",
       adId: "",
+      // se agrega los campos de cliente
+      RazonSocial: "",
+      CodigoCliente:'',
+      Cedula: "",
+      Ruc: "",
+      Direccion: "",
+      Telefono: "",
+      Ciudad: "",
+      Email: "",
+      Ciudades:[],
     };
   },
   computed: {
@@ -228,6 +309,7 @@ export default {
     this.listar();
     this.selectPersona();
     this.selectTransmicion();
+    this.selectCiudad();
     //this.selectTraccion();
     this.selectModelo();
     this.selectMarca();
@@ -236,6 +318,26 @@ export default {
     //this.selectAnios();
   },
   methods: {
+      selectCiudad() {
+      let me = this;
+      let ciudadArray = [];
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
+      axios
+        .get("ciudades/", configuracion)
+        .then(function(response) {
+          ciudadArray = response.data;
+          ciudadArray.map(function(x) {
+            me.Ciudades.push({
+              text: x.Ciudad,
+              value: x.CodigoCiudad
+            });
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     selectPersona() {
       let me = this;
       let personaArray = [];
@@ -491,6 +593,7 @@ export default {
             this.anio='';
             this.chapa='';
            this.chasis='';
+           this.observacion='';
     },
     validar() {
       this.valida = 0;
@@ -516,7 +619,13 @@ export default {
       return this.valida;
     },
     mostrarNuevo() {
-      this.verNuevo = 1;
+      this.verNuevo = 0;
+      this.dialog=true;
+      this.selectPersona();
+    },
+    mostrarCliente(){
+      this.dialogoCliente=true;
+      
     },
     ocultarNuevo() {
       this.verNuevo = 0;
@@ -550,13 +659,14 @@ export default {
             cliente:this.cliente,
             marca: this.marca,
             modelo: this.modelo,
-           transmicion: this.transmicion,
+            transmicion: this.transmicion,
             combustible: this.combustible,
             traccion: this.traccion,
             color: this.color,
             anio: this.anio,
             chapa:this.chapa,
-            chasis: this.chasis
+            chasis: this.chasis,
+            observacion:this.observacion
           },
           configuracion
         )
@@ -620,7 +730,72 @@ export default {
     },
     close() {
       this.dialog = false;
+      this.dialogoCliente=false;
+      this.limpiar();
     },
+    guardarCliente() {
+          let me = this;
+      let header={"auth-token":this.$store.state.token};
+      let configuracion={headers:header};
+      // if (this.validar()) {
+      //   return;
+      // }
+      if (this.editedIndex > -1) {
+        //Código para editar
+        console.log(this.Ciudad)
+        axios
+          .put(
+            "clientes/",
+            {
+              CodigoCliente:this.CodigoCliente,
+              CodigoCiudad: this.CodigoCiudad,
+              RazonSocial: this.RazonSocial,
+              Cedula: this.Cedula,
+              Ruc: this.Ruc,
+              Ciudad: this.Ciudad,
+              Direccion: this.Direccion,
+              Telefono: this.Telefono,
+              Email: this.Email
+            },
+            configuracion
+          )
+          .then(function(response) {
+            me.limpiar();
+            me.close();
+            me.listar();
+            me.dialogoConfirmacion = true;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      } else {
+        //Código para guardar
+        axios
+          .post(
+            "clientes/",
+            {
+            CodigoCiudad: this.CodigoCiudad,
+              RazonSocial: this.RazonSocial,
+              Cedula: this.Cedula,
+              Ruc: this.Ruc,
+              Ciudad: this.Ciudad,
+              Direccion: this.Direccion,
+              Telefono: this.Telefono,
+              Email: this.Email
+            },
+            configuracion
+          )
+          .then(function(response) {
+            me.limpiar();
+            me.close();
+            me.listar();
+            me.dialogoConfirmacion = true;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+      }
   },
 };
 </script>

@@ -14,6 +14,7 @@ import medidasRutas from './rutas/rutas-referenciales/ruta_unidadMedida';
 import impuestosRutas from './rutas/rutas-referenciales/ruta_impuesto';
 import marcasRutas from './rutas/rutas-referenciales/ruta_marca';
 import productosRutas from './rutas/rutas-producto/ruta_producto';
+import serviciosRutas from './rutas/rutas-producto/ruta_servicio';
 import listaRutas from './rutas/rutas-producto/ruta_lista';
 import clienteRutas from './rutas/rutas-clientes/ruta_cliente';
 import ciudadRutas from './rutas/rutas-localidades/ruta_ciudad';
@@ -42,6 +43,7 @@ import ordenRuta from './rutas/rutas-taller/ruta-ordenTrabajo'
 // referenciales factura
 
 import timbradosRutas from './rutas/rutas-referenciales-factura/ruta_timbrado';
+import { servicioControlador } from './controladores/productos/servicios';
 
 // fin referenciales productos
 class Server {
@@ -71,6 +73,7 @@ class Server {
         //this.app.use('/api/familias',familiaRutas);
         this.app.use('/api/categorias', TokenValidation,categoriaRutas);
         this.app.use('/api/productos', TokenValidation,productosRutas);
+        this.app.use('/api/servicios', TokenValidation,serviciosRutas);
         this.app.use('/api/listasprecios',TokenValidation ,listaRutas);
         this.app.use('/api/clientes', TokenValidation,clienteRutas);
         // referenciales localidades

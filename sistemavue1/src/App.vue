@@ -234,7 +234,15 @@
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-
+               <v-list-tile :to="{name: 'vehiculo'}">
+              <v-list-tile-action>
+                <v-icon>api</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Registro de Vehiculo</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          
              <v-list-tile :to="{name: 'recepcion'}">
               <v-list-tile-action>
                 <v-icon>api</v-icon>
@@ -251,18 +259,7 @@
               <v-list-tile-content>
                 <v-list-tile-title>Orden de Trabajo</v-list-tile-title>
               </v-list-tile-content>
-            </v-list-tile>
-
-             <v-list-tile :to="{name: 'vehiculo'}">
-              <v-list-tile-action>
-                <v-icon>api</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Registro de Vehiculo</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            
-       
+            </v-list-tile>       
           </v-list-group>
         </template>
         <template>
@@ -282,12 +279,12 @@
                 <v-list-tile-title>Repuestos</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-list-tile :to="{}">
+            <v-list-tile :to="{name:'servicio'}">
               <v-list-tile-action>
                 <v-icon color="black">info</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
-                <v-list-tile-title>Configuracion</v-list-tile-title>
+                <v-list-tile-title>Servicios</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
@@ -312,7 +309,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="green" dark app :clipped-left="$vuetify.breakpoint.mdAndUp" fixed>
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+      <v-toolbar-title style="width: 600px" class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <span class="hidden-sm-and-down">Mecanica Genes</span>
       </v-toolbar-title>

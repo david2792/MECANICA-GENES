@@ -16,6 +16,7 @@ const ruta_unidadMedida_1 = __importDefault(require("./rutas/rutas-referenciales
 const ruta_impuesto_1 = __importDefault(require("./rutas/rutas-referenciales/ruta_impuesto"));
 const ruta_marca_1 = __importDefault(require("./rutas/rutas-referenciales/ruta_marca"));
 const ruta_producto_1 = __importDefault(require("./rutas/rutas-producto/ruta_producto"));
+const ruta_servicio_1 = __importDefault(require("./rutas/rutas-producto/ruta_servicio"));
 const ruta_lista_1 = __importDefault(require("./rutas/rutas-producto/ruta_lista"));
 const ruta_cliente_1 = __importDefault(require("./rutas/rutas-clientes/ruta_cliente"));
 const ruta_ciudad_1 = __importDefault(require("./rutas/rutas-localidades/ruta_ciudad"));
@@ -64,6 +65,7 @@ class Server {
         //this.app.use('/api/familias',familiaRutas);
         this.app.use('/api/categorias', validateToken_1.TokenValidation, ruta_categoria_1.default);
         this.app.use('/api/productos', validateToken_1.TokenValidation, ruta_producto_1.default);
+        this.app.use('/api/servicios', validateToken_1.TokenValidation, ruta_servicio_1.default);
         this.app.use('/api/listasprecios', validateToken_1.TokenValidation, ruta_lista_1.default);
         this.app.use('/api/clientes', validateToken_1.TokenValidation, ruta_cliente_1.default);
         // referenciales localidades

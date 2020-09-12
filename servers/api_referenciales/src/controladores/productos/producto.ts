@@ -14,7 +14,7 @@ class ProductoControlador {
   }
 
   public async listar(req: Request, res: Response) {
-    const productos = await pool.query('SELECT * FROM vproductos where CodigoProducto>0');
+    const productos = await pool.query('SELECT * FROM vproductos where Categoria <> "SERVICIO" and CodigoProducto>0');
     res.json(productos);
   }
 

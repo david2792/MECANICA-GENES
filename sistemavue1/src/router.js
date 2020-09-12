@@ -8,6 +8,7 @@ import Marca from './components/referenciales-productos/Marca.vue'
 import Medida from './components/referenciales-productos/Medida.vue'
 import Impuesto from './components/referenciales-productos/Impuesto.vue'
 import Producto from './components/producto/Producto.vue'
+import Servicio from './components/producto/Servicio.vue'
 import Listaprecio from './components/producto/Listaprecio.vue'
 import Cliente from './components/referenciales-personas/Cliente.vue'
 import Pais from './components/referenciales-localidades/Pais.vue'
@@ -83,6 +84,14 @@ var router = new Router({
           path:'/productos',
           name:'producto',
           component: Producto,
+          meta: {
+            administrador:true
+            }
+        },
+        {
+          path:'/servicios',
+          name:'servicio',
+          component: Servicio,
           meta: {
             administrador:true
             }

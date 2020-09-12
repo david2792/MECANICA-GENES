@@ -27,7 +27,7 @@ class ProductoControlador {
     }
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const productos = yield conexionBD_1.default.query('SELECT * FROM vproductos where CodigoProducto>0');
+            const productos = yield conexionBD_1.default.query('SELECT * FROM vproductos where Categoria <> "SERVICIO" and CodigoProducto>0');
             res.json(productos);
         });
     }
