@@ -44,6 +44,8 @@ import ordenRuta from './rutas/rutas-taller/ruta-ordenTrabajo'
 
 import timbradosRutas from './rutas/rutas-referenciales-factura/ruta_timbrado';
 import { servicioControlador } from './controladores/productos/servicios';
+import sucursalesRutas from './rutas/rutas-referenciales-factura/ruta_sucursales';
+import tiposDocumentosRutas from './rutas/rutas-referenciales-factura/ruta_tiposDocumentos'
 
 // fin referenciales productos
 class Server {
@@ -97,8 +99,10 @@ class Server {
         this.app.use('/api/orden',TokenValidation,ordenRuta);
         this.app.use('/api/mecanico',TokenValidation,usuariomecanicoRutas);
         // fin de referenciales
-        //referenciales rutas
-        this.app.use('/api/timbrados', timbradosRutas);
+        //referenciales Facturas
+        this.app.use('/api/timbrados', TokenValidation,timbradosRutas);
+        this.app.use('/api/sucursales', TokenValidation,sucursalesRutas);
+        this.app.use('/api/tiposDocumentos', TokenValidation,tiposDocumentosRutas);
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
     }

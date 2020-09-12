@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as timbrados from '@/store/modulos/timbrado.js'
+import * as timbrados from '@/store/modulos/referenciales-facturas/timbrado.js'
+import * as sucursales from '@/store/modulos/referenciales-facturas/sucursales.js'
+import * as tipoDocumento from '@/store/modulos/referenciales-facturas/tipoDocumentos.js'
+import * as recepcionvehiculos from '@/store/modulos/informes/informe_recepcion.js'
+import * as rordenTrabajo from '@/store/modulos/informes/informe_ordenTrabajo.js'
 import decode from 'jwt-decode'
 import router from './router'
 
@@ -9,6 +13,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules:{
     timbrados,
+    sucursales,
+    tipoDocumento,
+    recepcionvehiculos,
+    rordenTrabajo,
   },
   state: {
     token: null,
