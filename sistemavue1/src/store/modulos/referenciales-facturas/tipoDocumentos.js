@@ -23,8 +23,8 @@ export const actions = {
             });
     },
 
-    insertTimbrado({ commit }, tipoDocumento){
-        console.log("recibiendo valores para registrar timbrados: ", timbrados);
-    }
+    // insertTimbrado({ commit }, tipoDocumento){
+    //     console.log("recibiendo valores para registrar timbrados: ", timbrados);
+    // }
     
 };

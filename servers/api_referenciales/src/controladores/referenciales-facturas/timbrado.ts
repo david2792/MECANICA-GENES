@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import pool from '../../conexionBD';
-import trasaccion from '../../transaccionBD';
+import transaccion from '../../transaccionBD';
+
 
 class TimbradoControlador {
     public async recuperarCodigo(req: Request, res:Response): Promise<any>{
@@ -16,6 +17,39 @@ class TimbradoControlador {
         console.log(timbrados)
         res.json(timbrados);
       }
+    public async crear(req:Request, res:Response): Promise<void> {
+        let timbrado = req.body.timbrados;
+        // console.log("Datos Recividos en backend", timbrado);
+        await  transaccion.query("SET autocommit=0");
+        // console.log(timbrado);
+        // for (const i in timbrado) {
+        //     if (Object.prototype.hasOwnProperty.call(timbrado, i)) {
+        // const element = timbrado[i];
+        const NumeroTimbrado = timbrado.NumeroTimbrado;
+        const CodigoSucursal = timbrado.CodigoSucursal;
+        const PuntoExpedicion = timbrado.PuntoExpedicion;
+        const CodigoTiposDocumento = timbrado.CodigoTiposDocumento;
+        const FechaInicioVigencia = timbrado.FechaInicioVigencia;
+        const FechaFinVigencia = timbrado.FechaFinVigencia;
+        const NumeroInicial = timbrado.NumeroInicial;
+        const NumeroFinal = timbrado.NumeroFinal;
+        if (timbrado.Estado) {
+            const Estado = '1';
+        } else {
+            const Estado = '0';
+        }
+        const Estado = timbrado.Estado;
+        const values = {NumeroTimbrado, CodigoSucursal, PuntoExpedicion, CodigoTiposDocumento, FechaInicioVigencia, FechaFinVigencia, NumeroInicial, NumeroFinal, Estado}
+        console.log("Datos Recividos en backend", values);
+        await pool.query("INSERT INTO timbrados SET ?", values);
+                
+        //     }
+        // }
+        await transaccion.query("COMMIT");// se confirma la transaccion
+        await transaccion.query("SET autocommit=1")
+        res.json({message: "El registro fué guardado"});
+
+    }
 }
 
 export const timbradoControlador = new TimbradoControlador();

@@ -13,13 +13,24 @@ export const mutations = {
 };
 
 export const actions = {
-    getTimbrados({ commit }) {
+    getTimbrados({ commit }, configuracion) {
         axios
-            .get('timbrados')
+            .get('timbrados', configuracion)
             .then(timbrado => timbrado.data)
             .then(timbrado => {
                 commit("SET_TIMBRADO", timbrado);
             });
     },
-    
+
+    insertTimbrado({ commit }, timbrado){
+        console.log("recibiendo valores para registrar timbrados: ", timbrado.configuracion);
+        axios
+        .post('timbrados', {timbrados: timbrado}, timbrado.configuracion)
+        .then(function (response) {
+            console.log('Hola!!!')
+        })
+        .catch(function(error) {
+            console.log(error);
+          });
+    }
 };

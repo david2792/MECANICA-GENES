@@ -21,9 +21,5 @@ export const actions = {
                 commit("SET_SUCURSAL", sucursal);
             });
     },
-
-    insertTimbrado({ commit }, sucursal){
-        console.log("recibiendo valores para registrar timbrados: ", timbrados);
-    }
     
 };
