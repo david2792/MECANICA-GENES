@@ -6,7 +6,7 @@ exports.default = {
         // host:'localhost',
         user: 'manager',
         password: '<developer>1234',
-        //    password: 'developer',
+        //  password: 'developer',
         database: 'compraventa'
     }
 };

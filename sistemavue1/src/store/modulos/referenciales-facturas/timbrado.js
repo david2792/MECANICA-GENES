@@ -32,5 +32,17 @@ export const actions = {
         .catch(function(error) {
             console.log(error);
           });
+    },
+
+    updateTimbrado({ commit }, timbrado){
+        console.log("recibiendo valores para actualizar timbrados: ", timbrado.configuracion);
+        axios
+        .put('timbrados', {timbrados: timbrado}, timbrado.configuracion)
+        .then(function (response) {
+            console.log('Hola!!!')
+        })
+        .catch(function(error) {
+            console.log(error);
+          });
     }
 };

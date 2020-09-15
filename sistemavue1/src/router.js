@@ -38,6 +38,10 @@ import Login from './components/acceso/Login.vue' ;
 // INFORMES
 import Informe_Recepcion from './components/informes/Informe_Recepcion.vue';
 import Informe_OrdenTrabajo from './components/informes/Informe_OrdenTrabajo.vue';
+
+// REFERENCIALES COMPRAS
+import VistaProveedor from './views/proveedor/VistaProveedor.vue';
+import FormularioProveedor from './views/proveedor/FormularioProveedor.vue';
 Vue.use(Router)
 
 var router = new Router({
@@ -315,7 +319,23 @@ var router = new Router({
         administrador:true
       }
     },
- 
+
+    {
+      path: '/vistaProveedor',
+      name: 'VistaProveedor',
+      component: VistaProveedor,
+      meta:{
+        libre:true
+      }
+    },
+    {
+      path: '/formularioProveedor',
+      name: 'FormularioProveedor',
+      component: FormularioProveedor,
+      meta:{
+        libre:true
+      }
+    },
   ]
 })
 router.beforeEach((to, from, next) => {

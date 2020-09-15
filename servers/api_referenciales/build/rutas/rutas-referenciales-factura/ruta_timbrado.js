@@ -10,6 +10,7 @@ class TimbradosRutas {
     config() {
         this.router.get('/', timbrado_1.timbradoControlador.listarTimbrados);
         this.router.post('/', timbrado_1.timbradoControlador.crear);
+        this.router.put('/', timbrado_1.timbradoControlador.actualizar);
     }
 }
 const timbradosRutas = new TimbradosRutas();

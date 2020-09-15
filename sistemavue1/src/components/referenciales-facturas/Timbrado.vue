@@ -31,7 +31,7 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 sm12 md4>
-                    <v-text-field v-model="timbrado.NumeroTimbrado" label="Número Timbrado"></v-text-field>
+                    <v-text-field v-show='editedIndex' v-model="timbrado.NumeroTimbrado" label="Número Timbrado"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md4>
                     <v-autocomplete
@@ -86,8 +86,12 @@
                       </template>
                       <v-date-picker v-model="timbrado.FechaInicioVigencia" no-title scrollable>
                         <v-spacer></v-spacer>
-                        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                        <v-btn text color="primary" @click="$refs.menu.save(timbrado.FechaInicioVigencia)">OK</v-btn>
+                        <v-btn text color="primary" @click="dialog = false">Cancel</v-btn>
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="$refs.menu.save(timbrado.FechaInicioVigencia)"
+                        >OK</v-btn>
                       </v-date-picker>
                     </v-menu>
                   </v-flex>
@@ -114,12 +118,16 @@
                       <v-date-picker v-model="timbrado.FechaFinVigencia" no-title scrollable>
                         <v-spacer></v-spacer>
                         <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-                        <v-btn text color="primary" @click="$refs.menu2.save(timbrado.FechaFinVigencia)">OK</v-btn>
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="$refs.menu2.save(timbrado.FechaFinVigencia)"
+                        >OK</v-btn>
                       </v-date-picker>
                     </v-menu>
                   </v-flex>
                 </v-layout>
-                
+
                 <v-flex xs12 sm12 md12>
                   <!-- <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v"></div> -->
                   <v-checkbox v-model="timbrado.Estado" label="Estado"></v-checkbox>
@@ -128,7 +136,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn class="mb-2" dark color="red accent-3">
+              <v-btn class="mb-2" dark color="red accent-3" @click="dialogoReset()">
                 Cancelar
                 <v-icon dark right>mdi-cancel</v-icon>
               </v-btn>
@@ -216,8 +224,8 @@ export default {
       menu2: false,
       dialog: false,
       token_configracion: [],
+      editedIndex: true,
     };
-    
   },
   name: "ListadoTimbrado",
   mounted() {
@@ -243,20 +251,45 @@ export default {
         NumeroInicial: "",
         NumeroFinal: "",
         Estado: "",
-        configuracion:[],
+        configuracion: [],
       };
     },
     guardar() {
-      console.log("Enviando datos ----------------->");
       this.timbrado.configuracion = this.token_configracion;
-      this.$store.dispatch("insertTimbrado", this.timbrado).then((result)=>{
-        console.log("Good job");
-        this.timbrado = this.createFreshTimbrado();
-      }).catch((err)=>{
-        console.log("Bad! this is sad")
-      });
+      if (this.editedIndex) {
+        this.$store
+          .dispatch("insertTimbrado", this.timbrado)
+          .then((result) => {
+            console.log("Good job");
+            this.timbrado = this.createFreshTimbrado();
+          })
+          .catch((err) => {
+            console.log("Bad! this is sad");
+          });
+      }else{
+        console.log("Enviando datos pra editar")
+        this.$store
+          .dispatch("updateTimbrado", this.timbrado)
+          .then((result) => {
+            console.log("Good job");
+            this.timbrado = this.createFreshTimbrado();
+          })
+          .catch((err) => {
+            console.log("Bad! this is sad");
+          });
+      }
     },
-    
+    editItem(item) {
+      this.timbrado = item;
+      console.log(this.timbrado);
+      this.dialog = true;
+      this.editedIndex = false;
+    },
+    dialogoReset(){
+      this.dialog = false;
+      this.editedIndex = true;
+      this.timbrado = this.createFreshTimbrado();
+    }
   },
 };
 </script>

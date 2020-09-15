@@ -9,6 +9,7 @@ class TimbradosRutas{
     config():void{
         this.router.get('/', timbradoControlador.listarTimbrados);
         this.router.post('/',timbradoControlador.crear);
+        this.router.put('/',timbradoControlador.actualizar);
     }
 }
 

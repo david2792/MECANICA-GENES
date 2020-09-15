@@ -45,7 +45,10 @@ import ordenRuta from './rutas/rutas-taller/ruta-ordenTrabajo'
 import timbradosRutas from './rutas/rutas-referenciales-factura/ruta_timbrado';
 import { servicioControlador } from './controladores/productos/servicios';
 import sucursalesRutas from './rutas/rutas-referenciales-factura/ruta_sucursales';
-import tiposDocumentosRutas from './rutas/rutas-referenciales-factura/ruta_tiposDocumentos'
+import tiposDocumentosRutas from './rutas/rutas-referenciales-factura/ruta_tiposDocumentos';
+
+// Referenciales compras
+import proveedorRutas from './rutas/rutas-compras/rutas-proveedores';
 
 // fin referenciales productos
 class Server {
@@ -103,6 +106,8 @@ class Server {
         this.app.use('/api/timbrados', TokenValidation,timbradosRutas);
         this.app.use('/api/sucursales', TokenValidation,sucursalesRutas);
         this.app.use('/api/tiposDocumentos', TokenValidation,tiposDocumentosRutas);
+        // referenciales compras
+        this.app.use('/api/proveedorRutas', TokenValidation, proveedorRutas);
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
     }

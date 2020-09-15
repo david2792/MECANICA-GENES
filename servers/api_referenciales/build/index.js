@@ -42,6 +42,8 @@ const ruta_ordenTrabajo_1 = __importDefault(require("./rutas/rutas-taller/ruta-o
 const ruta_timbrado_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta_timbrado"));
 const ruta_sucursales_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta_sucursales"));
 const ruta_tiposDocumentos_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta_tiposDocumentos"));
+// Referenciales compras
+const rutas_proveedores_1 = __importDefault(require("./rutas/rutas-compras/rutas-proveedores"));
 // fin referenciales productos
 class Server {
     constructor() {
@@ -95,6 +97,8 @@ class Server {
         this.app.use('/api/timbrados', validateToken_1.TokenValidation, ruta_timbrado_1.default);
         this.app.use('/api/sucursales', validateToken_1.TokenValidation, ruta_sucursales_1.default);
         this.app.use('/api/tiposDocumentos', validateToken_1.TokenValidation, ruta_tiposDocumentos_1.default);
+        // referenciales compras
+        this.app.use('/api/proveedorRutas', validateToken_1.TokenValidation, rutas_proveedores_1.default);
         // ruta de acceso
         this.app.use('/api/usuario', ruta_usuario_1.default);
     }
