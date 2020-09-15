@@ -15,12 +15,13 @@
           <FormularioProveedor/>
         </v-dialog>
       </v-toolbar>
-      
+      <ListaProveedor/>
     </v-flex>
   </v-layout>
 </template>
 <script>
 import FormularioProveedor from "./FormularioProveedor";
+import ListaProveedor from "./ListaProveedor";
 export default {
   data() {
     return {
@@ -29,6 +30,7 @@ export default {
   },
   components: {
     FormularioProveedor,
+    ListaProveedor
   },
 };
 </script>

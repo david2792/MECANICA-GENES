@@ -8,38 +8,38 @@
       <v-container grid-list-md>
         <v-layout wrap>
           <v-flex xs12 sm12 md4>
-            <v-text-field label="Código Proveedor."></v-text-field>
+            <v-text-field v-model="Proveedor.CodigoProveedor" label="Código Proveedor."></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md4>
-            <v-text-field label="Nombre y Apellido."></v-text-field>
+            <v-text-field v-model="Proveedor.RazonSocial"  label="Nombre y Apellido."></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md4>
-            <v-text-field label="N° de Cédula."></v-text-field>
-          </v-flex>
-        </v-layout>
-        <v-layout wrap>
-          <v-flex xs12 sm12 md4>
-            <v-text-field label="RUC."></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm12 md4>
-            <v-text-field label="Dirección."></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm12 md4>
-            <v-text-field label="Teléfono."></v-text-field>
+            <v-text-field v-model="Proveedor.Cedula"  label="N° de Cédula."></v-text-field>
           </v-flex>
         </v-layout>
         <v-layout wrap>
           <v-flex xs12 sm12 md4>
-            <v-text-field label="Email."></v-text-field>
+            <v-text-field v-model="Proveedor.Ruc"  label="RUC."></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md4>
-            <v-text-field label="Web."></v-text-field>
+            <v-text-field v-model="Proveedor.Direccion"  label="Dirección."></v-text-field>
+          </v-flex>
+          <v-flex xs12 sm12 md4>
+            <v-text-field v-model="Proveedor.Telefono"  label="Teléfono."></v-text-field>
+          </v-flex>
+        </v-layout>
+        <v-layout wrap>
+          <v-flex xs12 sm12 md4>
+            <v-text-field v-model="Proveedor.Email"  label="Email."></v-text-field>
+          </v-flex>
+          <v-flex xs12 sm12 md4>
+            <v-text-field v-model="Proveedor.Web"  label="Web."></v-text-field>
           </v-flex>
           <v-flex xs12 sm12 md4>
             <v-autocomplete
               item-text="Nombre"
-              item-value="CodigoSucursal"
-              label="Sucursal"
+              item-value="CodigoCiudad"
+              label="Ciudad"
             ></v-autocomplete>
           </v-flex>
         </v-layout>
@@ -55,13 +55,29 @@
 export default {
     data(){
         return {
-
+          Proveedor: this.createFreshProveedor(),
         };
     },
     // name: 'FormularioProveedor',
     
     mounted(){
 
+    },
+
+    methods:{
+      createFreshProveedor(){
+        return{
+          CodigoProveedor: "",
+          RazonSocial: "",
+          Cedula: "",
+          Ruc: "",
+          Direccion: "",
+          Telefono: "",
+          Email: "",
+          Web: "",
+          CodigoCiudad: ""
+        }
+      }
     },
 }
 </script>

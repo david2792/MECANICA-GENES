@@ -2,7 +2,7 @@
     <v-card>
         <v-data-table
         :headers="headers"
-        :items="timbrados.timbrados"
+        :items="vProveedor.proveedores"
         :search="search"
         class="elevation-1"
       >
@@ -56,10 +56,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
     data(){
         return{
             search: "",
+            token_configuration: [],
       headers: [
         { text: "Opciones", value: "opciones" },
         { text: "Código Proveedor", value: "CodigoProveedor" },
@@ -73,6 +75,16 @@ export default {
         { text: "Ciudad", value: "Ciudad" },
       ],
         }
+    },
+    mounted(){
+        let header = {'auth-token': this.$store.state.token};
+        this.token_configuration = {headers: header};
+        
+        this.$store.dispatch("getProveedores", this.token_configuration)
+
+    },
+    computed:{
+        ...mapState(['vProveedor'])
     },
     methods:{
         listar(){},

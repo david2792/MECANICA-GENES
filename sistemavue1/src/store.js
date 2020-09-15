@@ -5,6 +5,7 @@ import * as sucursales from '@/store/modulos/referenciales-facturas/sucursales.j
 import * as tipoDocumento from '@/store/modulos/referenciales-facturas/tipoDocumentos.js'
 import * as recepcionvehiculos from '@/store/modulos/informes/informe_recepcion.js'
 import * as rordenTrabajo from '@/store/modulos/informes/informe_ordenTrabajo.js'
+import * as vProveedor from '@/store/modulos/referencia-compras/proveedor.js'
 import decode from 'jwt-decode'
 import router from './router'
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     tipoDocumento,
     recepcionvehiculos,
     rordenTrabajo,
+    vProveedor,
   },
   state: {
     token: null,

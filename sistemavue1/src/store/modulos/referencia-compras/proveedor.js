@@ -3,27 +3,27 @@ import Vuex from 'vuex';
 import axios from 'axios';
 
 export const state = {
-    showModal: false,
     proveedores: []
 };
 
 export const mutations = {
-    SWITCH_MODAL(state) {
-        state.showModal = !state.showModal;
-    },
-    SET_PROVEEDOR(state, proveedores){
-        state.proveedores = proveedores;
+    SET_PROVEEDOR(state, proveedor){
+        console.log(proveedor);
+        state.proveedores = proveedor;
     }
 };
 
 export const actions = {
-    getProveedores({committ}, configuracion){
+    getProveedores({commit}, configuracion){
         console.log(configuracion);
+        axios
+            .get('proveedores', configuracion)
+            .then(proveedor => proveedor.data)
+            .then(proveedor => {
+                commit("SET_PROVEEDOR", proveedor);
+            });
     }
 };
 
 export const getters = {
-    showModal: state =>{
-        return state.showModal;
-    }
 };

@@ -107,7 +107,7 @@ class Server {
         this.app.use('/api/sucursales', TokenValidation,sucursalesRutas);
         this.app.use('/api/tiposDocumentos', TokenValidation,tiposDocumentosRutas);
         // referenciales compras
-        this.app.use('/api/proveedorRutas', TokenValidation, proveedorRutas);
+        this.app.use('/api/proveedores', TokenValidation, proveedorRutas);
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
     }
