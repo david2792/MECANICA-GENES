@@ -230,8 +230,7 @@ export default {
   name: "ListadoTimbrado",
   mounted() {
     let header = { "auth-token": this.$store.state.token };
-    let configuracion = { headers: header };
-    this.token_configracion = configuracion;
+    this.token_configracion = { headers: header };
     this.$store.dispatch("getTimbrados", configuracion);
     this.$store.dispatch("getSucursales", configuracion);
     this.$store.dispatch("getTipoDocumentos", configuracion);

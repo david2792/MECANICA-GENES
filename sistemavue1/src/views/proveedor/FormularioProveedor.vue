@@ -37,9 +37,11 @@
           </v-flex>
           <v-flex xs12 sm12 md4>
             <v-autocomplete
-              item-text="Nombre"
+              :items="ciudad.Ciudades"
+              item-text="Ciudad"
               item-value="CodigoCiudad"
               label="Ciudad"
+              v-model="Proveedor.Ciudad"
             ></v-autocomplete>
           </v-flex>
         </v-layout>
@@ -52,18 +54,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
     data(){
         return {
           Proveedor: this.createFreshProveedor(),
+          token_configuration: [],
         };
     },
     // name: 'FormularioProveedor',
     
     mounted(){
-
+      let header = {'auth-token': this.$store.state.token};
+      this.token_configuration = {headers: header};
+      this.$store.dispatch("getCiudades", this.token_configuration);
     },
-
+    computed:{
+      ...mapState(['ciudad']),
+    },
     methods:{
       createFreshProveedor(){
         return{

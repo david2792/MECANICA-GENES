@@ -6,6 +6,7 @@ import * as tipoDocumento from '@/store/modulos/referenciales-facturas/tipoDocum
 import * as recepcionvehiculos from '@/store/modulos/informes/informe_recepcion.js'
 import * as rordenTrabajo from '@/store/modulos/informes/informe_ordenTrabajo.js'
 import * as vProveedor from '@/store/modulos/referencia-compras/proveedor.js'
+import * as ciudad from '@/store/modulos/referencia-localidades/ciudad.js'
 import decode from 'jwt-decode'
 import router from './router'
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     recepcionvehiculos,
     rordenTrabajo,
     vProveedor,
+    ciudad,
   },
   state: {
     token: null,
