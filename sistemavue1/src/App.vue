@@ -11,7 +11,7 @@
         <template v-if="esAdministrador">
           <v-list-tile :to="{name:'Bienvenida'}">
             <v-list-tile-action>
-              <v-icon color="black">home_work</v-icon>
+              <v-icon>home_work</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Inicio</v-list-tile-title>
           </v-list-tile>
@@ -355,13 +355,8 @@
     <v-toolbar color="green" dark app :clipped-left="$vuetify.breakpoint.mdAndUp" fixed>
       <v-toolbar-title style="width: 600px" class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="hidden-sm-and-down">Mecanica Genes</span>
+       Mecanica Genes
       </v-toolbar-title>
-      <!-- <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>apps</v-icon>
-      </v-btn> -->
-            <v-spacer></v-spacer>
       <v-btn @click="salir()" icon v-if="logueado">
         <v-icon>logout</v-icon> Salir
       </v-btn>
