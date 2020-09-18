@@ -5,17 +5,17 @@
         <v-toolbar-title>Proveedor</v-toolbar-title>
         <v-divider class="mx-2" insert vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="1200px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="amber darken-4" dark class="mb-2" v-on="on">
-              Nuevo
-              <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
-            </v-btn>
-          </template>
-          <FormularioProveedor/>
+        <template>
+          <v-btn color="amber darken-4" dark class="mb-2" @click="modal=!modal">
+            Nuevo
+            <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
+          </v-btn>
+        </template>
+        <v-dialog v-model="modal" max-width="1200px">
+          <FormularioProveedor />
         </v-dialog>
       </v-toolbar>
-      <ListaProveedor/>
+      <ListaProveedor />
     </v-flex>
   </v-layout>
 </template>
@@ -25,12 +25,23 @@ import ListaProveedor from "./ListaProveedor";
 export default {
   data() {
     return {
-      dialog: false,
     };
   },
   components: {
     FormularioProveedor,
-    ListaProveedor
+    ListaProveedor,
   },
+  computed: {
+    modal: {
+      get() {
+        return this.$store.getters.getModal;
+      },
+      set(value) {
+        console.log("hola mundo");
+        this.$store.dispatch("switchDialog", value);
+      },
+    },
+  },
+  methods: {},
 };
 </script>
