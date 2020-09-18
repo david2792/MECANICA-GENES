@@ -95,7 +95,7 @@
       <v-data-table :headers="headers" :items="personas" :search="search" class="elevation-1">
         <template v-slot:items="props">
           <td class="justify-center layout px-0">
-            <v-btn class="mx-2" fab dark small color="amber darken-4" @click="editItem(props.item)">
+            <v-btn color="amber darken-4" @click="editItem(props.item)">
               <v-icon dark>mdi-pencil</v-icon>
             </v-btn>
           </td>
