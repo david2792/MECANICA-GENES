@@ -39,8 +39,7 @@ class TimbradoControlador {
             const Estado = '0';
         }
         const Estado = timbrado.Estado;
-        const values = {NumeroTimbrado, CodigoSucursal, PuntoExpedicion, CodigoTiposDocumento, FechaInicioVigencia, FechaFinVigencia, NumeroInicial, NumeroFinal, Estado}
-        console.log("Datos Recividos en backend", values);
+        const values = {NumeroTimbrado, CodigoSucursal, PuntoExpedicion, CodigoTiposDocumento, FechaInicioVigencia, FechaFinVigencia, NumeroInicial, NumeroFinal, Estado};
         await pool.query("INSERT INTO timbrados SET ?", values);
                 
         //     }
