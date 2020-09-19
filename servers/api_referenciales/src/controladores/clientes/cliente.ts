@@ -24,7 +24,7 @@ class ClienteControlador {
     // const CodigoCiudad = id[0].CodigoCiudad;
     let cliente = req.body.clientes;
     console.log(cliente.Ruc)
-    const CodigoCiudad=cliente.Ciudad
+    const CodigoCiudad=cliente.CodigoCiudad
     console.log(CodigoCiudad);
     const Cedula = cliente.Cedula;
     const Ruc = cliente.Ruc;
