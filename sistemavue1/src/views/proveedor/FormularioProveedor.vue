@@ -67,7 +67,7 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
-      // Proveedor: this.createFreshProveedor(),
+      // Proveedor: this.$store.state.vProveedor.Proveedor,
       token_configuration: [],
     };
   },
@@ -77,7 +77,7 @@ export default {
     let header = { "auth-token": this.$store.state.token };
     this.token_configuration = { headers: header };
     this.$store.dispatch("getCiudades", this.token_configuration);
-    this.$store.dispatch("getProveedor");
+    // this.$store.dispatch("getProveedor");
   },
   computed: {
     ...mapState(["ciudad", "vProveedor"]),
@@ -89,6 +89,9 @@ export default {
         this.$store.dispatch("switchDialog", value);
       },
     },
+    ...mapGetters([
+      'setProveedor',
+    ])
   },
   methods: {
     createFreshProveedor() {
@@ -106,11 +109,14 @@ export default {
       };
     },
     guardar() {
-      console.log("Hola guardar", this.$store.state.vProveedor.Proveedor);
-      if(this.$store.vProveedor.Proveedor.edit){
-        this.$store.dispatch("EditarProveedor", this.$store.vProveedor.Proveedor)
-      }
+      this.$store.dispatch("guardarProveedor", this.token_configuration).then(this.registroExitoso, this.regitroError);
     },
+    registroExitoso(result){
+      console.log("La operación fue correcta:", result);
+    },
+    regitroError(error){
+      console.log("Hubo un error al realizar la operación", error);
+    }
   },
 };
 </script>

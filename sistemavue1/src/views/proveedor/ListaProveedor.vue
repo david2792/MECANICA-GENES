@@ -77,9 +77,8 @@ export default {
   methods: {
     editItem(item) {
       this.modal = !this.modal;
-      this.$store.vProveedor.Proveedor.edit = true;
+      this.$store.state.vProveedor.editar_item = true;
       this.$store.dispatch("getProveedor", item);
-      // console.log("Hello wey", this.$store.state.vProveedor.Proveedor);
     },
   },
 };
