@@ -18,6 +18,8 @@ export const state = {
         configuracion: [],
     },
     editar_item: false,
+    show_alert: false,
+    show_alertE: false,
 };
 
 export const mutations = {
@@ -28,6 +30,12 @@ export const mutations = {
     GET_PROVEEDOR(state, value) {
         console.log("Muttations: ", value)
         state.Proveedor = value;
+    },
+    SHOW_ALERT(state, show){
+        state.show_alert = show;
+    },
+    SHOW_ALERTEMAIL(state, show){
+        state.show_alertE = show;
     }
 };
 
@@ -68,10 +76,41 @@ export const actions = {
             state.editar_item = !state.editar_item;
         }
     },
+
+    buscarCIProveedor({commit}){
+        let proveedor = state.proveedores.find(
+            find => find.Cedula === state.Proveedor.Cedula
+          );
+          // console.log(value);
+          if(proveedor){
+            console.log("encontrado", state.Proveedor.Cedula);
+            state.show_alert = true
+            commit('SHOW_ALERT', state.show_alert)
+          }else{
+              console.log("datos validos")
+              state.show_alert = false
+              commit('SHOW_ALERT', state.show_alert)
+          }
+    },
+    buscarEmailProveedor({commit}){
+        let proveedor = state.proveedores.find(
+            find => find.Email === state.Proveedor.Email
+          );
+          // console.log(value);
+          if(proveedor){
+            console.log("encontrado", state.Proveedor.Email);
+            state.show_alertE = true
+            commit('SHOW_ALERTEMAIL', state.show_alertE)
+          }else{
+              console.log("datos validos, Registrar");
+              state.show_alertE = false;
+              commit('SHOW_ALERTEMAIL', state.show_alertE);
+          }
+    }
 };
 
 export const getters = {
     setProveedor: (state) => {
         return state.proveedor;
-    }
+    },
 };
