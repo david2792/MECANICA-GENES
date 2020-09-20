@@ -32,10 +32,6 @@ class ClienteControlador {
             const Codigo = yield conexionBD_1.default.query('SELECT MAX(CodigoCliente)+1 AS Codigo FROM clientes');
             JSON.stringify(Codigo);
             const CodigoCliente = Codigo[0].Codigo;
-            // const Ciudad = req.body.Ciudad;
-            // const id = await pool.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
-            // JSON.stringify(id);
-            // const CodigoCiudad = id[0].CodigoCiudad;
             let cliente = req.body.clientes;
             console.log(cliente.Ruc);
             const CodigoCiudad = cliente.CodigoCiudad;
@@ -49,7 +45,8 @@ class ClienteControlador {
             const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono, Email, CodigoCiudad };
             console.log(values);
             yield conexionBD_1.default.query('INSERT INTO clientes  SET ?', values);
-            res.json({ message: "el cliente  fue guardado" });
+            const vclientes = yield conexionBD_1.default.query('SELECT * FROM vclientes');
+            res.json(vclientes);
         });
     }
     actualizar(req, res) {

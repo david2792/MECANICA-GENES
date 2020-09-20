@@ -18,10 +18,6 @@ class ClienteControlador {
     const Codigo = await pool.query('SELECT MAX(CodigoCliente)+1 AS Codigo FROM clientes')
     JSON.stringify(Codigo);
     const CodigoCliente = Codigo[0].Codigo;
-    // const Ciudad = req.body.Ciudad;
-    // const id = await pool.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
-    // JSON.stringify(id);
-    // const CodigoCiudad = id[0].CodigoCiudad;
     let cliente = req.body.clientes;
     console.log(cliente.Ruc)
     const CodigoCiudad=cliente.CodigoCiudad
@@ -35,7 +31,8 @@ class ClienteControlador {
     const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono,Email, CodigoCiudad };
     console.log(values);
     await pool.query('INSERT INTO clientes  SET ?', values);
-    res.json({ message: "el cliente  fue guardado" });
+    const vclientes = await pool.query('SELECT * FROM vclientes');
+    res.json(vclientes);
   }
 
   public async actualizar(req: Request, res: Response): Promise<void> {
