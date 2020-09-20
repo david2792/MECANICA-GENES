@@ -57,7 +57,6 @@ class TimbradoControlador {
             }
             const Estado = timbrado.Estado;
             const values = { NumeroTimbrado, CodigoSucursal, PuntoExpedicion, CodigoTiposDocumento, FechaInicioVigencia, FechaFinVigencia, NumeroInicial, NumeroFinal, Estado };
-            console.log("Datos Recividos en backend", values);
             yield conexionBD_1.default.query("INSERT INTO timbrados SET ?", values);
             //     }
             // }

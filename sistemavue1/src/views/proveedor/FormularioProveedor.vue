@@ -1,5 +1,6 @@
 <template>
-    <v-card>
+  <v-card>
+    <v-form ref="form" v-model="valid" lazy-validation>
       <v-card-title>
         <!-- Titulo del formulalrio -->
       </v-card-title>
@@ -7,30 +8,35 @@
         <!-- Cuerpo del formulario(inputs) -->
         <v-container grid-list-md>
           <v-layout wrap>
-            <v-flex xs12 sm12 md4>
+            <!-- <v-flex xs12 sm12 md4>
               <v-text-field v-model="vProveedor.Proveedor.CodigoProveedor" label="Código Proveedor."></v-text-field>
+            </v-flex>-->
+            <v-flex xs12 sm12 md6>
+              <v-text-field
+                v-model="vProveedor.Proveedor.RazonSocial"
+                label="Nombre y Apellido."
+                :rules="rsRules"
+                required
+              ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm12 md4>
-              <v-text-field v-model="vProveedor.Proveedor.RazonSocial" label="Nombre y Apellido."></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md4>
-              <v-text-field v-model="vProveedor.Proveedor.Cedula" label="N° de Cédula."></v-text-field>
-            </v-flex>
-          </v-layout>
-          <v-layout wrap>
-            <v-flex xs12 sm12 md4>
-              <v-text-field v-model="vProveedor.Proveedor.Ruc" label="RUC."></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md4>
-              <v-text-field v-model="vProveedor.Proveedor.Direccion" label="Dirección."></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md4>
-              <v-text-field v-model="vProveedor.Proveedor.Telefono" label="Teléfono."></v-text-field>
+            <v-flex xs12 sm12 md6>
+              <v-text-field v-model="vProveedor.Proveedor.Cedula" label="N° de Cédula." :rules="CedulaRules"></v-text-field>
             </v-flex>
           </v-layout>
           <v-layout wrap>
             <v-flex xs12 sm12 md4>
-              <v-text-field v-model="vProveedor.Proveedor.Email" label="Email."></v-text-field>
+              <v-text-field v-model="vProveedor.Proveedor.Ruc" label="RUC." :rules="rucRules"></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md4>
+              <v-text-field v-model="vProveedor.Proveedor.Direccion" label="Dirección." :rules='direccionRules'></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md4>
+              <v-text-field v-model="vProveedor.Proveedor.Telefono" label="Teléfono." :rules="telefonoRules"></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout wrap>
+            <v-flex xs12 sm12 md4>
+              <v-text-field v-model="vProveedor.Proveedor.Email" label="Email." :rules="emailRules"></v-text-field>
             </v-flex>
             <v-flex xs12 sm12 md4>
               <v-text-field v-model="vProveedor.Proveedor.Web" label="Web."></v-text-field>
@@ -50,7 +56,7 @@
       <v-card-actions>
         <!-- Acciones del formularios(Guardar/Cancelar) -->
         <v-spacer></v-spacer>
-        <v-btn class="mb-2" dark color="red accent-3" @click="modal=!modal">
+        <v-btn class="mb-2" dark color="red accent-3" :disabled="!valid" @click="cancelarRegistro()">
           Cancelar
           <v-icon dark right>mdi-cancel</v-icon>
         </v-btn>
@@ -59,7 +65,8 @@
           <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
         </v-btn>
       </v-card-actions>
-    </v-card>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
@@ -67,21 +74,36 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
-      // Proveedor: this.$store.state.vProveedor.Proveedor,
+      // valid: true,
       token_configuration: [],
+      rsRules: [(v) => !!v || "Nombre es requerido."],
+      emailRules: [
+        v => !!v || 'E-mail es requerido.',
+        v => /.+@.+/.test(v) || 'E-mail no valido'
+      ],
+      telefonoRules:[
+        v=> !!v || 'Telefono es requerido.'
+      ],
+      rucRules:[
+        v=> !!v || 'Ruc es requerido.'
+      ],
+      CedulaRules:[
+        v=> !!v || 'Telefono es requerido.'
+      ],
+      direccionRules:[
+        v=> !!v || 'Dirección es requerido.'
+      ]
     };
   },
-  // name: 'FormularioProveedor',
 
   mounted() {
     let header = { "auth-token": this.$store.state.token };
     this.token_configuration = { headers: header };
     this.$store.dispatch("getCiudades", this.token_configuration);
-    // this.$store.dispatch("getProveedor");
   },
   computed: {
     ...mapState(["ciudad", "vProveedor"]),
-     modal: {
+    modal: {
       get() {
         return this.$store.getters.getModal;
       },
@@ -89,9 +111,7 @@ export default {
         this.$store.dispatch("switchDialog", value);
       },
     },
-    ...mapGetters([
-      'setProveedor',
-    ])
+    ...mapGetters(["setProveedor"]),
   },
   methods: {
     createFreshProveedor() {
@@ -109,14 +129,27 @@ export default {
       };
     },
     guardar() {
-      this.$store.dispatch("guardarProveedor", this.token_configuration).then(this.registroExitoso, this.regitroError);
+      if (this.$refs.form.validate()) {
+          this.snackbar = true
+          this.$store
+        .dispatch("guardarProveedor", this.token_configuration)
+        .then(this.registroExitoso, this.regitroError);
+        }
     },
-    registroExitoso(result){
+    registroExitoso(result) {
       console.log("La operación fue correcta:", result);
+      this.vProveedor.Proveedor = this.createFreshProveedor();
+      if (this.$store.state.dialogo.dialog) {
+        this.modal = !this.modal;
+      }
     },
-    regitroError(error){
+    regitroError(error) {
       console.log("Hubo un error al realizar la operación", error);
-    }
+    },
+    cancelarRegistro() {
+      this.vProveedor.Proveedor = this.createFreshProveedor();
+      this.modal = !this.modal;
+    },
   },
 };
 </script>

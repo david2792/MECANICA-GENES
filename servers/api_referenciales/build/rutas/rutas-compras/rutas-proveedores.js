@@ -10,7 +10,7 @@ class ProveedorRutas {
     config() {
         this.router.get('/', proveedor_1.proveedorControlador.listarProveedores);
         this.router.post('/', proveedor_1.proveedorControlador.crear);
-        // this.router.put('/',proveedorControlador.actualizar);
+        this.router.put('/', proveedor_1.proveedorControlador.actualizar);
     }
 }
 const proveedorRutas = new ProveedorRutas();

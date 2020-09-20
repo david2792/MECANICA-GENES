@@ -47,19 +47,24 @@ export const actions = {
     },
 
     guardarProveedor({ commit }, configuracion) {
-        console.log(configuracion);
+        let setProveedor = state.Proveedor;
         if (!state.editar_item) {
-            console.log("Editar", state.Proveedor)
-            let setProveedor = state.Proveedor;
             axios
                 .post('proveedores', { proveedores: setProveedor }, configuracion)
+                .then(result =>{
+                    commit("SET_PROVEEDOR", result.data)
+                }).catch(error=>{
+                    console.log("Error: "+error);
+                });
+        } else {
+            axios
+                .put('proveedores', { proveedores: setProveedor }, configuracion)
                 .then(result =>{
                     commit("SET_PROVEEDOR", result.data);
                 }).catch(error=>{
                     console.log("Error: "+error);
                 });
-        } else {
-            console.log("Guardar", state.Proveedor);
+            console.log("Editar", state.Proveedor);
             state.editar_item = !state.editar_item;
         }
     },

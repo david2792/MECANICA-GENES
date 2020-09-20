@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.proveedorControlador = void 0;
 const conexionBD_1 = __importDefault(require("../../conexionBD"));
+const transaccionBD_1 = __importDefault(require("../../transaccionBD"));
 class ProveedorControlador {
     recuperCodigo(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -49,6 +50,29 @@ class ProveedorControlador {
             const values = { CodigoProveedor, RazonSocial, Cedula, Ruc, Direccion, Telefono, Email, Web, CodigoCiudad };
             console.log(values);
             yield conexionBD_1.default.query("INSERT INTO proveedores SET ?", values);
+            const vproveedores = yield conexionBD_1.default.query('SELECT * FROM vproveedores');
+            res.json(vproveedores);
+        });
+    }
+    actualizar(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let Proveedor = req.body.proveedores;
+            yield transaccionBD_1.default.query("SET autocommit=0");
+            console.log("Datos del proveedor recibidos correctamente: ", Proveedor);
+            const CodigoProveedor = Proveedor.CodigoProveedor;
+            const RazonSocial = Proveedor.RazonSocial;
+            const Cedula = Proveedor.Cedula;
+            const Ruc = Proveedor.Ruc;
+            const Direccion = Proveedor.Direccion;
+            const Telefono = Proveedor.Telefono;
+            const Email = Proveedor.Email;
+            const Web = Proveedor.Web;
+            const CodigoCiudad = Proveedor.CodigoCiudad;
+            const values = { CodigoProveedor, RazonSocial, Cedula, Ruc, Direccion, Telefono, Email, Web, CodigoCiudad };
+            console.log(values);
+            yield conexionBD_1.default.query("UPDATE proveedores SET ? WHERE CodigoProveedor = ?", [values, CodigoProveedor]);
+            yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
+            yield transaccionBD_1.default.query("SET autocommit=1");
             const vproveedores = yield conexionBD_1.default.query('SELECT * FROM vproveedores');
             res.json(vproveedores);
         });
