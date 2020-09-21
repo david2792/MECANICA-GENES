@@ -3,14 +3,12 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-card-title>
         <!-- Titulo del formulalrio -->
+        Proveedor
       </v-card-title>
       <v-card-text>
         <!-- Cuerpo del formulario(inputs) -->
         <v-container grid-list-md>
           <v-layout wrap>
-            <!-- <v-flex xs12 sm12 md4>
-              <v-text-field v-model="vProveedor.Proveedor.CodigoProveedor" label="Código Proveedor."></v-text-field>
-            </v-flex>-->
             <v-flex xs12 sm12 md6>
               <v-text-field
                 v-model="vProveedor.Proveedor.RazonSocial"

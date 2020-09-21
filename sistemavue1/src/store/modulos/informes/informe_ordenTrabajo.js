@@ -4,12 +4,17 @@ import axios from 'axios';
 
 export const state = {
     rOrdenTrabajos: [],
+    ordenTrabajoClienteFecha:[],
 };
 
 export const mutations = {
     SET_RORDENTRABAJO(state, rOrdenTrabajo) {
         console.log(rOrdenTrabajo)
         state.rOrdenTrabajos = rOrdenTrabajo;
+    },
+
+    SET_RORDENTRABAJO_PORCLIENTE(state, ordenTrabajo) {
+        state.ordenTrabajoPorCliente = ordenTrabajo;
     },
 };
 
@@ -26,9 +31,4 @@ export const actions = {
 };
 
 export const getters={
-    ordenTrabajoPorFecha(state, fechaInicio, fechaFin){
-        return state.rOrdenTrabajos.filter(ordenTrabajo =>{
-            return (ordenTrabajo.fechaentrada >= fechaInicio && fechaentrada <= fechaFin);
-        });
-    }
 };
