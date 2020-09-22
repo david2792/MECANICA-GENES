@@ -51,21 +51,20 @@ class ClienteControlador {
     }
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const CodigoCliente = req.body.CodigoCliente;
-            const Ciudad = req.body.Ciudad;
-            const idciudad = yield conexionBD_1.default.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
-            JSON.stringify(idciudad);
-            const CodigoCiudad = idciudad[0].CodigoCiudad;
-            const Cedula = req.body.Cedula;
-            const Ruc = req.body.Ruc;
-            const RazonSocial = req.body.RazonSocial;
-            const Direccion = req.body.Direccion;
-            const Telefono = req.body.Telefono;
-            const Email = req.body.Email;
+            let cliente = req.body.clientes;
+            const CodigoCliente = cliente.CodigoCliente;
+            const CodigoCiudad = cliente.CodigoCiudad;
+            const Cedula = cliente.Cedula;
+            const Ruc = cliente.Ruc;
+            const RazonSocial = cliente.RazonSocial;
+            const Direccion = cliente.Direccion;
+            const Telefono = cliente.Telefono;
+            const Email = cliente.Email;
             const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono, Email, CodigoCiudad };
-            console.log(values);
+            console.log("Datos para actualizar " + values);
             const marcas = yield conexionBD_1.default.query('UPDATE clientes SET ? WHERE CodigoCliente = ?', [values, CodigoCliente]);
-            res.json({ message: 'el cliente fue actualizado' });
+            const vclientes = yield conexionBD_1.default.query('SELECT * FROM vclientes');
+            res.json(vclientes);
         });
     }
     listarCiudad(req, res) {

@@ -36,21 +36,20 @@ class ClienteControlador {
   }
 
   public async actualizar(req: Request, res: Response): Promise<void> {
-    const CodigoCliente = req.body.CodigoCliente;
-    const Ciudad = req.body.Ciudad;
-    const idciudad = await pool.query('SELECT CodigoCiudad FROM ciudades WHERE Nombre =?', Ciudad);
-    JSON.stringify(idciudad);
-    const CodigoCiudad = idciudad[0].CodigoCiudad;
-    const Cedula = req.body.Cedula;
-    const Ruc = req.body.Ruc;
-    const RazonSocial = req.body.RazonSocial;
-    const Direccion = req.body.Direccion;
-    const Telefono = req.body.Telefono;
-    const Email = req.body.Email;
+    let cliente = req.body.clientes;
+    const CodigoCliente = cliente.CodigoCliente;
+    const CodigoCiudad=cliente.CodigoCiudad
+    const Cedula = cliente.Cedula;
+    const Ruc = cliente.Ruc;
+    const RazonSocial = cliente.RazonSocial;
+    const Direccion = cliente.Direccion;
+    const Telefono = cliente.Telefono;
+    const Email = cliente.Email;
     const values = { CodigoCliente, Cedula, Ruc, RazonSocial, Direccion, Telefono, Email, CodigoCiudad };
-    console.log(values)
+    console.log("Datos para actualizar "+values)
     const marcas = await pool.query('UPDATE clientes SET ? WHERE CodigoCliente = ?', [values, CodigoCliente]);
-    res.json({ message: 'el cliente fue actualizado' });
+    const vclientes = await pool.query('SELECT * FROM vclientes');
+    res.json(vclientes);
   }
   public async listarCiudad(req: Request, res: Response) {
 
