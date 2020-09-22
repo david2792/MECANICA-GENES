@@ -14,11 +14,41 @@
           hide-details
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-btn @click="Imprimir_reporte()">
+        <v-btn @click="dialogo_reporte = true">
           Generar Reporte.
           <v-icon>print</v-icon>
         </v-btn>
       </v-toolbar>
+
+       <!-- Dialogo para guardar o imprimir informe -->
+      <v-dialog v-model="dialogo_reporte" max-width="700px">
+        <v-card>
+          <v-card-title>Opciones de reportes</v-card-title>
+          <v-card-text>
+            <v-layout wrap>
+              <v-flex xs12 sm12 md2>
+                <v-checkbox v-model="enabled" hide-details class="shrink mr-2 mt-0"></v-checkbox>
+              </v-flex>
+              <v-flex xs12 sm12 md10>
+                <v-autocomplete
+                  :disabled="!enabled"
+                  :items="recepcionvehiculos.rvehiculos"
+                  :item-text="item => `${item.RazonSocial} - ${item.chapa}`"
+                  item-value="chapa"
+                  label="Buscar por número de chapa."
+                  v-model="numerochapa"
+                ></v-autocomplete>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" dark @click="Imprimir_reporte()">Ver informe</v-btn>
+            <v-btn color="primary" text @click="dialogo_reporte = false">Cancelar</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- fin dialogo informe -->
+
       <v-data-table :headers="headers" :items="recepcionvehiculos.rvehiculos" :search="search" class="elevation-1"
       >
         <template v-slot:items="props">
@@ -51,7 +81,9 @@ import moment from 'moment';
 export default {
   data() {
     return {
-      // dialogo_reporte: false,
+      dialogo_reporte: false,
+      numerochapa: "",
+      enabled: false,
       search: "",
       headers: [
         { text: "N° Recepción", value: "numero"},
@@ -79,11 +111,21 @@ export default {
     ...mapState(['recepcionvehiculos']),
   },
   methods:{
+    filtrarPorfecha() {
+      if (this.enabled) {
+        return this.$store.state.recepcionvehiculos.rvehiculos.filter(
+          item => item.chapa === this.numerochapa
+        );
+        console.log(this.fechaDesde, this.fechaFin);
+      } else {
+        return this.$store.state.recepcionvehiculos.rvehiculos;
+      }
+    },
     Imprimir_reporte(){
       let header={"auth-token":this.$store.state.token};
       let configuracion = { headers: header };
       this.$store.dispatch("getrvehiculos", configuracion);
-      let list_recepcion = this.$store.state.recepcionvehiculos.rvehiculos;
+      let list_recepcion = this.filtrarPorfecha();
       // const list_irecepcion = this.productos.filter(pro => pro.Categoria == this.CodigoCategoria);
       // console.log(producto_F);
       printJS({printable: list_recepcion, 
