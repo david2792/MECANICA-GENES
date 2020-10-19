@@ -27,24 +27,116 @@
           <v-card-text>
             <v-layout wrap>
               <v-flex xs12 sm12 md2>
-                <v-checkbox v-model="enabled" hide-details class="shrink mr-2 mt-0"></v-checkbox>
+                <v-checkbox
+                  v-model="enabled"
+                  hide-details
+                  class="shrink mr-2 mt-0"
+                ></v-checkbox>
               </v-flex>
               <v-flex xs12 sm12 md10>
                 <v-autocomplete
                   :disabled="!enabled"
                   :items="rordenTrabajo.rOrdenTrabajos"
-                  :item-text="item => `${item.RazonSocial} - ${item.numerochapa}`"
+                  :item-text="
+                    (item) => `${item.RazonSocial} - ${item.numerochapa}`
+                  "
                   item-value="numerochapa"
                   label="Buscar por número de chapa."
                   v-model="numerochapa"
-                  @keyup="filtrarPorfecha"
+                  @keyup="ffiltrar()"
                 ></v-autocomplete>
               </v-flex>
+              <!-- Fecha desde -->
+              <v-col sm6 md6>
+                <v-menu
+                  ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :return-value.sync="rordenTrabajo.fechaDesde"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="rordenTrabajo.fechaDesde"
+                      label="Fecha Desde"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    locale="Py"
+                    v-model="rordenTrabajo.fechaDesde"
+                    no-title
+                    scrollable
+                  >
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false"
+                      >Cancel</v-btn
+                    >
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="
+                        $refs.menu.save(rordenTrabajo.fechaDesde, ffiltrar())
+                      "
+                      >OK</v-btn
+                    >
+                  </v-date-picker>
+                </v-menu>
+              </v-col>
+              <!-- fin fecha desde -->
+              <v-spacer></v-spacer>
+              <!-- Fecha hasta -->
+              <v-col sm6 md6>
+                <v-menu
+                  ref="menu1"
+                  v-model="menu1"
+                  :close-on-content-click="false"
+                  :return-value.sync="rordenTrabajo.fechaHasta"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="rordenTrabajo.fechaHasta"
+                      label="Fecha Desde"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    locale="Py"
+                    v-model="rordenTrabajo.fechaHasta"
+                    no-title
+                    scrollable
+                  >
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu1 = false"
+                      >Cancel</v-btn
+                    >
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="$refs.menu1.save(rordenTrabajo.fechaHasta, ffiltrar())"
+                      >OK</v-btn
+                    >
+                  </v-date-picker>
+                </v-menu>
+              </v-col>
+              <!-- fin fecha hasta -->
             </v-layout>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" dark @click="Imprimir_reporte()">Ver informe</v-btn>
-            <v-btn color="primary" text @click="dialogo_reporte = false">Cancelar</v-btn>
+            <v-btn color="primary" dark @click="Imprimir_reporte()"
+              >Ver informe</v-btn
+            >
+             <v-btn color="primary" dark @click="imprimir_todo()"
+              >Ver Todo</v-btn>
+
+            <v-btn color="primary" text @click="dialogo_reporte = false"
+              >Cancelar</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -57,15 +149,15 @@
       >
         <template v-slot:items="props">
           <td>{{ props.item.numero }}</td>
-          <td>{{ props.item.RazonSocial}}</td>
-          <td>{{ props.item.Cedula}}</td>
+          <td>{{ props.item.RazonSocial }}</td>
+          <td>{{ props.item.Cedula }}</td>
           <td>{{ props.item.estadorden }}</td>
           <td>{{ props.item.estadorecepcion }}</td>
           <td>{{ props.item.fechaentrada }}</td>
-          <td>{{props.item.fechaemision}}</td>
+          <td>{{ props.item.fechaemision }}</td>
           <td>{{ props.item.observacionrecepcion }}</td>
-          <td>{{ props.item.kmrecepcion}}</td>
-          <td>{{ props.item.numerochapa}}</td>
+          <td>{{ props.item.kmrecepcion }}</td>
+          <td>{{ props.item.numerochapa }}</td>
 
           <td></td>
         </template>
@@ -85,13 +177,11 @@ export default {
     return {
       dialogo_reporte: false,
       search: "",
-      numerochapa: "",
-      fechaDesde: "",
-      fechaFin: "",
       enabled: false,
       menu: false,
-      menu2: false,
+      menu1: false,
       dialog: false,
+      modal: false,
       headers: [
         { text: "N° Recepción", value: "numero" },
         { text: "Razon Social", value: "RazonSocial" },
@@ -117,26 +207,34 @@ export default {
     ...mapState(["rordenTrabajo", "clientes"]),
   },
   methods: {
-    filtrarPorfecha() {
+    ffiltrar() {
+      let header = { "auth-token": this.$store.state.token };
+      let configuracion = { headers: header };
       if (this.enabled) {
-        return this.$store.state.rordenTrabajo.rOrdenTrabajos.filter(
-          item => item.numerochapa === this.numerochapa
-        );
-        console.log(this.fechaDesde, this.fechaFin);
+        this.$store.dispatch("filtrar_recepcion_Datos", configuracion);
       } else {
-        return this.$store.state.rordenTrabajo.rOrdenTrabajos;
+        console.log("Filtrar sólo por fecha");
+        this.$store.dispatch("getrecepcionvehiculosPorFecha", configuracion);
       }
     },
     Imprimir_reporte() {
-      let list_recepcion = [];
-      let header = { "auth-token": this.$store.state.token };
-      let configuracion = { headers: header };
-      this.$store.dispatch("getrvehiculos", configuracion);
-      list_recepcion = this.filtrarPorfecha();
-      // let f = f.getFullYear()+ "-"+ f.getMonth()+ "-" +f.getDate();
-      console.log(this.fechaDesde, this.fechaFin, this.$store.state.rordenTrabajo.rOrdenTrabajos.fechaentrada);
+      let lista = [];
+      this.ffiltrar();
+
+      if (this.enabled) {
+        lista = this.rordenTrabajo.filtrar_rvehiculos;
+      } else {
+        lista = this.rordenTrabajo.filtar_fecha;
+      }
+      this.mostrar_pdf(lista);
+    },
+    imprimir_todo() {
+      let lista = this.$store.state.rordenTrabajo.rOrdenTrabajos;
+      this.mostrar_pdf(lista);
+    },
+    mostrar_pdf(lista) {
       printJS({
-        printable: list_recepcion,
+        printable: lista,
         properties: [
           { field: "numero", displayName: "Número" },
           { field: "codigocliente", displayName: "Número" },
@@ -150,8 +248,12 @@ export default {
           { field: "kmrecepcion", displayName: "Km" },
           { field: "numerochapa", displayName: "N° de Chapa" },
         ],
+        showModal: true,
+        modalMessage: 'Cargando datos...',
         header: "Orden de trabajo",
         type: "json",
+        // gridHeaderStyle: 'font-weight: bold;', // Used when printing JSON. 
+        gridStyle: 'border: 1px solid lightgray; margin-bottom: -1px;', // Used when printing JSON. 
       });
     },
   },

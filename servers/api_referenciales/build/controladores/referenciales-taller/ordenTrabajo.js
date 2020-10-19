@@ -230,5 +230,23 @@ class OrdenControlador {
             }
         });
     }
+    ordenPorFecha(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("Recibido backend: ", req.body);
+            const fechaentrada = req.body.fechadesde;
+            const fechaemision = req.body.fechaHasta;
+            const numerochapa = req.body.chapa;
+            if (numerochapa) {
+                console.log("Filtrar datos_chapa_fecha");
+                const orden_Chapa_fecha = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE numerochapa=? AND fechaentrada  BETWEEN ? AND ?', [numerochapa, fechaentrada, fechaemision]);
+                res.json(orden_Chapa_fecha);
+            }
+            else {
+                console.log("Filtrar datos por fecha");
+                const orden_recepcionFecha = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE fechaentrada  BETWEEN ? AND ?', [fechaentrada, fechaemision]);
+                res.json(orden_recepcionFecha);
+            }
+        });
+    }
 }
 exports.ordenControlador = new OrdenControlador();

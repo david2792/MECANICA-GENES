@@ -89,7 +89,7 @@ class Server {
         this.app.use('/api/anios', validateToken_1.TokenValidation, ruta_anios_1.default);
         this.app.use('/api/estadotrabajos', validateToken_1.TokenValidation, ruta_estadorecepcion_1.default);
         this.app.use('/api/vehiculos', validateToken_1.TokenValidation, ruta_vehiculo_1.default);
-        this.app.use('/api/rvehiculo', validateToken_1.TokenValidation, ruta_recepcionvehiculo_1.default);
+        this.app.use('/api/rvehiculo', ruta_recepcionvehiculo_1.default);
         this.app.use('/api/orden', validateToken_1.TokenValidation, ruta_ordenTrabajo_1.default);
         this.app.use('/api/mecanico', validateToken_1.TokenValidation, ruta_usuarioMecanico_1.default);
         // fin de referenciales

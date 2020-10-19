@@ -98,7 +98,7 @@ class Server {
           this.app.use('/api/anios',TokenValidation,aniosRutas);
          this.app.use('/api/estadotrabajos',TokenValidation,estdoTrabajoRutas);
          this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
-        this.app.use('/api/rvehiculo',TokenValidation,recepcionVehiculoRuta);
+        this.app.use('/api/rvehiculo',recepcionVehiculoRuta);
         this.app.use('/api/orden',TokenValidation,ordenRuta);
         this.app.use('/api/mecanico',TokenValidation,usuariomecanicoRutas);
         // fin de referenciales

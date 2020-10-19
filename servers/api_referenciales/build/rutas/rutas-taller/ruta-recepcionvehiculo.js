@@ -8,11 +8,12 @@ class RecepcionVehiculoRuta {
         this.config();
     }
     config() {
-        this.router.get('/:id', recepcionVehiculo_1.recepcionvehiculoControlador.listar);
+        this.router.get('/lista:id', recepcionVehiculo_1.recepcionvehiculoControlador.listar);
         this.router.get('/update/:id', recepcionVehiculo_1.recepcionvehiculoControlador.listarUno);
         this.router.get('/', recepcionVehiculo_1.recepcionvehiculoControlador.listarRecepcion);
         this.router.post('/', recepcionVehiculo_1.recepcionvehiculoControlador.guardar);
         //    this.router.put('/',traccionesControlador.actualizar);
+        this.router.post('/recepcionFecha', recepcionVehiculo_1.recepcionvehiculoControlador.recepcionPorFecha);
     }
 }
 const recepcionVehiculoRuta = new RecepcionVehiculoRuta();
