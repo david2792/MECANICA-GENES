@@ -34,41 +34,38 @@ class FormasPagoControlador {
     crear(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let FormasPago = req.body.fpago;
-            console.log("Datos del proveedor recibidos correctamente: ", FormasPago);
+            console.log("Datos recibidos correctamente(Backend): ", FormasPago);
             const Codigo = yield conexionBD_1.default.query("SELECT MAX(CodigoFormasPago)+1 AS Codigo FROM formaspago");
             JSON.stringify(Codigo);
             const CodigoFormasPago = Codigo[0].Codigo;
             const Descripcion = FormasPago.Descripcion;
             const Plazo = FormasPago.Plazo;
             const Dias = FormasPago.Dias;
-            const values = { CodigoFormasPago, Descripcion, Plazo, Dias };
+            const Estado = FormasPago.Estado;
+            const values = { CodigoFormasPago, Descripcion, Plazo, Dias, Estado };
             console.log(values);
-            yield conexionBD_1.default.query("INSERT INTO proveedores SET ?", values);
-            const vproveedores = yield conexionBD_1.default.query('SELECT * FROM vproveedores');
-            res.json(vproveedores);
+            yield conexionBD_1.default.query("INSERT INTO formaspago SET ?", values);
+            const formaspago = yield conexionBD_1.default.query('SELECT * FROM formaspago');
+            res.json(formaspago);
         });
     }
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let Proveedor = req.body.proveedores;
+            let FormasPago = req.body.fpago;
             yield transaccionBD_1.default.query("SET autocommit=0");
-            console.log("Datos del proveedor recibidos correctamente: ", Proveedor);
-            const CodigoProveedor = Proveedor.CodigoProveedor;
-            const RazonSocial = Proveedor.RazonSocial;
-            const Cedula = Proveedor.Cedula;
-            const Ruc = Proveedor.Ruc;
-            const Direccion = Proveedor.Direccion;
-            const Telefono = Proveedor.Telefono;
-            const Email = Proveedor.Email;
-            const Web = Proveedor.Web;
-            const CodigoCiudad = Proveedor.CodigoCiudad;
-            const values = { CodigoProveedor, RazonSocial, Cedula, Ruc, Direccion, Telefono, Email, Web, CodigoCiudad };
+            console.log("Datos recibidos correctamente(UPDATE backend): ", FormasPago);
+            const CodigoFormasPago = FormasPago.CodigoFormasPago;
+            const Descripcion = FormasPago.Descripcion;
+            const Plazo = FormasPago.Plazo;
+            const Dias = FormasPago.Dias;
+            const Estado = FormasPago.Estado;
+            const values = { CodigoFormasPago, Descripcion, Plazo, Dias, Estado };
             console.log(values);
-            yield conexionBD_1.default.query("UPDATE proveedores SET ? WHERE CodigoProveedor = ?", [values, CodigoProveedor]);
+            yield conexionBD_1.default.query("UPDATE formaspago SET ? WHERE CodigoFormasPago = ?", [values, CodigoFormasPago]);
             yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
             yield transaccionBD_1.default.query("SET autocommit=1");
-            const vproveedores = yield conexionBD_1.default.query('SELECT * FROM vproveedores');
-            res.json(vproveedores);
+            const fpagos = yield conexionBD_1.default.query('SELECT * FROM formaspago');
+            res.json(fpagos);
         });
     }
 }

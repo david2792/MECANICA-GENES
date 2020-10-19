@@ -18,40 +18,37 @@ class FormasPagoControlador {
 
     public async crear(req: Request, res: Response):Promise<void>{
         let FormasPago = req.body.fpago;
-        console.log("Datos del proveedor recibidos correctamente: ", FormasPago);
+        console.log("Datos recibidos correctamente(Backend): ", FormasPago);
         const Codigo = await pool.query("SELECT MAX(CodigoFormasPago)+1 AS Codigo FROM formaspago" );
         JSON.stringify(Codigo);
         const CodigoFormasPago = Codigo[0].Codigo;
         const Descripcion = FormasPago.Descripcion;
         const Plazo = FormasPago.Plazo;
         const Dias = FormasPago.Dias;
-        const values= {CodigoFormasPago, Descripcion, Plazo, Dias};
+        const Estado = FormasPago.Estado;
+        const values= {CodigoFormasPago, Descripcion, Plazo, Dias, Estado};
         console.log(values);
-        await pool.query("INSERT INTO proveedores SET ?", values);
-        const vproveedores = await pool.query('SELECT * FROM vproveedores');
-        res.json(vproveedores);
+        await pool.query("INSERT INTO formaspago SET ?", values);
+        const formaspago = await pool.query('SELECT * FROM formaspago');
+        res.json(formaspago);
     }
 
     public async actualizar(req: Request, res: Response):Promise<void>{
-        let Proveedor = req.body.proveedores;
+        let FormasPago = req.body.fpago;
         await  transaccion.query("SET autocommit=0");
-        console.log("Datos del proveedor recibidos correctamente: ", Proveedor);
-        const CodigoProveedor = Proveedor.CodigoProveedor;
-        const RazonSocial = Proveedor.RazonSocial;
-        const Cedula = Proveedor.Cedula;
-        const Ruc = Proveedor.Ruc;
-        const Direccion = Proveedor.Direccion;
-        const Telefono = Proveedor.Telefono;
-        const Email = Proveedor.Email;
-        const Web = Proveedor.Web;
-        const CodigoCiudad = Proveedor.CodigoCiudad;
-        const values= {CodigoProveedor, RazonSocial, Cedula, Ruc, Direccion, Telefono, Email, Web, CodigoCiudad};
+        console.log("Datos recibidos correctamente(UPDATE backend): ", FormasPago);
+        const CodigoFormasPago = FormasPago.CodigoFormasPago;
+        const Descripcion = FormasPago.Descripcion;
+        const Plazo = FormasPago.Plazo;
+        const Dias = FormasPago.Dias;
+        const Estado = FormasPago.Estado;
+        const values= {CodigoFormasPago, Descripcion, Plazo, Dias, Estado};
         console.log(values);
-        await pool.query("UPDATE proveedores SET ? WHERE CodigoProveedor = ?", [values, CodigoProveedor]);
+        await pool.query("UPDATE formaspago SET ? WHERE CodigoFormasPago = ?", [values, CodigoFormasPago]);
         await transaccion.query("COMMIT");// se confirma la transaccion
         await transaccion.query("SET autocommit=1")
-        const vproveedores = await pool.query('SELECT * FROM vproveedores');
-        res.json(vproveedores);
+        const fpagos = await pool.query('SELECT * FROM formaspago');
+        res.json(fpagos);
     }
 }
 export const formasPagoControlador = new FormasPagoControlador();
