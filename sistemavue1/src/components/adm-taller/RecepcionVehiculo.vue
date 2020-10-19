@@ -486,7 +486,7 @@ export default {
       let header={"auth-token" : this.$store.state.token};
       let configuracion= {headers : header};
        let cliente = this.cliente;
-      axios.get('rvehiculo/'+cliente,configuracion).then(function (response){
+      axios.get('rvehiculo/list/'+cliente,configuracion).then(function (response){
         me.articulos=response.data;
       }).catch(function(error){
         console.log(error);
@@ -526,7 +526,7 @@ export default {
       let me=this;
       let header={"auth-token" : this.$store.state.token};
       let configuracion= {headers : header};
-      axios.get('rvehiculo/',configuracion).then(function (response){
+      axios.get('rvehiculo/listar',configuracion).then(function (response){
         me.ventas=response.data;
         console.log(me.ventas)
       }).catch(function(error){

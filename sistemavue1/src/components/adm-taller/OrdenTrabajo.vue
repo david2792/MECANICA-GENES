@@ -160,6 +160,7 @@
                 color="purple darken-4"> <v-icon @click="entregado(props.item)">
               add
             </v-icon>Confirmar</v-btn>
+            <spacer></spacer>
             <v-btn  class="mx-2"
                 @click="editar(props.item)"
                 dark
@@ -174,8 +175,8 @@
           <td>{{ props.item.RazonSocial }}</td>
           <td>{{ props.item.observacionorden }}</td>
           <td>{{ props.item.observacionrecepcion }}</td>
-          <td>{{ props.item.fechaemision }}</td>
-          <td>{{ props.item.fechaentrada }}</td>
+          <td>{{  props.item.fechaemision}}</td>
+          <td>{{ props.item.fechaentrada}}</td>
          <td> {{ props.item.estadorden }} </td>
          
          
@@ -469,6 +470,7 @@ export default {
    // this.listarArticulos()
   },
   methods: {
+
     fromatodemoneda(value) {
       let val = (value/1).toFixed(0).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -783,7 +785,6 @@ export default {
       let configuracion= {headers : header};
       axios.get('orden/listar/',configuracion).then(function (response){
         me.ventas=response.data;
-        console.log(me.ventas)
       }).catch(function(error){
         console.log(error);
       });

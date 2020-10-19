@@ -31,19 +31,22 @@ class ServicioControlador {
 
   public async crear(req: Request, res: Response): Promise<void> {
     try {
+      const Codigo = await pool.query('SELECT MAX(CodigoProducto)+1 AS Codigo FROM productos')
+      JSON.stringify(Codigo); 
+      const CodigoProducto = Codigo[0].Codigo;
       const categoria = "SERVICIO";
       const marca = "NO DEFINIDO";
       const idimpuesto = "3"
       const iddeposito = "1"
       // se inicia recuperando los datos de la tabla productos
-      const CodigoProducto = req.body.CodigoProducto;
+      let producto=req.body.productos;
       const CodigoCategoria = '2';
       const CodigoMarca = '1';
       const CodigoUnidad = '1';
       const CodigoRepresentante = '1';
       const CodigImpuesto = '3';
-      const CodigoBarra = req.body.CodigoBarra;
-      const Descripcion = req.body.Descripcion;
+      const CodigoBarra = producto.CodigoBarra;
+      const Descripcion = producto.Descripcion;
       const cantidadpaquete = '0';
       const perecedero = '1';
       const peso = '0';
@@ -56,9 +59,9 @@ class ServicioControlador {
       const StockActual = 0;
       const StockMinimo =0;
       const StockMaximo = 0;
-      const PrecioCompra = req.body.PrecioCompra;
-      const PrecioVentaMinorista = req.body.PrecioVentaMinorista;
-      const PrecioVentaMayorista = req.body.PrecioVentaMinorista;
+      const PrecioCompra = producto.PrecioCompra;
+      const PrecioVentaMinorista =producto.PrecioVentaMinorista;
+      const PrecioVentaMayorista =producto.PrecioVentaMinorista;
       const UtilidadMinima = 0;
       const UtilidadMaxima = 0;
       const stock = {
@@ -71,7 +74,8 @@ class ServicioControlador {
       await transaccion.query('INSERT INTO stock  SET ?', stock);// se inserta los datos en la tabla stock
       await transaccion.query("COMMIT");// se confirma la transaccion
       await transaccion.query("SET autocommit=1")
-      res.json({ message: "el producto fue guardado" })
+      const vproducto = await pool.query('SELECT * FROM vproductos where Categoria = "SERVICIO" and CodigoProducto>0');
+      res.json(vproducto)
     } catch (error) {
       await transaccion.query("ROLLBACK");
       await transaccion.query("SET autocommit=1")
@@ -82,20 +86,20 @@ class ServicioControlador {
 
   }
   public async actualizar(req: Request, res: Response): Promise<any> {
-
+    let producto=req.body.productos;
     const categoria = "SERVICIO";
     const marca = "NO DEFINIDO";
     const idimpuesto = "3"
     const iddeposito = "1"
     // se inicia recuperando los datos de la tabla productos
-    const CodigoProducto = req.body.CodigoProducto;
+    const CodigoProducto = producto.CodigoProducto;
     const CodigoCategoria = '2';
     const CodigoMarca = '1';
     const CodigoUnidad = '1';
     const CodigoRepresentante = '1';
     const CodigImpuesto = '3';
-    const CodigoBarra = req.body.CodigoBarra;
-    const Descripcion = req.body.Descripcion;
+    const CodigoBarra =producto.CodigoBarra;
+    const Descripcion = producto.Descripcion;
     const cantidadpaquete = '0';
     const perecedero = '1';
     const peso = '0';
@@ -108,9 +112,9 @@ class ServicioControlador {
     const StockActual = 0;
     const StockMinimo =0;
     const StockMaximo = 0;
-    const PrecioCompra = req.body.PrecioCompra;
-    const PrecioVentaMinorista = req.body.PrecioVentaMinorista;
-    const PrecioVentaMayorista = req.body.PrecioVentaMinorista;
+    const PrecioCompra = producto.PrecioCompra;
+    const PrecioVentaMinorista =producto.PrecioVentaMinorista;
+    const PrecioVentaMayorista = producto.PrecioVentaMinorista;
     const UtilidadMinima = 0;
     const UtilidadMaxima = 0;
     const stock = {
@@ -124,7 +128,8 @@ class ServicioControlador {
       await transaccion.query('UPDATE  stock  SET ? WHERE codigoproducto= ?', [stock, CodigoProducto]);// se inserta los datos en la tabla stock
       await transaccion.query("COMMIT");// se confirma la transaccion
       await transaccion.query("SET autocommit=1")
-      res.json({ message: "el producto fue actualizado" });
+      const vproducto = await pool.query('SELECT * FROM vproductos where Categoria = "SERVICIO" and CodigoProducto>0');
+      res.json(vproducto)
       console.timeEnd('loop');
     } catch (error) {
       await transaccion.query("ROLLBACK");

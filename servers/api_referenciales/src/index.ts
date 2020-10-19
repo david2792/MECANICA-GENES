@@ -49,7 +49,12 @@ import tiposDocumentosRutas from './rutas/rutas-referenciales-factura/ruta_tipos
 
 // Referenciales compras
 import proveedorRutas from './rutas/rutas-compras/rutas-proveedores';
-
+// referenciales cajas 
+import aperturaRutas from './rutas/rutas-referenciales-caja/ruta-aperturacaja'
+// facturacion
+import facturacionRutas from './rutas/rutas-facturacion/ruta-facturacion'
+import condicionRutas from './rutas/rutas-referenciales-factura/ruta-condicion'
+import tipoDocumentonRutas from './rutas/rutas-referenciales-factura/ruta-tipodocumento'
 // fin referenciales productos
 class Server {
 
@@ -97,8 +102,8 @@ class Server {
          this.app.use('/api/colores',TokenValidation,colorRutas);
           this.app.use('/api/anios',TokenValidation,aniosRutas);
          this.app.use('/api/estadotrabajos',TokenValidation,estdoTrabajoRutas);
-         this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
-        this.app.use('/api/rvehiculo',TokenValidation,recepcionVehiculoRuta);
+         this.app.use('/api/vehiculos',vehiculoRuta);
+        this.app.use('/api/rvehiculo',recepcionVehiculoRuta);
         this.app.use('/api/orden',TokenValidation,ordenRuta);
         this.app.use('/api/mecanico',TokenValidation,usuariomecanicoRutas);
         // fin de referenciales
@@ -110,6 +115,12 @@ class Server {
         this.app.use('/api/proveedores', TokenValidation, proveedorRutas);
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
+        // ruta caja
+        this.app.use('/api/abrircaja', TokenValidation, aperturaRutas);
+        // facturacion
+        this.app.use('/api/facturacion', TokenValidation, facturacionRutas);
+        this.app.use('/api/condicion', TokenValidation, condicionRutas);
+        this.app.use('/api/tipodocumento', TokenValidation, tipoDocumentonRutas);
     }
 
     iniciar(): void {

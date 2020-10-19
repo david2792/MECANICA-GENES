@@ -45,34 +45,19 @@ class ProductoControlador {
     crear(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const categoria = req.body.Categoria;
-                console.log(categoria);
-                const id = yield conexionBD_1.default.query('SELECT CodigoCategoria FROM categorias WHERE Descripcion =?', categoria);
-                JSON.stringify(id); //CONVIERTE LA CONSULTA A UN JSON
-                //se capturan los codigos
-                const marca = req.body.Marca;
-                console.log(marca);
-                const idmarca = yield conexionBD_1.default.query('SELECT CodigoMarca FROM marcas WHERE Descripcion =?', marca);
-                JSON.stringify(idmarca);
-                ///
-                const impuesto = req.body.Impuesto;
-                console.log(impuesto);
-                const idimpuesto = yield conexionBD_1.default.query('SELECT CodigImpuesto FROM tipoimpuesto WHERE Descripcion =?', impuesto);
-                JSON.stringify(idimpuesto);
-                ///
-                const deposito = req.body.Deposito;
-                console.log(deposito);
-                const iddeposito = yield conexionBD_1.default.query('SELECT codigoDeposito FROM depositos WHERE Nombre =?', deposito);
-                JSON.stringify(iddeposito);
+                const Codigo = yield conexionBD_1.default.query('SELECT MAX(CodigoProducto)+1 AS Codigo FROM productos');
+                JSON.stringify(Codigo);
+                const CodigoProducto = Codigo[0].Codigo;
+                let producto = req.body.productos;
+                console.log(producto);
                 // se inicia recuperando los datos de la tabla productos
-                const CodigoProducto = req.body.CodigoProducto;
-                const CodigoCategoria = id[0].CodigoCategoria;
-                const CodigoMarca = idmarca[0].CodigoMarca;
+                const CodigoCategoria = producto.CodigoCategoria;
+                const CodigoMarca = producto.CodigoMarca;
                 const CodigoUnidad = '1';
                 const CodigoRepresentante = '1';
-                const CodigImpuesto = idimpuesto[0].CodigImpuesto;
-                const CodigoBarra = req.body.CodigoBarra;
-                const Descripcion = req.body.Descripcion;
+                const CodigImpuesto = producto.CodigImpuesto;
+                const CodigoBarra = producto.CodigoBarra;
+                const Descripcion = producto.Descripcion;
                 const cantidadpaquete = '0';
                 const perecedero = '1';
                 const peso = '0';
@@ -81,13 +66,13 @@ class ProductoControlador {
                     CodigoProducto, CodigoBarra, Descripcion, cantidadpaquete, peso, perecedero, estado,
                     CodigoRepresentante, CodigoUnidad, CodigoMarca, CodigoCategoria, CodigImpuesto
                 }; // datos de productos
-                const codigoDeposito = iddeposito[0].codigoDeposito;
-                const StockActual = req.body.StockActual;
-                const StockMinimo = req.body.StockMinimo;
+                const codigoDeposito = producto.CodigoDeposito;
+                const StockActual = producto.StockActual;
+                const StockMinimo = producto.StockMinimo;
                 const StockMaximo = 0;
-                const PrecioCompra = req.body.PrecioCompra;
-                const PrecioVentaMinorista = req.body.PrecioVentaMinorista;
-                const PrecioVentaMayorista = req.body.PrecioVentaMinorista;
+                const PrecioCompra = producto.PrecioCompra;
+                const PrecioVentaMinorista = producto.PrecioVentaMinorista;
+                const PrecioVentaMayorista = producto.PrecioVentaMinorista;
                 const UtilidadMinima = 0;
                 const UtilidadMaxima = 0;
                 const stock = {
@@ -100,7 +85,8 @@ class ProductoControlador {
                 yield transaccionBD_1.default.query('INSERT INTO stock  SET ?', stock); // se inserta los datos en la tabla stock
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
-                res.json({ message: "el producto fue guardado" });
+                const vproducto = yield conexionBD_1.default.query('SELECT * FROM vproductos where Categoria <> "SERVICIO" and CodigoProducto>0');
+                res.json(vproducto);
             }
             catch (error) {
                 yield transaccionBD_1.default.query("ROLLBACK");
@@ -112,34 +98,16 @@ class ProductoControlador {
     }
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const categoria = req.body.Categoria;
-            console.log(categoria);
-            const id = yield conexionBD_1.default.query('SELECT CodigoCategoria FROM categorias WHERE Descripcion =?', categoria);
-            JSON.stringify(id); //CONVIERTE LA CONSULTA A UN JSON
-            //se capturan los codigos
-            const marca = req.body.Marca;
-            console.log(marca);
-            const idmarca = yield conexionBD_1.default.query('SELECT CodigoMarca FROM marcas WHERE Descripcion =?', marca);
-            JSON.stringify(idmarca);
-            ///
-            const impuesto = req.body.Impuesto;
-            console.log(impuesto);
-            const idimpuesto = yield conexionBD_1.default.query('SELECT CodigImpuesto FROM tipoimpuesto WHERE Descripcion =?', impuesto);
-            JSON.stringify(idimpuesto);
-            ///
-            const deposito = req.body.Deposito;
-            console.log(deposito);
-            const iddeposito = yield conexionBD_1.default.query('SELECT codigoDeposito FROM depositos WHERE Nombre =?', deposito);
-            JSON.stringify(iddeposito);
+            let producto = req.body.productos;
+            const CodigoProducto = producto.CodigoProducto;
             // se inicia recuperando los datos de la tabla productos
-            const CodigoProducto = req.body.CodigoProducto;
-            const CodigoCategoria = id[0].CodigoCategoria;
-            const CodigoMarca = idmarca[0].CodigoMarca;
+            const CodigoCategoria = producto.CodigoCategoria;
+            const CodigoMarca = producto.CodigoMarca;
             const CodigoUnidad = '1';
             const CodigoRepresentante = '1';
-            const CodigImpuesto = idimpuesto[0].CodigImpuesto;
-            const CodigoBarra = req.body.CodigoBarra;
-            const Descripcion = req.body.Descripcion;
+            const CodigImpuesto = producto.CodigImpuesto;
+            const CodigoBarra = producto.CodigoBarra;
+            const Descripcion = producto.Descripcion;
             const cantidadpaquete = '0';
             const perecedero = '1';
             const peso = '0';
@@ -148,13 +116,13 @@ class ProductoControlador {
                 CodigoProducto, CodigoBarra, Descripcion, cantidadpaquete, peso, perecedero, estado,
                 CodigoRepresentante, CodigoUnidad, CodigoMarca, CodigoCategoria, CodigImpuesto
             }; // datos de productos
-            const codigoDeposito = iddeposito[0].codigoDeposito;
-            const StockActual = req.body.StockActual;
-            const StockMinimo = req.body.StockMinimo;
+            const codigoDeposito = producto.CodigoDeposito;
+            const StockActual = producto.StockActual;
+            const StockMinimo = producto.StockMinimo;
             const StockMaximo = 0;
-            const PrecioCompra = req.body.PrecioCompra;
-            const PrecioVentaMinorista = req.body.PrecioVentaMinorista;
-            const PrecioVentaMayorista = req.body.PrecioVentaMinorista;
+            const PrecioCompra = producto.PrecioCompra;
+            const PrecioVentaMinorista = producto.PrecioVentaMinorista;
+            const PrecioVentaMayorista = producto.PrecioVentaMinorista;
             const UtilidadMinima = 0;
             const UtilidadMaxima = 0;
             const stock = {
@@ -168,7 +136,8 @@ class ProductoControlador {
                 yield transaccionBD_1.default.query('UPDATE  stock  SET ? WHERE codigoproducto= ?', [stock, CodigoProducto]); // se inserta los datos en la tabla stock
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
-                res.json({ message: "el producto fue actualizado" });
+                const vproducto = yield conexionBD_1.default.query('SELECT * FROM vproductos where Categoria <> "SERVICIO" and CodigoProducto>0');
+                res.json(vproducto);
                 console.timeEnd('loop');
             }
             catch (error) {

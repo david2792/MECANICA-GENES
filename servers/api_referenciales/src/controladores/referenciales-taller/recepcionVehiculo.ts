@@ -5,8 +5,6 @@ import transaccion from '../../transaccionBD';
 class RecepcionVehiculoControlador {
     public async listar(req: Request, res: Response):Promise<any>  {
         const { id } = req.params;
-        const CodigoCliente=req.body.cliente;
-        console.log(CodigoCliente)
         const marcas = await pool.query('SELECT * FROM vclientevehiculos WHERE  CodigoCliente=?',id);
         res.json(marcas);
 
@@ -14,6 +12,7 @@ class RecepcionVehiculoControlador {
     public async listarUno(req: Request, res: Response):Promise<any>  {
         const { id } = req.params;
         const marcas = await pool.query('SELECT * FROM vrecepciones WHERE numero=?',id);
+       
         console.log(marcas)
         res.json(marcas);
 
@@ -21,12 +20,21 @@ class RecepcionVehiculoControlador {
 
     public async listarRecepcion(req: Request, res: Response) {
       const marcas = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
+      for (let i in marcas) {
+       
+        marcas[i].fechaentrada = new Date().toJSON().slice(0,10).replace(/-/g,'/')
+      }
+     
       res.json(marcas);
 
   }
   
     public async guardar(req: Request, res: Response):Promise<any>  {
       try {
+        await  transaccion.query("SET autocommit=0")
+       
+        let recepcion = req.body.recepciones
+
         const codigomaximo = await pool.query('SELECT MAX(numero)+1 AS codigo FROM recepciones');
             JSON.stringify(codigomaximo);
             let numero = codigomaximo[0].codigo;
@@ -34,32 +42,31 @@ class RecepcionVehiculoControlador {
             {
               numero=1
             }
-        const codigosucursal=req.body.CodigoSucursal;
-        const puntoexpedicion =req.body.PuntoExpedicion;
-        // const numero = '1';
-        const CodigoCliente=req.body.codigocliente;
-        const recibidopor=req.body.recibidopor;
-        const estado=req.body.estado;
+        const codigosucursal=recepcion.codigosucursal;
+        const puntoexpedicion =recepcion.puntoexpedicion;
+        const CodigoCliente=recepcion.codigocliente;
+        const recibidopor=recepcion.recibidopor;
+        const estado="1";
         const fechaentrada = new Date().toJSON().slice(0,10).replace(/-/g,'/');
         const horaentrada= "00:00:00";
-        const observaciones=req.body.observaciones;
+        const observaciones=recepcion.observaciones;
         const recepciones={codigosucursal,puntoexpedicion,numero,CodigoCliente,recibidopor,estado,fechaentrada,
       horaentrada,observaciones}
       console.log(recepciones)
-      await  transaccion.query("SET autocommit=0")
       await transaccion.query('INSERT INTO recepciones  SET ?', recepciones);
-        let detalles=req.body.detalles;
-          console.log(detalles)
-            for (let i in detalles){
-              const codigonivelcombustible =detalles[i].codigonivel
-              const codigovehiculos= detalles[i].Codigo 
-              const km = detalles[i].km
-              const detalle = {codigosucursal,puntoexpedicion,numero,codigovehiculos,codigonivelcombustible,km}
-              await transaccion.query('INSERT INTO detallesrecepciones  SET ?', detalle);
-          }
+     //   let detalle=req.body.detalles;
+              const codigonivelcombustible =recepcion.codigonivelcombustible
+              const codigovehiculos= recepcion.codigovehiculo
+              const km = recepcion.km
+              const detalleRecepcion = {codigosucursal,puntoexpedicion,numero,codigovehiculos,codigonivelcombustible,km}
+              await transaccion.query('INSERT INTO detallesrecepciones  SET ?', detalleRecepcion);
          await transaccion.query("COMMIT");// se confirma la transaccion
          await transaccion.query("SET autocommit=1")
-         res.json({ message: "el producto fue guardado" })
+         const vRecepcion = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
+         for (let i in vRecepcion) {
+             vRecepcion[i].fechaentrada = new Date().toJSON().slice(0,10).replace(/-/g,'/')
+         }   
+        res.json(vRecepcion);
       } catch (error) {
         await transaccion.query("ROLLBACK");
         await transaccion.query("SET autocommit=1")
@@ -67,7 +74,47 @@ class RecepcionVehiculoControlador {
         throw error
       }
     }   
-
+  
+    public async actualizar(req: Request, res: Response):Promise<any>  {
+      try {
+        await  transaccion.query("SET autocommit=0")
+       
+        let recepcion = req.body.recepciones
+        const numero = recepcion.numero
+        const codigosucursal=recepcion.codigosucursal;
+        const puntoexpedicion =recepcion.puntoexpedicion;
+        const CodigoCliente=recepcion.codigocliente;
+        const recibidopor=recepcion.recibidopor;
+        const estado="1";
+        const fechaentrada = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+        const horaentrada= "00:00:00";
+        const observaciones=recepcion.observaciones;
+        const recepciones={codigosucursal,puntoexpedicion,numero,CodigoCliente,recibidopor,estado,fechaentrada,
+      horaentrada,observaciones}
+      console.log(recepciones)
+      //await transaccion.query('INSERT INTO recepciones  SET ?', recepciones);
+     //   let detalle=req.body.detalles;
+              const codigonivelcombustible =recepcion.codigonivelcombustible
+              const codigovehiculos= recepcion.codigovehiculo
+              const km = recepcion.km
+              const detalleRecepcion = {codigosucursal,puntoexpedicion,numero,codigovehiculos,codigonivelcombustible,km}
+               await transaccion.query('UPDATE recepciones SET ? WHERE numero = ?',[ recepciones,numero]);
+              //await transaccion.query('INSERT INTO detallesrecepciones  SET ?', detalleRecepcion);
+         await transaccion.query("COMMIT");// se confirma la transaccion
+         await transaccion.query("SET autocommit=1")
+         const vRecepcion = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
+      for (let i in vRecepcion) {
+       
+         vRecepcion[i].fechaentrada = new Date().toJSON().slice(0,10).replace(/-/g,'/')
+      }   
+      res.json(vRecepcion);
+      } catch (error) {
+        await transaccion.query("ROLLBACK");
+        await transaccion.query("SET autocommit=1")
+        console.log("ocurrio un error: " + error);
+        throw error
+      }
+    }   
 }
 
 export const recepcionvehiculoControlador = new RecepcionVehiculoControlador();
