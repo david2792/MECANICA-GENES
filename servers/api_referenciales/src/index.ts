@@ -49,6 +49,7 @@ import tiposDocumentosRutas from './rutas/rutas-referenciales-factura/ruta_tipos
 
 // Referenciales compras
 import proveedorRutas from './rutas/rutas-compras/rutas-proveedores';
+import formaPagosRutas from './rutas/rutas-compras/rutas-formapagos';
 
 // fin referenciales productos
 class Server {
@@ -108,6 +109,7 @@ class Server {
         this.app.use('/api/tiposDocumentos', TokenValidation,tiposDocumentosRutas);
         // referenciales compras
         this.app.use('/api/proveedores', TokenValidation, proveedorRutas);
+        this.app.use('/api/fpagos', formaPagosRutas);
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
     }
