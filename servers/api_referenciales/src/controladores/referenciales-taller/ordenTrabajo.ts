@@ -220,6 +220,27 @@ class OrdenControlador {
         throw error
       }
     }
+
+    public async ordenPorFecha(req: Request, res: Response) {
+      console.log("Recibido backend: ",req.body)
+      const fechaentrada = req.body.fechadesde;
+      const fechaemision = req.body.fechaHasta;
+      const numerochapa = req.body.chapa;
+      if (numerochapa) {
+        console.log("Filtrar datos_chapa_fecha");
+        const orden_Chapa_fecha = await pool.query('SELECT * FROM vordentrabajo WHERE numerochapa=? AND fechaentrada  BETWEEN ? AND ?',[numerochapa, fechaentrada, fechaemision]);
+        res.json(orden_Chapa_fecha); 
+      } else {
+        console.log("Filtrar datos por fecha");
+        const orden_recepcionFecha = await pool.query('SELECT * FROM vordentrabajo WHERE fechaentrada  BETWEEN ? AND ?',[fechaentrada, fechaemision]);
+        res.json(orden_recepcionFecha);
+      }
+  }
+
+  public async listarOrdenConf(req: Request, res: Response):Promise<any>  {
+    const recepciones = await pool.query('SELECT * FROM vrecepciones WHERE estado=2');
+    res.json(recepciones);
+}
 }
 
 export const ordenControlador = new OrdenControlador();

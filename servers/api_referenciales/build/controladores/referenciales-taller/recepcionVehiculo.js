@@ -37,6 +37,7 @@ class RecepcionVehiculoControlador {
             for (let i in marcas) {
                 marcas[i].fechaentrada = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
             }
+            console.log("hola");
             res.json(marcas);
         });
     }
@@ -123,6 +124,24 @@ class RecepcionVehiculoControlador {
                 yield transaccionBD_1.default.query("SET autocommit=1");
                 console.log("ocurrio un error: " + error);
                 throw error;
+            }
+        });
+    }
+    recepcionPorFecha(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            const fechaentrada = req.body.fechadesde;
+            const fechaemision = req.body.fechaHasta;
+            const chapa = req.body.chapa;
+            if (chapa) {
+                console.log("Filtrar datos_chapa_fecha");
+                const recepcionChapa_fecha = yield conexionBD_1.default.query('SELECT * FROM vrecepciones WHERE estado=2 AND chapa=? AND fechaentrada  BETWEEN ? AND ?', [chapa, fechaentrada, fechaemision]);
+                res.json(recepcionChapa_fecha);
+            }
+            else {
+                console.log("Filtrar datos por fecha");
+                const recepcionFecha = yield conexionBD_1.default.query('SELECT * FROM vrecepciones WHERE estado=2 AND fechaentrada  BETWEEN ? AND ?', [fechaentrada, fechaemision]);
+                res.json(recepcionFecha);
             }
         });
     }

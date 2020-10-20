@@ -55,6 +55,8 @@ import aperturaRutas from './rutas/rutas-referenciales-caja/ruta-aperturacaja'
 import facturacionRutas from './rutas/rutas-facturacion/ruta-facturacion'
 import condicionRutas from './rutas/rutas-referenciales-factura/ruta-condicion'
 import tipoDocumentonRutas from './rutas/rutas-referenciales-factura/ruta-tipodocumento'
+import formaPagosRutas from './rutas/rutas-compras/rutas-formapagos';
+
 // fin referenciales productos
 class Server {
 
@@ -103,6 +105,7 @@ class Server {
           this.app.use('/api/anios',TokenValidation,aniosRutas);
          this.app.use('/api/estadotrabajos',TokenValidation,estdoTrabajoRutas);
          this.app.use('/api/vehiculos',vehiculoRuta);
+         this.app.use('/api/vehiculos',TokenValidation,vehiculoRuta);
         this.app.use('/api/rvehiculo',recepcionVehiculoRuta);
         this.app.use('/api/orden',TokenValidation,ordenRuta);
         this.app.use('/api/mecanico',TokenValidation,usuariomecanicoRutas);
@@ -113,6 +116,7 @@ class Server {
         this.app.use('/api/tiposDocumentos', TokenValidation,tiposDocumentosRutas);
         // referenciales compras
         this.app.use('/api/proveedores', TokenValidation, proveedorRutas);
+        this.app.use('/api/fpagos', formaPagosRutas);
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
         // ruta caja

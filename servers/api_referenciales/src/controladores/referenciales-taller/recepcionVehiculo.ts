@@ -18,13 +18,15 @@ class RecepcionVehiculoControlador {
 
     }
 
-    public async listarRecepcion(req: Request, res: Response) {
+    public async listarRecepcion(req: Request, res: Response) :Promise<any> {
       const marcas = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
+
       for (let i in marcas) {
        
         marcas[i].fechaentrada = new Date().toJSON().slice(0,10).replace(/-/g,'/')
       }
      
+      console.log("hola")
       res.json(marcas);
 
   }
@@ -114,7 +116,24 @@ class RecepcionVehiculoControlador {
         console.log("ocurrio un error: " + error);
         throw error
       }
-    }   
+    
+    }
+    
+    public async recepcionPorFecha(req: Request, res: Response) {
+      console.log(req.body)
+      const fechaentrada = req.body.fechadesde;
+      const fechaemision = req.body.fechaHasta;
+      const chapa = req.body.chapa;
+      if (chapa) {
+        console.log("Filtrar datos_chapa_fecha");
+        const recepcionChapa_fecha = await pool.query('SELECT * FROM vrecepciones WHERE estado=2 AND chapa=? AND fechaentrada  BETWEEN ? AND ?',[chapa, fechaentrada, fechaemision]);
+        res.json(recepcionChapa_fecha); 
+      } else {
+        console.log("Filtrar datos por fecha");
+        const recepcionFecha = await pool.query('SELECT * FROM vrecepciones WHERE estado=2 AND fechaentrada  BETWEEN ? AND ?',[fechaentrada, fechaemision]);
+        res.json(recepcionFecha);
+      }
+  }
 }
 
 export const recepcionvehiculoControlador = new RecepcionVehiculoControlador();

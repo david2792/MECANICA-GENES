@@ -50,6 +50,7 @@ const ruta_aperturacaja_1 = __importDefault(require("./rutas/rutas-referenciales
 const ruta_facturacion_1 = __importDefault(require("./rutas/rutas-facturacion/ruta-facturacion"));
 const ruta_condicion_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta-condicion"));
 const ruta_tipodocumento_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta-tipodocumento"));
+const rutas_formapagos_1 = __importDefault(require("./rutas/rutas-compras/rutas-formapagos"));
 // fin referenciales productos
 class Server {
     constructor() {
@@ -95,6 +96,7 @@ class Server {
         this.app.use('/api/anios', validateToken_1.TokenValidation, ruta_anios_1.default);
         this.app.use('/api/estadotrabajos', validateToken_1.TokenValidation, ruta_estadorecepcion_1.default);
         this.app.use('/api/vehiculos', ruta_vehiculo_1.default);
+        this.app.use('/api/vehiculos', validateToken_1.TokenValidation, ruta_vehiculo_1.default);
         this.app.use('/api/rvehiculo', ruta_recepcionvehiculo_1.default);
         this.app.use('/api/orden', validateToken_1.TokenValidation, ruta_ordenTrabajo_1.default);
         this.app.use('/api/mecanico', validateToken_1.TokenValidation, ruta_usuarioMecanico_1.default);
@@ -105,6 +107,7 @@ class Server {
         this.app.use('/api/tiposDocumentos', validateToken_1.TokenValidation, ruta_tiposDocumentos_1.default);
         // referenciales compras
         this.app.use('/api/proveedores', validateToken_1.TokenValidation, rutas_proveedores_1.default);
+        this.app.use('/api/fpagos', rutas_formapagos_1.default);
         // ruta de acceso
         this.app.use('/api/usuario', ruta_usuario_1.default);
         // ruta caja
