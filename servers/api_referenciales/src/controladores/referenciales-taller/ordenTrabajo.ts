@@ -34,6 +34,7 @@ class OrdenControlador {
         const recepciones = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
         res.json(recepciones);
     }
+
   public async listarOrden(req: Request, res: Response):Promise<any> {
     const recepciones = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
     for (let i in recepciones) {
@@ -43,6 +44,7 @@ class OrdenControlador {
     }
     res.json(recepciones);
   }
+
   public async listarRecepcion(req: Request, res: Response) {
       const marcas = await pool.query('SELECT * FROM vordentrabajo');
       res.json(marcas);

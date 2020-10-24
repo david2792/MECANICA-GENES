@@ -102,9 +102,14 @@ class FacturacionControlador {
                 const movimiento = { NumeroOperacion, NumeroApertura, CodigoOperacion, Fecha, Hora, Descripcion, Estado };
                 yield transaccionBD_1.default.query('INSERT INTO movimientoscaja  SET ?', movimiento);
                 // Detalle movimiento
-                const monto = cuentacobrar.total;
-                const detallemovimiento = { NumeroOperacion, NumeroCuota, NumeroTimbrado, CodigoSucursal, PuntoExpedicion, NumeroFactura, monto };
+                const Monto = cuentacobrar.total;
+                const detallemovimiento = { NumeroOperacion, NumeroCuota, NumeroTimbrado, CodigoSucursal, PuntoExpedicion, NumeroFactura, Monto };
                 yield transaccionBD_1.default.query('INSERT INTO detallesmovimientoscaja  SET ?', detallemovimiento);
+                // detalle  tipo de cobro
+                const CodigoTiposCobro = 1;
+                const detalletipocobro = { CodigoTiposCobro, NumeroOperacion, Monto };
+                yield transaccionBD_1.default.query('INSERT INTO detallestiposcobro  SET ?', detalletipocobro);
+                // fin
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
                 const vOrdenes = yield conexionBD_1.default.query('SELECT * FROM vfacturasventas ');

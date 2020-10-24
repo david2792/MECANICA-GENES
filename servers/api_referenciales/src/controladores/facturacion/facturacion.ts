@@ -89,10 +89,14 @@ class FacturacionControlador {
             const movimiento = {NumeroOperacion,NumeroApertura,CodigoOperacion,Fecha,Hora,Descripcion,Estado}
             await transaccion.query('INSERT INTO movimientoscaja  SET ?', movimiento);
             // Detalle movimiento
-            const monto = cuentacobrar.total
-            const detallemovimiento = {NumeroOperacion,NumeroCuota,NumeroTimbrado,CodigoSucursal,PuntoExpedicion,NumeroFactura,monto}
+            const Monto = cuentacobrar.total
+            const detallemovimiento = {NumeroOperacion,NumeroCuota,NumeroTimbrado,CodigoSucursal,PuntoExpedicion,NumeroFactura,Monto}
             await transaccion.query('INSERT INTO detallesmovimientoscaja  SET ?', detallemovimiento);
-
+            // detalle  tipo de cobro
+            const CodigoTiposCobro=1;
+            const detalletipocobro ={CodigoTiposCobro,NumeroOperacion,Monto}
+            await transaccion.query('INSERT INTO detallestiposcobro  SET ?', detalletipocobro);
+            // fin
            await transaccion.query("COMMIT");// se confirma la transaccion
            await transaccion.query("SET autocommit=1")
            const vOrdenes = await pool.query('SELECT * FROM vfacturasventas ');
