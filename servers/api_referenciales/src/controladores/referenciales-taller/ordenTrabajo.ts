@@ -237,7 +237,6 @@ class OrdenControlador {
       }
   }
 
-<<<<<<< HEAD
   public async listarEntregados(req: Request, res: Response):Promise<any> {
     // console.log("Recibido backend: ",req.body);
     let orden_trabajo = {};
@@ -265,12 +264,6 @@ class OrdenControlador {
   public async listarDone(req: Request, res: Response) {
     const done = await pool.query('SELECT * FROM vordentrabajo where codigoestadoorden=2');
     res.json(done);
-
-=======
-  public async listarOrdenConf(req: Request, res: Response):Promise<any>  {
-    const recepciones = await pool.query('SELECT * FROM vrecepciones WHERE estado=2');
-    res.json(recepciones);
->>>>>>> 0dd7ea2870805080be57092cf2ebdc987dd7a9b7
 }
 }
 
