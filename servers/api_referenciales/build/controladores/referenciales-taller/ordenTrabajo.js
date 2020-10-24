@@ -248,5 +248,36 @@ class OrdenControlador {
             }
         });
     }
+    listarEntregados(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // console.log("Recibido backend: ",req.body);
+            let orden_trabajo = {};
+            let numero = req.body.numerochapa;
+            const fechaentrada = req.body.fechadesde;
+            const fechaemision = req.body.fechaHasta;
+            console.log("Consulta de ordenes done");
+            const cabecera = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=2 AND numerochapa=? AND fechaemision  BETWEEN ? AND ?', [numero, fechaentrada, fechaemision]);
+            let numerorecepcion = "";
+            cabecera.forEach(element => {
+                numerorecepcion = element.numero;
+                console.log(numerorecepcion);
+            });
+            // detalle orden trabajo
+            let detalle = yield conexionBD_1.default.query("SELECT * FROM detallesordentrabajos WHERE numero=?", [numerorecepcion]);
+            console.log("detalle", detalle);
+            orden_trabajo = {
+                o_cabecera: cabecera,
+                o_detalle: detalle
+            };
+            console.log(orden_trabajo);
+            res.json(orden_trabajo);
+        });
+    }
+    listarDone(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const done = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo where codigoestadoorden=2');
+            res.json(done);
+        });
+    }
 }
 exports.ordenControlador = new OrdenControlador();

@@ -19,7 +19,9 @@ class OrdenoRuta
         this.router.post('/guardar',ordenControlador.guardar);
         this.router.post('/insertardetalle',ordenControlador.guardardetalle);
         this.router.put('/eliminar',ordenControlador.eliminarDetalles);
-        this.router.post('/filtrarvordentrabajos', ordenControlador.ordenPorFecha)
+        this.router.post('/filtrarvordentrabajos', ordenControlador.ordenPorFecha);
+        this.router.post('/lista_entregados', ordenControlador.listarEntregados);
+        this.router.get('/listadones', ordenControlador.listarDone);
         //    this.router.put('/',traccionesControlador.actualizar);
     
     }
