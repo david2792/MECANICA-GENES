@@ -19,6 +19,7 @@ class OrdenoRuta {
         this.router.post('/filtrarvordentrabajos', ordenTrabajo_1.ordenControlador.ordenPorFecha);
         this.router.post('/lista_entregados', ordenTrabajo_1.ordenControlador.listarEntregados);
         this.router.get('/listadones', ordenTrabajo_1.ordenControlador.listarDone);
+        // this.router.get('/listarOrdenConf', ordenControlador.listarOrdenConf);
         //    this.router.put('/',traccionesControlador.actualizar);
     }
 }

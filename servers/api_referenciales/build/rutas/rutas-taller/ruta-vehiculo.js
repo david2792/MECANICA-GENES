@@ -10,7 +10,7 @@ class VehiculoRuta {
     config() {
         this.router.get('/', vehiculo_1.vehiculoControlador.listar);
         this.router.post('/', vehiculo_1.vehiculoControlador.crear);
-        //    this.router.put('/',traccionesControlador.actualizar);
+        this.router.put('/', vehiculo_1.vehiculoControlador.actualizar);
     }
 }
 const vehiculoRuta = new VehiculoRuta();

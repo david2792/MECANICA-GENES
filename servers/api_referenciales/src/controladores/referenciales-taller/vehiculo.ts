@@ -29,22 +29,22 @@ class VehiculoControlador {
             {
                 codigo=1
             }
-
-            const codigomarca = req.body.marca;
-            const codigomodelo = req.body.modelo;
-            const codigotransmision = req.body.transmicion;
+            let vehiculo=req.body.vehiculos;
+            const codigomarca = vehiculo.codigomarca;
+            const codigomodelo = vehiculo.codigomodelo;
+            const codigotransmision = vehiculo.codigotransmision;
             const codigotipocombustible = "1";
             const codigotraccion = "1";
-            const codigocolor = req.body.color;
+            const codigocolor = vehiculo.codigocolor;
             const codigoanio = "1";
-            const numerochapa = req.body.chapa;
-            const numerochasis = req.body.chasis;
-            const observacion=req.body.observacion;
+            const numerochapa = vehiculo.chapa;
+            const numerochasis = vehiculo.chasis;
+            const observacion=vehiculo.observacion;
             const vehiculos = {
                 codigo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
                 codigoanio, numerochapa, numerochasis,observacion
             };
-            const codigocliente = req.body.cliente;
+            const codigocliente = vehiculo.CodigoCliente;
             const codigovehiculo=codigo;
             const detallevehiculo = { codigovehiculo, codigocliente }
             console.log(vehiculos)
@@ -54,7 +54,9 @@ class VehiculoControlador {
             await transaccion.query("COMMIT");// se confirma la transaccion
             await transaccion.query("SET autocommit=1")
            // await Promise.all([set0, cabecera, detalle, comi, set1])
-            res.json({ message: "el anio fue guardado" });
+            
+           const vVehiculo = await pool.query('SELECT * FROM vclientevehiculos');
+           res.json(vVehiculo);
         } catch (error) {
             await transaccion.query("ROLLBACK");
             await transaccion.query("SET autocommit=1")
@@ -71,11 +73,37 @@ class VehiculoControlador {
 
     public async actualizar(req: Request, res: Response): Promise<any> {
         try {
-            const codigo = req.body.codigo;
-            const nombre = req.body.nombre;
-            const categoria = await pool.query('UPDATE tracciones SET ? WHERE codigo = ?', [req.body, codigo]);
-            res.json({ message: 'La marca fue actualizada' });
+            let vehiculo=req.body.vehiculos;
+            const codigo=vehiculo.codigo;
+            const codigomarca = vehiculo.codigomarca;
+            const codigomodelo = vehiculo.codigomodelo;
+            const codigotransmision = vehiculo.codigotransmision;
+            const codigotipocombustible = "1";
+            const codigotraccion = "1";
+            const codigocolor = vehiculo.codigocolor;
+            const codigoanio = "1";
+            const numerochapa = vehiculo.chapa;
+            const numerochasis = vehiculo.chasis;
+            const observacion=vehiculo.observacion;
+            const vehiculos = {
+                codigo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
+                codigoanio, numerochapa, numerochasis,observacion
+            };
+            console.log(vehiculos)
+            await transaccion.query("SET autocommit=0")
+            await transaccion.query('UPDATE vehiculos SET ? WHERE codigo = ?', [vehiculos,codigo]);
+            // await transaccion.query('INSERT INTO vehiculos  SET ?', vehiculos);
+            // await transaccion.query('INSERT INTO detallesvehiculos  SET ?', detallevehiculo);
+            await transaccion.query("COMMIT");// se confirma la transaccion
+            await transaccion.query("SET autocommit=1")
+           // await Promise.all([set0, cabecera, detalle, comi, set1])
+            
+           const vVehiculo = await pool.query('SELECT * FROM vclientevehiculos');
+           res.json(vVehiculo);
         } catch (error) {
+            await transaccion.query("ROLLBACK");
+            await transaccion.query("SET autocommit=1")
+           // await Promise.all([rol, set11]);
             console.log('error' + error)
         }
     }

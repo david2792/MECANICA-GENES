@@ -13,7 +13,7 @@ class VehiculoRuta
    {
        this.router.get('/',vehiculoControlador.listar);
        this.router.post('/',vehiculoControlador.crear);
-    //    this.router.put('/',traccionesControlador.actualizar);
+       this.router.put('/',vehiculoControlador.actualizar);
    }
 }
 

@@ -47,10 +47,8 @@
           <td>{{ props.item.chasis }}</td>
            <td>{{ props.item.observacion }}</td>
           <td>{{ props.item.transmicion }}</td>
-          <!-- <td>{{ props.item.traccion }}</td> -->
           <td>{{ props.item.modelo }}</td>
           <td>{{ props.item.marca }}</td>
-          <!-- <td>{{ props.item.combustible }}</td> -->
           <td>{{ props.item.color }}</td>
         </template>
         <template v-slot:no-data>
@@ -64,17 +62,12 @@
               <span class="headline"></span>
             </v-card-title>
             <v-card-text>
-              <v-container grid-list-md>
-                <v-layout wrap>
-                  <v-layout row wrap>
+         <v-container grid-list-md>
+           <v-layout wrap>
+           <v-layout row wrap>
           <v-flex xs12 sm8 md8 lg8 xl8>
             <v-autocomplete :items="clientes" v-model="cliente" item-value="value" label="cliente"></v-autocomplete>
           </v-flex>
-          <!-- <v-flex xs1 sm2 md2 lg2 xl2>
-            <v-btn small fab dark color="teal" @click="mostrarModalArticulos()">
-              <v-icon dark>list</v-icon>
-            </v-btn>
-          </v-flex> -->
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete
               :items="transmiciones"
@@ -83,33 +76,12 @@
               label="Tipo Transmicion"
             ></v-autocomplete>
           </v-flex>
-          <!-- <v-flex xs12 sm4 md4 lg4 xl4>
-            <v-autocomplete
-              :items="tracciones"
-              v-model="traccion"
-              item-value="value"
-              label="Tipo Traccion"
-            ></v-autocomplete>
-          </v-flex> -->
-
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="marcas" v-model="marca" item-value="value" label="Marca"></v-autocomplete>
           </v-flex>
            <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="modelos" v-model="modelo" item-value="value" label="Modelo"></v-autocomplete>
           </v-flex>
-          <!-- <v-flex xs12 sm4 md4 lg4 xl4>
-            <v-autocomplete
-              :items="combustibles"
-              v-model="combustible"
-              item-value="value"
-              label="Combustible"
-            ></v-autocomplete>
-          </v-flex> -->
-
-          <!-- <v-flex xs12 sm4 md4 lg4 xl4>
-            <v-autocomplete :items="anios" v-model="anio" item-value="value" label="Anios"></v-autocomplete>
-          </v-flex> -->
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-autocomplete :items="colores" v-model="color" item-value="value" label="Colores"></v-autocomplete>
           </v-flex>
@@ -130,7 +102,7 @@
                     <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v"></div>
                   </v-flex>
                 </v-layout>
-              </v-container>
+          </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>

@@ -44,6 +44,12 @@ const ruta_sucursales_1 = __importDefault(require("./rutas/rutas-referenciales-f
 const ruta_tiposDocumentos_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta_tiposDocumentos"));
 // Referenciales compras
 const rutas_proveedores_1 = __importDefault(require("./rutas/rutas-compras/rutas-proveedores"));
+// referenciales cajas 
+const ruta_aperturacaja_1 = __importDefault(require("./rutas/rutas-referenciales-caja/ruta-aperturacaja"));
+// facturacion
+const ruta_facturacion_1 = __importDefault(require("./rutas/rutas-facturacion/ruta-facturacion"));
+const ruta_condicion_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta-condicion"));
+const ruta_tipodocumento_1 = __importDefault(require("./rutas/rutas-referenciales-factura/ruta-tipodocumento"));
 const rutas_formapagos_1 = __importDefault(require("./rutas/rutas-compras/rutas-formapagos"));
 // fin referenciales productos
 class Server {
@@ -89,6 +95,7 @@ class Server {
         this.app.use('/api/colores', validateToken_1.TokenValidation, ruta_color_1.default);
         this.app.use('/api/anios', validateToken_1.TokenValidation, ruta_anios_1.default);
         this.app.use('/api/estadotrabajos', validateToken_1.TokenValidation, ruta_estadorecepcion_1.default);
+        this.app.use('/api/vehiculos', ruta_vehiculo_1.default);
         this.app.use('/api/vehiculos', validateToken_1.TokenValidation, ruta_vehiculo_1.default);
         this.app.use('/api/rvehiculo', ruta_recepcionvehiculo_1.default);
         this.app.use('/api/orden', validateToken_1.TokenValidation, ruta_ordenTrabajo_1.default);
@@ -103,6 +110,12 @@ class Server {
         this.app.use('/api/fpagos', rutas_formapagos_1.default);
         // ruta de acceso
         this.app.use('/api/usuario', ruta_usuario_1.default);
+        // ruta caja
+        this.app.use('/api/abrircaja', validateToken_1.TokenValidation, ruta_aperturacaja_1.default);
+        // facturacion
+        this.app.use('/api/facturacion', validateToken_1.TokenValidation, ruta_facturacion_1.default);
+        this.app.use('/api/condicion', validateToken_1.TokenValidation, ruta_condicion_1.default);
+        this.app.use('/api/tipodocumento', validateToken_1.TokenValidation, ruta_tipodocumento_1.default);
     }
     iniciar() {
         this.app.listen(this.app.get('port'), () => {

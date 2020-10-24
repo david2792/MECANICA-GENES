@@ -55,6 +55,10 @@ class OrdenControlador {
     listarOrden(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const recepciones = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
+            for (let i in recepciones) {
+                recepciones[i].fechaemision = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+                recepciones[i].fechaentrada = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+            }
             res.json(recepciones);
         });
     }
@@ -99,7 +103,7 @@ class OrdenControlador {
                 const numero = req.body.numero;
                 const codigoestadoorden = req.body.codigoestadoorden;
                 const observacion = req.body.observacion;
-                const fechaemision = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+                const fechaemision = req.body.fecha;
                 const horaemision = "00:00:00";
                 const fechatentativaentrega = "2020-01-01";
                 const horatentativaentrega = "00:00:00";
@@ -146,12 +150,14 @@ class OrdenControlador {
     guardar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const codigosucursal = req.body.CodigoSucursal;
-                const puntoexpedicion = req.body.PuntoExpedicion;
-                const numero = req.body.numero;
-                const codigoestadoorden = req.body.codigoestadoorden;
-                const observacion = req.body.observacion;
-                const fechaemision = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+                let orden = req.body.ordenes;
+                const codigosucursal = orden.codigosucursal;
+                const puntoexpedicion = orden.puntoexpedicion;
+                const codigousuario = orden.CodigoUsuario;
+                const numero = orden.numero;
+                const codigoestadoorden = "1";
+                const observacion = orden.observacion;
+                const fechaemision = orden.fechaemision;
                 const horaemision = "00:00:00";
                 const fechatentativaentrega = "2020-01-01";
                 const horatentativaentrega = "00:00:00";
@@ -159,20 +165,20 @@ class OrdenControlador {
                 const horafinalizacion = "00:00:00";
                 const fechaentrega = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
                 const horaentrega = "00:00:00";
-                const orden = { codigosucursal, puntoexpedicion, numero, codigoestadoorden, observacion,
+                const cabecera = { codigosucursal, puntoexpedicion, numero, codigoestadoorden, observacion,
                     fechaemision, horaemision, fechatentativaentrega, horatentativaentrega, fechafinalizacion, horafinalizacion, fechaentrega, horaentrega };
                 console.log(orden);
                 yield transaccionBD_1.default.query("SET autocommit=0");
-                yield transaccionBD_1.default.query('INSERT INTO ordenestrabajos  SET ?', orden);
-                let detalles = req.body.detalles;
-                console.log(detalles);
-                for (let i in detalles) {
-                    const codigoproducto = detalles[i].codigoproducto;
-                    const codigomecanico = detalles[i].codigomecanico;
-                    const cantidad = detalles[i].cantidad;
-                    const descripcion = detalles[i].descripcion;
-                    const precio = detalles[i].precio;
-                    const codigoimpuesto = detalles[i].codigoimpuesto;
+                yield transaccionBD_1.default.query('INSERT INTO ordenestrabajos  SET ?', cabecera);
+                let deta = req.body.ordenes.detalles;
+                console.log(deta);
+                for (let i in deta) {
+                    const codigoproducto = deta[i].codigoproducto;
+                    const codigomecanico = codigousuario;
+                    const cantidad = deta[i].cantidad;
+                    const descripcion = deta[i].descripcion;
+                    const precio = deta[i].precio;
+                    const codigoimpuesto = deta[i].codigoimpuesto;
                     const codigoestadoreparacion = '1';
                     const detalle = { codigosucursal, puntoexpedicion, numero, codigoproducto, codigomecanico, cantidad,
                         descripcion, precio, codigoimpuesto, codigoestadoreparacion };
@@ -185,7 +191,12 @@ class OrdenControlador {
                 }
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
-                res.json({ message: "el orden de trabajo fue guardado" });
+                const vOrdenes = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
+                for (let i in vOrdenes) {
+                    vOrdenes[i].fechaemision = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+                    vOrdenes[i].fechaentrada = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+                }
+                res.json(vOrdenes);
             }
             catch (error) {
                 yield transaccionBD_1.default.query("ROLLBACK");

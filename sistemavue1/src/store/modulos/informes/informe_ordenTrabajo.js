@@ -32,7 +32,7 @@ export const mutations = {
 export const actions = {
     getrvordenTrabajo({ commit }, configuracion) {
         axios
-            .get('orden/listar/', configuracion)
+            .get('orden/listarOrdenConf/', configuracion)
             .then(rOrdenTrabajo => rOrdenTrabajo.data)
             .then(rOrdenTrabajo => {
                 commit("SET_RORDENTRABAJO", rOrdenTrabajo);
