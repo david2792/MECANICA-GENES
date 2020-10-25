@@ -261,7 +261,6 @@ class OrdenControlador {
     }
     listarEntregados(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            // console.log("Recibido backend: ",req.body);
             let orden_trabajo = {};
             let numero = req.body.numerochapa;
             const fechaentrada = req.body.fechadesde;
@@ -269,7 +268,7 @@ class OrdenControlador {
             console.log("Consulta de ordenes done");
             const cabecera = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=2 AND numerochapa=? AND fechaemision  BETWEEN ? AND ?', [numero, fechaentrada, fechaemision]);
             let numerorecepcion = "";
-            cabecera.forEach(element => {
+            cabecera.forEach((element) => {
                 numerorecepcion = element.numero;
                 console.log(numerorecepcion);
             });
@@ -287,7 +286,44 @@ class OrdenControlador {
     listarDone(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const done = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo where codigoestadoorden=2');
+            done.forEach((element) => {
+                element.fechaemision = element.fechaemision.toJSON().slice(0, 10).replace(/-/g, '-');
+            });
             res.json(done);
+        });
+    }
+    listall(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const done = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo');
+            res.json(done);
+        });
+    }
+    listaDetallesOrdenTrabajo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("datos recibidos: ", req.body);
+            const estadoorden = req.body.estadoorden;
+            const numerchapa = req.body.numerochapa;
+            const fechadesde = req.body.fechadesde;
+            const fechahasta = req.body.fechaHasta;
+            if (estadoorden === '3') {
+                console.log("hello darkness1");
+                const all = yield conexionBD_1.default.query('SELECT * FROM veditaroden where numerochapa=?', [numerchapa]);
+                console.log(all);
+                all.forEach((element) => {
+                    element.fechaemision = element.fechaemision.toJSON().slice(0, 10).replace(/-/g, '-');
+                });
+                console.log(all);
+                res.json(all);
+            }
+            else {
+                console.log("hello darkness2");
+                const done = yield conexionBD_1.default.query('SELECT * FROM veditaroden where codigoestadoorden=? AND numerochapa=? AND fechaemision BETWEEN ? AND ?', [estadoorden, numerchapa, fechadesde, fechahasta]);
+                done.forEach((element) => {
+                    element.fechaemision = element.fechaemision.toJSON().slice(0, 10).replace(/-/g, '-');
+                });
+                console.log(done);
+                res.json(done);
+            }
         });
     }
 }
