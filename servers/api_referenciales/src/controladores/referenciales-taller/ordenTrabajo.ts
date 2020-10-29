@@ -239,9 +239,33 @@ class OrdenControlador {
       }
   }
 
-  public async listarOrdenConf(req: Request, res: Response):Promise<any>  {
-    const recepciones = await pool.query('SELECT * FROM vrecepciones WHERE estado=2');
-    res.json(recepciones);
+  public async listarEntregados(req: Request, res: Response):Promise<any> {
+    // console.log("Recibido backend: ",req.body);
+    let orden_trabajo = {};
+    let numero = req.body.numerochapa;
+    const fechaentrada = req.body.fechadesde;
+    const fechaemision = req.body.fechaHasta;
+    console.log("Consulta de ordenes done")
+    const cabecera = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=2 AND numerochapa=? AND fechaemision  BETWEEN ? AND ?', [numero, fechaentrada, fechaemision]);
+    let numerorecepcion = "";
+    cabecera.forEach((element:any) => {
+      numerorecepcion = element.numero;
+      console.log(numerorecepcion)
+    });
+    // detalle orden trabajo
+    let detalle= await pool.query("SELECT * FROM detallesordentrabajos WHERE numero=?", [numerorecepcion]);
+    console.log("detalle", detalle);
+    orden_trabajo = {
+      o_cabecera: cabecera,
+      o_detalle: detalle
+    }
+    console.log(orden_trabajo);
+    res.json(orden_trabajo);
+  }
+
+  public async listarDone(req: Request, res: Response) {
+    const done = await pool.query('SELECT * FROM vordentrabajo where codigoestadoorden=2');
+    res.json(done);
 }
 }
 

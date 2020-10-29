@@ -414,9 +414,9 @@ export default {
     validar() {
       this.valida = 0;
       this.validaMensaje = [];
-      if (this.Descripcion.length < 1 || this.Descripcion.length > 50) {
+      if (this.Descripcion.length < 1 || this.Descripcion.length > 500) {
         this.validaMensaje.push(
-          "La descripcion de la unidad debe tener entre 1-50 caracteres."
+          "La descripcion de la unidad debe tener entre 1-500 caracteres."
         );
       }
       if (this.CodigoBarra.length < 1) {
