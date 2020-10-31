@@ -20,6 +20,7 @@ class RecepcionVehiculoControlador {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const marcas = yield conexionBD_1.default.query('SELECT * FROM vclientevehiculos WHERE  CodigoCliente=?', id);
+            //   console.log(marcas)
             res.json(marcas);
         });
     }

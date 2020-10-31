@@ -81,8 +81,16 @@ class FacturacionControlador {
                     console.log(stockanterior);
                     const stockactual = stockanterior - cantidad;
                     yield transaccionBD_1.default.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?', [stockactual, codigoproducto]);
+                    // descontar stock
                     //  inicia cuentas a cobrar
                 }
+                // confirma orden de trabajo si existe
+                let numeroorden = req.body.orden.numero;
+                if (numeroorden != null) {
+                    console.log("paso para confirmar la orden" + numeroorden);
+                    yield transaccionBD_1.default.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?', [2, numeroorden]);
+                }
+                // fin orden
                 let cuentacobrar = req.body.detalles;
                 const NumeroCuota = 1;
                 const MontoCuota = cuentacobrar.total;

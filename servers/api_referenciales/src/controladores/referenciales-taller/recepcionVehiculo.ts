@@ -6,6 +6,7 @@ class RecepcionVehiculoControlador {
     public async listar(req: Request, res: Response):Promise<any>  {
         const { id } = req.params;
         const marcas = await pool.query('SELECT * FROM vclientevehiculos WHERE  CodigoCliente=?',id);
+     //   console.log(marcas)
         res.json(marcas);
 
     }

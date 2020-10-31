@@ -110,11 +110,12 @@ class OrdenControlador {
             const detalle = {codigosucursal,puntoexpedicion,numero,codigoproducto,codigomecanico,cantidad,
               descripcion,precio,codigoimpuesto,codigoestadoreparacion}
             await transaccion.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
-            const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
-            const stockanterior= consulta[0].StockActual;
-            console.log(stockanterior)
-            const stockactual = stockanterior-cantidad;
-            await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+            // const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
+            // const stockanterior= consulta[0].StockActual;
+            // console.log(stockanterior)
+            // const stockactual = stockanterior-cantidad;
+            // await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+            await transaccion.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?',[2,numero])
         }
        await transaccion.query("COMMIT");// se confirma la transaccion
        await transaccion.query("SET autocommit=1")
