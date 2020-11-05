@@ -14,6 +14,15 @@ class AperturaControlador {
     res.json(caja);
   }
 
+  public async validarApertura(req: Request, res: Response) {
+    const {usuarioCajero} = req.params;
+    const apertura = await pool.query('SELECT estado FROM vaperturascaja WHERE  usuarioCajero=? AND estado = 1',usuarioCajero);
+   // JSON.stringify(apertura);
+    //console.log(apertura)
+    res.json(apertura);
+  } 
+
+
   public async abrirCaja(req: Request, res: Response): Promise<void> {
     const Codigo = await pool.query('SELECT MAX(NumeroApertura)+1 AS numero FROM aperturascaja')
     JSON.stringify(Codigo);
@@ -31,6 +40,8 @@ class AperturaControlador {
     const vapertura = await pool.query('SELECT * FROM aperturascaja');
     res.json(vapertura);
   }
+
+  
 
   public async actualizar(req: Request, res: Response): Promise<void> {
     let cliente = req.body.clientes;

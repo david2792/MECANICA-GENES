@@ -6,8 +6,8 @@ class FacturacionControlador {
 
     public async validarApertura(req: Request, res: Response) {
         const {usuarioCajero} = req.params;
-        console.log(usuarioCajero)
         const apertura = await pool.query('SELECT * FROM vaperturascaja WHERE estado=1 AND usuarioCajero=?',usuarioCajero);
+        console.log(apertura)
         res.json(apertura);
       } 
       public async validarTimbrado(req: Request, res: Response) {

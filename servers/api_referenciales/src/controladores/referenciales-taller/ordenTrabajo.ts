@@ -165,12 +165,13 @@ class OrdenControlador {
                 descripcion,precio,codigoimpuesto,codigoestadoreparacion}
               await transaccion.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
               const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
-              const stockanterior= consulta[0].StockActual;
-              console.log(stockanterior)
-              const stockactual = stockanterior-cantidad;
-              await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+              // const stockanterior= consulta[0].StockActual;
+              // console.log(stockanterior)
+              // const stockactual = stockanterior-cantidad;
+              // await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
              
           }
+          await transaccion.query('UPDATE recepciones SET estado=? WHERE numero=?',[2,numero])
          await transaccion.query("COMMIT");// se confirma la transaccion
          await transaccion.query("SET autocommit=1")
          const vOrdenes = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
@@ -248,11 +249,8 @@ class OrdenControlador {
     console.log("Consulta de ordenes done")
     const cabecera = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=2 AND numerochapa=? AND fechaemision  BETWEEN ? AND ?', [numero, fechaentrada, fechaemision]);
     let numerorecepcion = "";
-<<<<<<< HEAD
-    cabecera.forEach((element:any) => {
-=======
     cabecera.forEach((element: any) => {
->>>>>>> 16fd1f00c371996e7c928100d23322d7efa00684
+
       numerorecepcion = element.numero;
       console.log(numerorecepcion)
     });

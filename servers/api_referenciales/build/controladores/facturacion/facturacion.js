@@ -19,8 +19,8 @@ class FacturacionControlador {
     validarApertura(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { usuarioCajero } = req.params;
-            console.log(usuarioCajero);
             const apertura = yield conexionBD_1.default.query('SELECT * FROM vaperturascaja WHERE estado=1 AND usuarioCajero=?', usuarioCajero);
+            console.log(apertura);
             res.json(apertura);
         });
     }
