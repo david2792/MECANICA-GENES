@@ -27,6 +27,15 @@ class AperturaControlador {
             res.json(caja);
         });
     }
+    validarApertura(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { usuarioCajero } = req.params;
+            const apertura = yield conexionBD_1.default.query('SELECT estado FROM vaperturascaja WHERE  usuarioCajero=? AND estado = 1', usuarioCajero);
+            // JSON.stringify(apertura);
+            //console.log(apertura)
+            res.json(apertura);
+        });
+    }
     abrirCaja(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const Codigo = yield conexionBD_1.default.query('SELECT MAX(NumeroApertura)+1 AS numero FROM aperturascaja');

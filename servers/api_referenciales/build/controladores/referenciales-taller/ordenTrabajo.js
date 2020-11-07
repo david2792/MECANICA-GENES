@@ -129,11 +129,12 @@ class OrdenControlador {
                     const detalle = { codigosucursal, puntoexpedicion, numero, codigoproducto, codigomecanico, cantidad,
                         descripcion, precio, codigoimpuesto, codigoestadoreparacion };
                     yield transaccionBD_1.default.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
-                    const consulta = yield transaccionBD_1.default.query('SELECT StockActual FROM stock WHERE CodigoProducto=?', [codigoproducto]);
-                    const stockanterior = consulta[0].StockActual;
-                    console.log(stockanterior);
-                    const stockactual = stockanterior - cantidad;
-                    yield transaccionBD_1.default.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?', [stockactual, codigoproducto]);
+                    // const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
+                    // const stockanterior= consulta[0].StockActual;
+                    // console.log(stockanterior)
+                    // const stockactual = stockanterior-cantidad;
+                    // await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+                    yield transaccionBD_1.default.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?', [2, numero]);
                 }
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
@@ -184,11 +185,12 @@ class OrdenControlador {
                         descripcion, precio, codigoimpuesto, codigoestadoreparacion };
                     yield transaccionBD_1.default.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
                     const consulta = yield transaccionBD_1.default.query('SELECT StockActual FROM stock WHERE CodigoProducto=?', [codigoproducto]);
-                    const stockanterior = consulta[0].StockActual;
-                    console.log(stockanterior);
-                    const stockactual = stockanterior - cantidad;
-                    yield transaccionBD_1.default.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?', [stockactual, codigoproducto]);
+                    // const stockanterior= consulta[0].StockActual;
+                    // console.log(stockanterior)
+                    // const stockactual = stockanterior-cantidad;
+                    // await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
                 }
+                yield transaccionBD_1.default.query('UPDATE recepciones SET estado=? WHERE numero=?', [2, numero]);
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
                 const vOrdenes = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');

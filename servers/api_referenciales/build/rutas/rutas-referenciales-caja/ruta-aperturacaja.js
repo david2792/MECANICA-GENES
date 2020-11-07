@@ -9,7 +9,7 @@ class AperturaRutas {
     }
     config() {
         this.router.get('/abrir', aperturacaja_1.controladorApertura.listarApertura);
-        //  this.router.get('/mecanico',controladorCliente.listarMecanico);
+        this.router.get('/validar/:usuarioCajero', aperturacaja_1.controladorApertura.validarApertura);
         this.router.post('/abrir', aperturacaja_1.controladorApertura.abrirCaja);
         //     this.router.put('/',controladorCliente.actualizar);
     }

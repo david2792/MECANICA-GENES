@@ -19,8 +19,8 @@ class FacturacionControlador {
     validarApertura(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { usuarioCajero } = req.params;
-            console.log(usuarioCajero);
             const apertura = yield conexionBD_1.default.query('SELECT * FROM vaperturascaja WHERE estado=1 AND usuarioCajero=?', usuarioCajero);
+            console.log(apertura);
             res.json(apertura);
         });
     }
@@ -81,8 +81,16 @@ class FacturacionControlador {
                     console.log(stockanterior);
                     const stockactual = stockanterior - cantidad;
                     yield transaccionBD_1.default.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?', [stockactual, codigoproducto]);
+                    // descontar stock
                     //  inicia cuentas a cobrar
                 }
+                // confirma orden de trabajo si existe
+                let numeroorden = req.body.orden.numero;
+                if (numeroorden != null) {
+                    console.log("paso para confirmar la orden" + numeroorden);
+                    yield transaccionBD_1.default.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?', [2, numeroorden]);
+                }
+                // fin orden
                 let cuentacobrar = req.body.detalles;
                 const NumeroCuota = 1;
                 const MontoCuota = cuentacobrar.total;
@@ -102,9 +110,14 @@ class FacturacionControlador {
                 const movimiento = { NumeroOperacion, NumeroApertura, CodigoOperacion, Fecha, Hora, Descripcion, Estado };
                 yield transaccionBD_1.default.query('INSERT INTO movimientoscaja  SET ?', movimiento);
                 // Detalle movimiento
-                const monto = cuentacobrar.total;
-                const detallemovimiento = { NumeroOperacion, NumeroCuota, NumeroTimbrado, CodigoSucursal, PuntoExpedicion, NumeroFactura, monto };
+                const Monto = cuentacobrar.total;
+                const detallemovimiento = { NumeroOperacion, NumeroCuota, NumeroTimbrado, CodigoSucursal, PuntoExpedicion, NumeroFactura, Monto };
                 yield transaccionBD_1.default.query('INSERT INTO detallesmovimientoscaja  SET ?', detallemovimiento);
+                // detalle  tipo de cobro
+                const CodigoTiposCobro = 1;
+                const detalletipocobro = { CodigoTiposCobro, NumeroOperacion, Monto };
+                yield transaccionBD_1.default.query('INSERT INTO detallestiposcobro  SET ?', detalletipocobro);
+                // fin
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
                 const vOrdenes = yield conexionBD_1.default.query('SELECT * FROM vfacturasventas ');

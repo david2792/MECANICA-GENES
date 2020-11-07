@@ -45,7 +45,7 @@ class ServicioControlador {
       const CodigoUnidad = '1';
       const CodigoRepresentante = '1';
       const CodigImpuesto = '3';
-      const CodigoBarra = producto.CodigoBarra;
+      const CodigoBarra =CodigoProducto;
       const Descripcion = producto.Descripcion;
       const cantidadpaquete = '0';
       const perecedero = '1';
@@ -98,7 +98,7 @@ class ServicioControlador {
     const CodigoUnidad = '1';
     const CodigoRepresentante = '1';
     const CodigImpuesto = '3';
-    const CodigoBarra =producto.CodigoBarra;
+    const CodigoBarra =CodigoProducto;
     const Descripcion = producto.Descripcion;
     const cantidadpaquete = '0';
     const perecedero = '1';

@@ -6,8 +6,8 @@ class FacturacionControlador {
 
     public async validarApertura(req: Request, res: Response) {
         const {usuarioCajero} = req.params;
-        console.log(usuarioCajero)
         const apertura = await pool.query('SELECT * FROM vaperturascaja WHERE estado=1 AND usuarioCajero=?',usuarioCajero);
+        console.log(apertura)
         res.json(apertura);
       } 
       public async validarTimbrado(req: Request, res: Response) {
@@ -67,8 +67,17 @@ class FacturacionControlador {
                 console.log(stockanterior)
                 const stockactual = stockanterior-cantidad;
                 await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+                // descontar stock
               //  inicia cuentas a cobrar
             }
+            // confirma orden de trabajo si existe
+            let numeroorden = req.body.orden.numero
+            if (numeroorden != null )
+            {
+              console.log("paso para confirmar la orden"+numeroorden)
+              await transaccion.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?',[2,numeroorden])
+            }
+            // fin orden
             let cuentacobrar = req.body.detalles
             const NumeroCuota=1;
             const MontoCuota=cuentacobrar.total
@@ -89,10 +98,15 @@ class FacturacionControlador {
             const movimiento = {NumeroOperacion,NumeroApertura,CodigoOperacion,Fecha,Hora,Descripcion,Estado}
             await transaccion.query('INSERT INTO movimientoscaja  SET ?', movimiento);
             // Detalle movimiento
-            const monto = cuentacobrar.total
-            const detallemovimiento = {NumeroOperacion,NumeroCuota,NumeroTimbrado,CodigoSucursal,PuntoExpedicion,NumeroFactura,monto}
+            const Monto = cuentacobrar.total
+            const detallemovimiento = {NumeroOperacion,NumeroCuota,NumeroTimbrado,CodigoSucursal,PuntoExpedicion,NumeroFactura,Monto}
             await transaccion.query('INSERT INTO detallesmovimientoscaja  SET ?', detallemovimiento);
-
+            // detalle  tipo de cobro
+            const CodigoTiposCobro=1;
+            const detalletipocobro ={CodigoTiposCobro,NumeroOperacion,Monto}
+            await transaccion.query('INSERT INTO detallestiposcobro  SET ?', detalletipocobro);
+          
+            // fin
            await transaccion.query("COMMIT");// se confirma la transaccion
            await transaccion.query("SET autocommit=1")
            const vOrdenes = await pool.query('SELECT * FROM vfacturasventas ');

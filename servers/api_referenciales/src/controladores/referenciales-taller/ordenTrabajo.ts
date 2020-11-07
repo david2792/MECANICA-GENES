@@ -34,6 +34,7 @@ class OrdenControlador {
         const recepciones = await pool.query('SELECT * FROM vrecepciones WHERE estado=1');
         res.json(recepciones);
     }
+
   public async listarOrden(req: Request, res: Response):Promise<any> {
     const recepciones = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
     for (let i in recepciones) {
@@ -43,6 +44,7 @@ class OrdenControlador {
     }
     res.json(recepciones);
   }
+
   public async listarRecepcion(req: Request, res: Response) {
       const marcas = await pool.query('SELECT * FROM vordentrabajo');
       res.json(marcas);
@@ -108,11 +110,12 @@ class OrdenControlador {
             const detalle = {codigosucursal,puntoexpedicion,numero,codigoproducto,codigomecanico,cantidad,
               descripcion,precio,codigoimpuesto,codigoestadoreparacion}
             await transaccion.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
-            const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
-            const stockanterior= consulta[0].StockActual;
-            console.log(stockanterior)
-            const stockactual = stockanterior-cantidad;
-            await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+            // const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
+            // const stockanterior= consulta[0].StockActual;
+            // console.log(stockanterior)
+            // const stockactual = stockanterior-cantidad;
+            // await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+            await transaccion.query('UPDATE ordenestrabajos SET codigoestadoorden=? WHERE numero=?',[2,numero])
         }
        await transaccion.query("COMMIT");// se confirma la transaccion
        await transaccion.query("SET autocommit=1")
@@ -162,12 +165,13 @@ class OrdenControlador {
                 descripcion,precio,codigoimpuesto,codigoestadoreparacion}
               await transaccion.query('INSERT INTO detallesordentrabajos  SET ?', detalle);
               const consulta=await transaccion.query('SELECT StockActual FROM stock WHERE CodigoProducto=?',[codigoproducto]);
-              const stockanterior= consulta[0].StockActual;
-              console.log(stockanterior)
-              const stockactual = stockanterior-cantidad;
-              await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
+              // const stockanterior= consulta[0].StockActual;
+              // console.log(stockanterior)
+              // const stockactual = stockanterior-cantidad;
+              // await transaccion.query('UPDATE stock SET StockActual=? WHERE CodigoProducto=?',[stockactual,codigoproducto])
              
           }
+          await transaccion.query('UPDATE recepciones SET estado=? WHERE numero=?',[2,numero])
          await transaccion.query("COMMIT");// se confirma la transaccion
          await transaccion.query("SET autocommit=1")
          const vOrdenes = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=1');
@@ -246,6 +250,7 @@ class OrdenControlador {
     const cabecera = await pool.query('SELECT * FROM vordentrabajo WHERE codigoestadoorden=2 AND numerochapa=? AND fechaemision  BETWEEN ? AND ?', [numero, fechaentrada, fechaemision]);
     let numerorecepcion = "";
     cabecera.forEach((element: any) => {
+
       numerorecepcion = element.numero;
       console.log(numerorecepcion)
     });
