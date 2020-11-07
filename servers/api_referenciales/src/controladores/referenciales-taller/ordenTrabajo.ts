@@ -270,6 +270,9 @@ class OrdenControlador {
 
 public async listall(req: Request, res: Response) {
   const done = await pool.query('SELECT * FROM vordentrabajo');
+  done.forEach((element:any) => {
+    element.fechaemision = element.fechaemision.toJSON().slice(0,10).replace(/-/g,'-');
+  });
   res.json(done);
 }
 public async listaDetallesOrdenTrabajo(req: Request, res: Response) {

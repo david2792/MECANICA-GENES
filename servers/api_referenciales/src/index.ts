@@ -49,6 +49,7 @@ import tiposDocumentosRutas from './rutas/rutas-referenciales-factura/ruta_tipos
 
 // Referenciales compras
 import proveedorRutas from './rutas/rutas-compras/rutas-proveedores';
+import compras from './rutas/rutas-compras/rutas-compras';
 // referenciales cajas 
 import aperturaRutas from './rutas/rutas-referenciales-caja/ruta-aperturacaja'
 // facturacion
@@ -116,7 +117,8 @@ class Server {
         this.app.use('/api/tiposDocumentos', TokenValidation,tiposDocumentosRutas);
         // referenciales compras
         this.app.use('/api/proveedores', TokenValidation, proveedorRutas);
-        this.app.use('/api/fpagos', formaPagosRutas);
+        this.app.use('/api/fpagos', TokenValidation, formaPagosRutas);
+        this.app.use('/api/compras', TokenValidation, compras);
         // ruta de acceso
         this.app.use('/api/usuario',usuarioRutas)
         // ruta caja

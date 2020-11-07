@@ -35,9 +35,18 @@ class FormasPagoControlador {
         return __awaiter(this, void 0, void 0, function* () {
             let FormasPago = req.body.fpago;
             console.log("Datos recibidos correctamente(Backend): ", FormasPago);
-            const Codigo = yield conexionBD_1.default.query("SELECT MAX(CodigoFormasPago)+1 AS Codigo FROM formaspago");
-            JSON.stringify(Codigo);
-            const CodigoFormasPago = Codigo[0].Codigo;
+            let Codigo = yield conexionBD_1.default.query("SELECT MAX(CodigoFormasPago)+1 AS Codigo FROM formaspago");
+            let CodigoFormasPago;
+            if (Codigo[0].Codigo) {
+                console.log("Código", Codigo[0].Codigo);
+                JSON.stringify(Codigo);
+                CodigoFormasPago = Codigo[0].Codigo;
+            }
+            else {
+                console.log("Hello darkness my old friend");
+                CodigoFormasPago = 1;
+            }
+            console.log("Código Formas pago: ", CodigoFormasPago);
             const Descripcion = FormasPago.Descripcion;
             const Plazo = FormasPago.Plazo;
             const Dias = FormasPago.Dias;

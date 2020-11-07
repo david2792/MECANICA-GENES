@@ -19,9 +19,17 @@ class FormasPagoControlador {
     public async crear(req: Request, res: Response):Promise<void>{
         let FormasPago = req.body.fpago;
         console.log("Datos recibidos correctamente(Backend): ", FormasPago);
-        const Codigo = await pool.query("SELECT MAX(CodigoFormasPago)+1 AS Codigo FROM formaspago" );
-        JSON.stringify(Codigo);
-        const CodigoFormasPago = Codigo[0].Codigo;
+        let Codigo = await pool.query("SELECT MAX(CodigoFormasPago)+1 AS Codigo FROM formaspago" );
+        let CodigoFormasPago;
+        if (Codigo[0].Codigo) {
+            console.log("Código", Codigo[0].Codigo)
+            JSON.stringify(Codigo);
+            CodigoFormasPago = Codigo[0].Codigo;
+        }else{
+            console.log("Hello darkness my old friend")
+            CodigoFormasPago = 1
+        }
+        console.log("Código Formas pago: ", CodigoFormasPago);
         const Descripcion = FormasPago.Descripcion;
         const Plazo = FormasPago.Plazo;
         const Dias = FormasPago.Dias;
