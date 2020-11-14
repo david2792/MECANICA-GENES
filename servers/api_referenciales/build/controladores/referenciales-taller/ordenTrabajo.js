@@ -296,7 +296,8 @@ class OrdenControlador {
     }
     listall(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const done = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo');
+            const numerochapa = req.body.numerochapa;
+            const done = yield conexionBD_1.default.query('SELECT * FROM vordentrabajo WHERE numerochapa = ?', [numerochapa]);
             done.forEach((element) => {
                 element.fechaemision = element.fechaemision.toJSON().slice(0, 10).replace(/-/g, '-');
             });

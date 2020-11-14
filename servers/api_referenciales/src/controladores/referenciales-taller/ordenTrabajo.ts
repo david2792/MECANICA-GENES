@@ -274,7 +274,8 @@ class OrdenControlador {
 }
 
 public async listall(req: Request, res: Response) {
-  const done = await pool.query('SELECT * FROM vordentrabajo');
+  const numerochapa = req.body.numerochapa;
+  const done = await pool.query('SELECT * FROM vordentrabajo WHERE numerochapa = ?', [numerochapa]);
   done.forEach((element:any) => {
     element.fechaemision = element.fechaemision.toJSON().slice(0,10).replace(/-/g,'-');
   });
