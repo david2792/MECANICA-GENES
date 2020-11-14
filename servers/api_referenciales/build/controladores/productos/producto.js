@@ -42,7 +42,7 @@ class ProductoControlador {
             res.status(404).json({ text: 'El producto no existe' });
         });
     }
-    crear(req, res) {
+    crearProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const Codigo = yield conexionBD_1.default.query('SELECT MAX(CodigoProducto)+1 AS Codigo FROM productos');
@@ -66,6 +66,7 @@ class ProductoControlador {
                     CodigoProducto, CodigoBarra, Descripcion, cantidadpaquete, peso, perecedero, estado,
                     CodigoRepresentante, CodigoUnidad, CodigoMarca, CodigoCategoria, CodigImpuesto
                 }; // datos de productos
+                console.log(productos);
                 const codigoDeposito = producto.CodigoDeposito;
                 const StockActual = producto.StockActual;
                 const StockMinimo = producto.StockMinimo;
@@ -96,7 +97,7 @@ class ProductoControlador {
             }
         });
     }
-    actualizar(req, res) {
+    actualizarProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let producto = req.body.productos;
             const CodigoProducto = producto.CodigoProducto;

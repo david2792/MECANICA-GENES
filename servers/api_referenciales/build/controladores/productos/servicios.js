@@ -123,6 +123,7 @@ class ServicioControlador {
                 CodigoProducto, CodigoBarra, Descripcion, cantidadpaquete, peso, perecedero, estado,
                 CodigoRepresentante, CodigoUnidad, CodigoMarca, CodigoCategoria, CodigImpuesto
             }; // datos de productos
+            console.log(productos);
             const codigoDeposito = '1';
             const StockActual = 0;
             const StockMinimo = 0;

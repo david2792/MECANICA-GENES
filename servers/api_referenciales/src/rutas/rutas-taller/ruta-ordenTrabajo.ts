@@ -16,7 +16,7 @@ class OrdenoRuta
         this.router.get('/update/:id',ordenControlador.listarUno);
         this.router.get('/repuesto',ordenControlador.listarRepuestos);
         this.router.put('/entregado',ordenControlador.entregado);
-        this.router.post('/guardar',ordenControlador.guardar);
+        this.router.post('/guardar',ordenControlador.guardarOrden);
         this.router.post('/insertardetalle',ordenControlador.guardardetalle);
         this.router.put('/eliminar',ordenControlador.eliminarDetalles);
         this.router.post('/filtrarvordentrabajos', ordenControlador.ordenPorFecha);

@@ -29,7 +29,7 @@ class ProductoControlador {
 
   }
 
-  public async crear(req: Request, res: Response): Promise<void> {
+  public async crearProducto(req: Request, res: Response): Promise<void> {
     try {
       const Codigo = await pool.query('SELECT MAX(CodigoProducto)+1 AS Codigo FROM productos')
       JSON.stringify(Codigo); 
@@ -52,6 +52,7 @@ class ProductoControlador {
         CodigoProducto, CodigoBarra, Descripcion, cantidadpaquete, peso, perecedero, estado,
         CodigoRepresentante, CodigoUnidad, CodigoMarca, CodigoCategoria, CodigImpuesto
       };// datos de productos
+      console.log(productos)
       const codigoDeposito =producto.CodigoDeposito;
       const StockActual = producto.StockActual;
       const StockMinimo =producto.StockMinimo;
@@ -82,7 +83,7 @@ class ProductoControlador {
 
 
   }
-  public async actualizar(req: Request, res: Response): Promise<any> {
+  public async actualizarProducto(req: Request, res: Response): Promise<any> {
 
     let producto=req.body.productos;
     const CodigoProducto = producto.CodigoProducto;

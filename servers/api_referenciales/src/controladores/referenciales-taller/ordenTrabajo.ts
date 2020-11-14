@@ -127,7 +127,7 @@ class OrdenControlador {
       throw error
     }
   }  
-    public async guardar(req: Request, res: Response):Promise<any>  {
+    public async guardarOrden(req: Request, res: Response):Promise<any>  {
       try {
         let orden = req.body.ordenes
 
@@ -135,7 +135,7 @@ class OrdenControlador {
         const puntoexpedicion =orden.puntoexpedicion;
         const codigousuario=orden.CodigoUsuario;
         const numero = orden.numero;
-        const codigoestadoorden="1";
+        const codigoestadoorden=1;
         const observacion=orden.observacion;
         const fechaemision= orden.fechaemision;
         const horaemision="00:00:00";

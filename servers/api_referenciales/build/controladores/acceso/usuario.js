@@ -33,6 +33,7 @@ class UsuarioControlador {
                 const NivelUsuario = usuario[0].NivelUsuario;
                 const PuntoExpedicion = usuario[0].PuntoExpedicion;
                 const CodigoSucursal = usuario[0].CodigoSucursal;
+                const Nombre = usuario[0].Nombre + " " + usuario[0].Apellido;
                 const value = { Usuario, Clave };
                 const users = req.body.usuario;
                 const pass = req.body.password;
@@ -45,7 +46,8 @@ class UsuarioControlador {
                         pass: pass,
                         NivelUsuario: NivelUsuario,
                         PuntoExpedicion: PuntoExpedicion,
-                        CodigoSucursal: CodigoSucursal
+                        CodigoSucursal: CodigoSucursal,
+                        Nombre: Nombre
                         // ANY DATA
                     };
                     console.log("bienvenido");
