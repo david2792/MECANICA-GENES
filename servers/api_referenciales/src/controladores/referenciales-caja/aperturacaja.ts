@@ -16,7 +16,15 @@ class AperturaControlador {
 
   public async validarApertura(req: Request, res: Response) {
     const {usuarioCajero} = req.params;
-    const apertura = await pool.query('SELECT estado FROM vaperturascaja WHERE  usuarioCajero=? AND estado = 1',usuarioCajero);
+    const apertura = await pool.query('SELECT * FROM vaperturascaja WHERE  usuarioCajero=? AND estado = 1',usuarioCajero);
+   // JSON.stringify(apertura);
+    //console.log(apertura)
+    res.json(apertura);
+  } 
+
+  public async CalcularTotalVenta(req: Request, res: Response) {
+    const {usuarioCajero} = req.params;
+    const apertura = await pool.query('SELECT NumeroApertura,CodigoTiposCobro,SUM(Monto) AS Monto,TipoCobro,TipoMovimiento FROM vingresosarqueos WHERE  usuarioCajero=? AND estado = 1',usuarioCajero);
    // JSON.stringify(apertura);
     //console.log(apertura)
     res.json(apertura);
