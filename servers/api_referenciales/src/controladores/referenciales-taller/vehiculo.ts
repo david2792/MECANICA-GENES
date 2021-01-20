@@ -22,12 +22,12 @@ class VehiculoControlador {
     public async crear(req: Request, res: Response): Promise<void> {
         try {
 
-            const codigomaximo = await pool.query('SELECT MAX(codigo)+1 AS codigo FROM vehiculos');
+            const codigomaximo = await pool.query('SELECT MAX(codigovehiculo)+1 AS codigo FROM vehiculos');
             JSON.stringify(codigomaximo);
-            let codigo = codigomaximo[0].codigo;
-            if (codigo==null)
+            let codigovehiculo = codigomaximo[0].codigo;
+            if (codigovehiculo==null)
             {
-                codigo=1
+                codigovehiculo=1
             }
             let vehiculo=req.body.vehiculos;
             const codigomarca = vehiculo.codigomarca;
@@ -41,11 +41,11 @@ class VehiculoControlador {
             const numerochasis = vehiculo.chasis;
             const observacion=vehiculo.observacion;
             const vehiculos = {
-                codigo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
+                codigovehiculo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
                 codigoanio, numerochapa, numerochasis,observacion
             };
             const codigocliente = vehiculo.CodigoCliente;
-            const codigovehiculo=codigo;
+           // const codigovehiculo=codigo;
             const detallevehiculo = { codigovehiculo, codigocliente }
             console.log(vehiculos)
             await transaccion.query("SET autocommit=0")
@@ -74,7 +74,7 @@ class VehiculoControlador {
     public async actualizar(req: Request, res: Response): Promise<any> {
         try {
             let vehiculo=req.body.vehiculos;
-            const codigo=vehiculo.codigo;
+            const codigovehiculo=vehiculo.codigovehiculo;
             const codigomarca = vehiculo.codigomarca;
             const codigomodelo = vehiculo.codigomodelo;
             const codigotransmision = vehiculo.codigotransmision;
@@ -86,12 +86,12 @@ class VehiculoControlador {
             const numerochasis = vehiculo.chasis;
             const observacion=vehiculo.observacion;
             const vehiculos = {
-                codigo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
+                codigovehiculo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
                 codigoanio, numerochapa, numerochasis,observacion
             };
             console.log(vehiculos)
             await transaccion.query("SET autocommit=0")
-            await transaccion.query('UPDATE vehiculos SET ? WHERE codigo = ?', [vehiculos,codigo]);
+            await transaccion.query('UPDATE vehiculos SET ? WHERE codigovehiculo = ?', [vehiculos,codigovehiculo]);
             // await transaccion.query('INSERT INTO vehiculos  SET ?', vehiculos);
             // await transaccion.query('INSERT INTO detallesvehiculos  SET ?', detallevehiculo);
             await transaccion.query("COMMIT");// se confirma la transaccion

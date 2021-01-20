@@ -148,7 +148,7 @@ class OrdenControlador {
             }
         });
     }
-    guardar(req, res) {
+    guardarOrden(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let orden = req.body.ordenes;
@@ -156,7 +156,7 @@ class OrdenControlador {
                 const puntoexpedicion = orden.puntoexpedicion;
                 const codigousuario = orden.CodigoUsuario;
                 const numero = orden.numero;
-                const codigoestadoorden = "1";
+                const codigoestadoorden = 1;
                 const observacion = orden.observacion;
                 const fechaemision = orden.fechaemision;
                 const horaemision = "00:00:00";

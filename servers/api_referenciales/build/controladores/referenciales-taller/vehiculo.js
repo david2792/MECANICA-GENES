@@ -36,11 +36,11 @@ class VehiculoControlador {
     crear(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const codigomaximo = yield conexionBD_1.default.query('SELECT MAX(codigo)+1 AS codigo FROM vehiculos');
+                const codigomaximo = yield conexionBD_1.default.query('SELECT MAX(codigovehiculo)+1 AS codigo FROM vehiculos');
                 JSON.stringify(codigomaximo);
-                let codigo = codigomaximo[0].codigo;
-                if (codigo == null) {
-                    codigo = 1;
+                let codigovehiculo = codigomaximo[0].codigo;
+                if (codigovehiculo == null) {
+                    codigovehiculo = 1;
                 }
                 let vehiculo = req.body.vehiculos;
                 const codigomarca = vehiculo.codigomarca;
@@ -54,11 +54,11 @@ class VehiculoControlador {
                 const numerochasis = vehiculo.chasis;
                 const observacion = vehiculo.observacion;
                 const vehiculos = {
-                    codigo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
+                    codigovehiculo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
                     codigoanio, numerochapa, numerochasis, observacion
                 };
                 const codigocliente = vehiculo.CodigoCliente;
-                const codigovehiculo = codigo;
+                // const codigovehiculo=codigo;
                 const detallevehiculo = { codigovehiculo, codigocliente };
                 console.log(vehiculos);
                 yield transaccionBD_1.default.query("SET autocommit=0");
@@ -89,7 +89,7 @@ class VehiculoControlador {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let vehiculo = req.body.vehiculos;
-                const codigo = vehiculo.codigo;
+                const codigovehiculo = vehiculo.codigovehiculo;
                 const codigomarca = vehiculo.codigomarca;
                 const codigomodelo = vehiculo.codigomodelo;
                 const codigotransmision = vehiculo.codigotransmision;
@@ -101,12 +101,12 @@ class VehiculoControlador {
                 const numerochasis = vehiculo.chasis;
                 const observacion = vehiculo.observacion;
                 const vehiculos = {
-                    codigo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
+                    codigovehiculo, codigomarca, codigomodelo, codigotransmision, codigotipocombustible, codigotraccion, codigocolor,
                     codigoanio, numerochapa, numerochasis, observacion
                 };
                 console.log(vehiculos);
                 yield transaccionBD_1.default.query("SET autocommit=0");
-                yield transaccionBD_1.default.query('UPDATE vehiculos SET ? WHERE codigo = ?', [vehiculos, codigo]);
+                yield transaccionBD_1.default.query('UPDATE vehiculos SET ? WHERE codigovehiculo = ?', [vehiculos, codigovehiculo]);
                 // await transaccion.query('INSERT INTO vehiculos  SET ?', vehiculos);
                 // await transaccion.query('INSERT INTO detallesvehiculos  SET ?', detallevehiculo);
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion

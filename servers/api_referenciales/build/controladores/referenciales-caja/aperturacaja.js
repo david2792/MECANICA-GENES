@@ -30,7 +30,16 @@ class AperturaControlador {
     validarApertura(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { usuarioCajero } = req.params;
-            const apertura = yield conexionBD_1.default.query('SELECT estado FROM vaperturascaja WHERE  usuarioCajero=? AND estado = 1', usuarioCajero);
+            const apertura = yield conexionBD_1.default.query('SELECT * FROM vaperturascaja WHERE  usuarioCajero=? AND estado = 1', usuarioCajero);
+            // JSON.stringify(apertura);
+            //console.log(apertura)
+            res.json(apertura);
+        });
+    }
+    CalcularTotalVenta(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { usuarioCajero } = req.params;
+            const apertura = yield conexionBD_1.default.query('SELECT NumeroApertura,CodigoTiposCobro,SUM(Monto) AS Monto,TipoCobro,TipoMovimiento FROM vingresosarqueos WHERE  usuarioCajero=? AND estado = 1', usuarioCajero);
             // JSON.stringify(apertura);
             //console.log(apertura)
             res.json(apertura);
