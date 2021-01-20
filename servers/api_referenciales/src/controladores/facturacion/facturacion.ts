@@ -110,7 +110,8 @@ class FacturacionControlador {
            await transaccion.query("COMMIT");// se confirma la transaccion
            await transaccion.query("SET autocommit=1")
            const vOrdenes = await pool.query('SELECT * FROM vfacturasventas ');
-           res.json(vOrdenes)
+           const vCabecera = await pool.query('SELECT * FROM vfacturasventas where NumeroFactura = ?', [NumeroFactura]);
+           res.json({'cabecera':vCabecera, 'vOrdenes': vOrdenes})
         } catch (error) {
           await transaccion.query("ROLLBACK");
           await transaccion.query("SET autocommit=1")

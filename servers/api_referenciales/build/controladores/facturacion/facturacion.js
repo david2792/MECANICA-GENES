@@ -121,7 +121,8 @@ class FacturacionControlador {
                 yield transaccionBD_1.default.query("COMMIT"); // se confirma la transaccion
                 yield transaccionBD_1.default.query("SET autocommit=1");
                 const vOrdenes = yield conexionBD_1.default.query('SELECT * FROM vfacturasventas ');
-                res.json(vOrdenes);
+                const vCabecera = yield conexionBD_1.default.query('SELECT * FROM vfacturasventas where NumeroFactura = ?', [NumeroFactura]);
+                res.json({ 'cabecera': vCabecera, 'vOrdenes': vOrdenes });
             }
             catch (error) {
                 yield transaccionBD_1.default.query("ROLLBACK");

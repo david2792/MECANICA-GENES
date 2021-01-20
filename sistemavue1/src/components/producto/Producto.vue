@@ -657,7 +657,6 @@ export default {
     },
     Imprimir_reporte(){
       const producto_F = this.productos.filter(pro => pro.Categoria == this.CodigoCategoria);
-      // console.log(producto_F);
       printJS({printable: producto_F, properties: ['CodigoProducto', 'CodigoBarra', 'Descripcion'], type: 'json'})
     },
   }
